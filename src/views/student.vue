@@ -7,7 +7,7 @@
           <span>学号：</span>
         </div>
         <div id="exit">
-          <el-button type="text" @click="herfExit">退出登录</el-button>
+          <el-button type="text" @click="hrefExit">退出登录</el-button>
         </div>
       </el-header>
 
@@ -63,7 +63,7 @@ export default {
       console.log(key, keyPath);
     },
 
-    herfExit()
+    hrefExit()
     {
       this.$router.push({path:'./login'});
     },
@@ -73,7 +73,7 @@ export default {
       this.$router.push({path:'./studentBoardApply'});
     },
 
-    herfStudentCement()
+    hrefStudentCement()
     {
       this.$router.push({path:'./studentCement'});
     }

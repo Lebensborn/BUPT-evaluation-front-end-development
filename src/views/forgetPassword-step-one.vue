@@ -2,7 +2,7 @@
   <div id="forget-password">
       <!--头部-->
       <div id="header">
-        <el-button type="text" @click="herfReturn" id="return-button">返回登录界面</el-button>
+        <el-button type="text" @click="hrefReturn" id="return-button">返回登录界面</el-button>
       </div>
 
       <!--主体部分-->
@@ -132,7 +132,7 @@ export default {
       'v-sidentify':Sidentify
     },
   methods: {
-    herfReturn()
+    hrefReturn()
     {
       this.$router.push({path: './login'});
     },

@@ -51,12 +51,12 @@
             </router-link>
 
             <!--公告公示-->
-            <router-link to="./studentHomePage" >
+            <router-link to="./studentPublicAnnouncement" >
               <el-button type="text" @click="hrefStudentPublicAnnouncement" id="forget-password">公告公示</el-button>
             </router-link>
 
             <!--退出登录-->
-            <router-link to="./studentHomePage" >
+            <router-link to="./login" >
               <el-button type="text" @click="hrefLogout" id="forget-password">首页</el-button>
             </router-link>
 
@@ -79,7 +79,6 @@
 </template>
  
 <script>
-//import axios from 'axios' //引入 axios
 
 export default {
   data() {

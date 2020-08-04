@@ -7,7 +7,7 @@
           <span>学号：</span>
         </div>
         <div id="exit">
-          <el-button type="text" @click="herfExit">退出登录</el-button>
+          <el-button type="text" @click="hrefExit">退出登录</el-button>
         </div>
       </el-header>
 
@@ -40,7 +40,7 @@
               <div style="padding: 14px;">
                 <span>自评与互评</span>
                 <div class="bottom clearfix">
-                  <el-button type="text" class="button" @click="herfStudentCement">点击跳转</el-button>
+                  <el-button type="text" class="button" @click="hrefStudentCement">点击跳转</el-button>
                 </div>
               </div>
             </el-card>
@@ -75,7 +75,7 @@ export default {
       console.log(key, keyPath);
     },
 
-    herfExit()
+    hrefExit()
     {
       this.$router.push({path:'./login'});
     },
@@ -85,7 +85,7 @@ export default {
       this.$router.push({path:'./studentBoardApply'});
     },
 
-    herfStudentCement()
+    hrefStudentCement()
     {
       this.$router.push({path:'./studentCement'});
     }

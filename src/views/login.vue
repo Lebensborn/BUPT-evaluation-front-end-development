@@ -38,7 +38,7 @@
             <el-checkbox v-model="numberValidateForm.checked" class="remember-password">记住密码</el-checkbox>
             
             <!--忘记密码-->
-            <el-button type="text" @click="herfForgetPassword" class="forget-password">忘记密码</el-button>
+            <el-button type="text" @click="hrefForgetPassword" class="forget-password">忘记密码</el-button>
 
             <!--登录按钮-->
             <el-form-item>
@@ -77,7 +77,7 @@
             <el-checkbox v-model="numberValidateForm.checked" class="remember-password">记住密码</el-checkbox>
             
             <!--忘记密码-->
-            <el-button type="text" @click="herfForgetPassword" class="forget-password">忘记密码</el-button>
+            <el-button type="text" @click="hrefForgetPassword" class="forget-password">忘记密码</el-button>
 
             <!--登录按钮-->
             <el-form-item>
@@ -116,7 +116,7 @@
             <el-checkbox v-model="numberValidateForm.checked" class="remember-password">记住密码</el-checkbox>
             
             <!--忘记密码-->
-            <el-button type="text" @click="herfForgetPassword" class="forget-password">忘记密码</el-button>
+            <el-button type="text" @click="hrefForgetPassword" class="forget-password">忘记密码</el-button>
 
             <!--登录按钮-->
             <el-form-item>
@@ -183,7 +183,7 @@ export default {
       });   
     },
     //跳转忘记密码
-    herfForgetPassword()
+    hrefForgetPassword()
     {
       this.$router.push({path:'./forgetPassword-step-one'});
     },
