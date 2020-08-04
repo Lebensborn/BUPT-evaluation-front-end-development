@@ -7,7 +7,7 @@
           <span>学号：</span>
         </div>
         <div id="exit">
-          <el-button type="text" @click="herfExit">退出登陆</el-button>
+          <el-button type="text" @click="herfExit">退出登录</el-button>
         </div>
       </el-header>
 
