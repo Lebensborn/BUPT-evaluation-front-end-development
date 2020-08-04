@@ -2,6 +2,11 @@
   <div id="login">
     <!--头部logo-->
     <div id="header">
+      <el-button type="text" @click="hrefStudentHomePage" id="return-button">首页</el-button>
+      |
+      <el-button type="text" @click="hrefStudentPublicAnnouncement" id="return-button">公告公示</el-button>
+      |
+      <el-button type="text" @click="hrefLogout" id="return-button">退出登录</el-button>
     </div>
 
     <!--主体部分-->
@@ -17,11 +22,7 @@
 
       <el-card class="box-card" >
         <div class="text item" id="text-box">
-          <el-form :model="numberValidateForm" ref="numberValidateForm" class="demo-ruleForm">
-              
-            >
-              <el-input type="password" v-model.number="numberValidateForm.password" autocomplete="off" class="input-block" clearable @keyup.enter.native="submitForm('numberValidateForm')"></el-input>
-            </el-form-item>
+          <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
 
             <!--新密码输入栏-->
             <el-form-item
@@ -31,7 +32,7 @@
                 { required: true, message: '新密码不能为空'},
               ]"
             >
-              <el-input type="password" v-model="numberValidateForm.password" autocomplete="off" class="input-block" clearable @keyup.enter.native="submitForm('numberValidateForm')"></el-input>
+              <el-input type="password" v-model="ruleForm.newPassword" autocomplete="off" class="reset-password-input-block" clearable @keyup.enter.native="submitForm('numberValidateForm')"></el-input>
             </el-form-item>
 
             <!--新密码重复输入栏-->
@@ -42,25 +43,8 @@
                 { required: true, message: '新密码不能为空'},
               ]"
             >
-              <el-input type="password" v-model="numberValidateForm.password" autocomplete="off" class="input-block" clearable @keyup.enter.native="submitForm('numberValidateForm')"></el-input>
+              <el-input type="password" v-model="ruleForm.confirmNewPassword" autocomplete="off" class="reset-password-input-block" clearable @keyup.enter.native="submitForm('numberValidateForm')"></el-input>
             </el-form-item>
-
-            <!--回到首页-->
-            <router-link to="./studentHomePage" >
-              <el-button type="text" @click="hrefStudentHomePage" id="forget-password">首页</el-button>
-            </router-link>
-
-            <!--公告公示-->
-            <router-link to="./studentPublicAnnouncement" >
-              <el-button type="text" @click="hrefStudentPublicAnnouncement" id="forget-password">公告公示</el-button>
-            </router-link>
-
-            <!--退出登录-->
-            <router-link to="./login" >
-              <el-button type="text" @click="hrefLogout" id="forget-password">首页</el-button>
-            </router-link>
-
-
 
             <!--保存按钮-->
             <el-form-item>
@@ -71,41 +55,60 @@
       </el-card>        
     </div>
 
-    <!--页脚部分留白--> 
-    <div id="footer">
-    </div>
-
+     <!--尾部-->
+      <div id="footer">
+      </div>
   </div>
 </template>
  
 <script>
 
 export default {
-  data() {
-    return {
-      numberValidateForm: {
-        //表单返回值
-        username: '',
-        password: '',
-        userType: '0'
-      },
-
-      //记住密码返回值
-      checked: true,
-      label: '保存'
-    };
-  },
-  methods: {
-    submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
+    data() {
+      var validatePass = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请输入新密码'));
+        } else {
+          if (this.ruleForm.confirmNewPassword !== '') {
+            this.$refs.ruleForm.validateField('confirmNewPassword');
+          }
+          callback();
+        }
+      };
+      var validatePass2 = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请再次输入新密码'));
+        } else if (value !== this.ruleForm.newPassword) {
+          callback(new Error('两次输入密码不一致!'));
+        } else {
+          callback();
+        }
+      };
+      return {
+        ruleForm: {
+          newPassword: '',
+          confirmNewPassword: ''
+        },
+        rules: {
+          newPassword: [
+            { validator: validatePass, trigger: 'blur' }
+          ],
+          confirmNewPassword: [
+            { validator: validatePass2, trigger: 'blur' }
+          ]
+        }
+      };
+    },
+    methods: {
+      submitForm(formName) {
+        if (this.loading == true) return false; //防止重复点击
+        this.$refs[formName].validate(valid => {
           if (valid) {
-            
-            this.$refs[formName].resetFields();
-            this.$router.push({path:'./home'});
-            this.$router.go(0);
-          } 
-          else {
-            console.log('error submit!!');
+            this.loading = true;
+            this.$store.commit("setUserItemList", formName);
+            this.$router.push("/forgetPassword-step-3");
+          } else {
+            console.log("参数不合法！");
             return false;
           }
         });
@@ -122,7 +125,7 @@ export default {
     hrefStudentPublicAnnouncement()
     {
       
-      this.$router.push({path:'./studentHomePage'});
+      this.$router.push({path:'./studentPublicAnnouncement'});
       this.$router.go(0);
     },
 
@@ -160,8 +163,8 @@ export default {
   right: 29px;
   width: 400px;
 }
-/*账号密码输入框*/
-.input-block {
+/*密码输入框*/
+.reset-password-input-block {
   left: 0px;
   width: 210px;
 }

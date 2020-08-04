@@ -7,11 +7,11 @@ export const constantRouterMap = [
     //配置默认的路径，默认显示登录页
     { path: '/', component: () => import('@/views/login')},
     //配置忘记密码页面步骤（1）
-    { path: '/forgetPassword-step-one', component: () => import('@/views/forgetPassword-step-one')},
+    { path: '/forgetPassword-step-1', component: () => import('@/views/forgetPassword-step-1')},
     //配置忘记密码页面步骤（2）
-    { path: '/forgetPassword-step-two', component: () => import('@/views/forgetPassword-step-two')},
+    { path: '/forgetPassword-step-2', component: () => import('@/views/forgetPassword-step-2')},
     //配置忘记密码页面步骤（2）
-    { path: '/forgetPassword-step-three', component: () => import('@/views/forgetPassword-step-three')},
+    { path: '/forgetPassword-step-3', component: () => import('@/views/forgetPassword-step-3')},
     //配置主页
     { path: '/student', component: () => import('@/views/student')},
     //配置学生公告

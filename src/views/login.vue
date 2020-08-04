@@ -185,7 +185,7 @@ export default {
     //跳转忘记密码
     hrefForgetPassword()
     {
-      this.$router.push({path:'./forgetPassword-step-one'});
+      this.$router.push({path:'./forgetPassword-step-1'});
     },
   }
 }
