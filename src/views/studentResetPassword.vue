@@ -48,7 +48,7 @@
 
             <!--保存按钮-->
             <el-form-item>
-              <el-button id="login-button" type="primary" @click="submitForm('numberValidateForm')" >保存</el-button>
+              <el-button id="save-button" type="primary" @click="submitForm('numberValidateForm')" >保存</el-button>
             </el-form-item>              
           </el-form>            
         </div>
@@ -177,15 +177,15 @@ export default {
 .el-form-item__error {
   left: 50px;
 } 
-/*三个按钮*/ 
-#student {
+/*两个按钮*/ 
+#personalInformation {
   border-radius: 0px;
   width: 107px;
   background-color:rgba(255, 255, 255, 0.6);
   color: #606266;
 }
 
-#teacher {
+#resetPassword {
   border-radius: 0px;
   margin-left: 0px;
   width: 107px;
@@ -193,22 +193,15 @@ export default {
   color: #606266;
 }
 
-#admin {
-  border-radius: 0px;
-  margin-left: 0px;
-  width: 107px;
-  background-color:rgba(255, 255, 255, 0.6);
-  color: #606266; 
-}
 
-#student:focus {
+#personalInformation:focus {
   border-radius: 0px;
   width: 107px;
   background-color:rgba(0, 0, 0, 0.6);
   color: #ffffff;
 }
 
-#teacher:focus {
+#resetPassword:focus {
   border-radius: 0px;
   margin-left: 0px;
   width: 107px;
@@ -216,13 +209,6 @@ export default {
   color: #ffffff;
 }
 
-#admin:focus {
-  border-radius: 0px;
-  margin-left: 0px;
-  width: 107px;
-  background-color:rgba(0, 0, 0, 0.6);
-  color: #ffffff;
-}
 </style>
 
 <style scope>
