@@ -24,3 +24,18 @@ export function changeInfo(form) {
         }
     })
 }
+
+export function CheckCode(form) {
+    var email = form.email;
+    var code = form.code;
+    return request({
+      url: 'user/email',
+      method: 'put',
+      data: {
+        email,
+        code
+      }
+    })
+  }
+  
+  

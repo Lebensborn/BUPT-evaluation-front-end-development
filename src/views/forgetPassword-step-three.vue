@@ -23,11 +23,11 @@
               </el-steps>
 
               <!--表单内容-->
-                <el-form :model="numberValidateForm"  ref="numberValidateForm" label-width="100px" class="demo-ruleForm">
+                <el-form :model="resetForm"  ref="resetForm" label-width="100px" class="demo-ruleForm">
                     <div id="change-success">
                         修改成功！
                     </div>
-                    <el-button type="primary" @click="submitForm('numberValidateForm')" id="forget-password-next-step-step-three">返回</el-button>
+                    <el-button type="primary" @click="submitForm" id="forget-password-next-step-step-three">返回</el-button>
                 </el-form>    
             </el-card>
           </el-col>
@@ -41,33 +41,41 @@
 </template>
 <script>
 export default {
+  
   data() {
     return {
-      numberValidateForm: {
-        username: '',
-        email: '',
+      resetForm: {
+        userId: null,
+        code: null,
+        password: null,
       }
     };
   },
-  
+  created: function(){
+    this.resetForm = {
+      userId: this.$store.state.user.userInfo.userId,
+      code: this.$store.state.user.userInfo.validCode,
+      password: this.$store.state.user.userInfo.pass,
+    }
+  },
   methods: {
     herfReturn()
     {
       this.$router.push({path: './login'});
     },
-    submitForm(formName) {
+    submitForm() {
       if (this.loading == true) return false; //防止重复点击
-      this.$refs[formName].validate(valid => {
+      this.$refs.resetForm.validate(valid => {
         if (valid) {
           this.loading = true;
           this.$store
-            .dispatch("resetPassword", formName) //调用reset后返回了一个promise对象，后面的then是promise的方法
+            .dispatch("forgetPassword", this.resetForm) //调用reset后返回了一个promise对象，后面的then是promise的方法
             .then(response => {
               this.loading = false;
               let state = response.data.success;
               if (state == true) {
-                this.$store.commit("LoginInfoLogin", response.data.info);
-                this.$router.push("/login");
+                //this.$store.commit("LoginInfoLogin", response.data.info);
+                this.$router.push("./");
                 this.$message.success("重置密码成功！");
                 var arr = document.cookie.split("=");
                 this.$cookies.set(arr[0], arr[1], 60 * 60 * 24 * 7, "/");
@@ -84,36 +92,6 @@ export default {
         }
       });
     },
-
-    handlereset() {
-      if (this.loading == true) return false; //防止重复点击
-      this.$refs.resetForm.validate(valid => {
-        if (valid) {
-          this.loading = true;
-          this.$store
-            .dispatch("resetPassword", this.resetForm) //调用reset后返回了一个promise对象，后面的then是promise的方法
-            .then(response => {
-              this.loading = false;
-              let state = response.data.success;
-              if (state == true) {
-                this.$store.commit("LoginInfoLogin", response.data.info);
-                this.$router.push("/");
-                this.$message.success("重置密码成功！");
-                var arr = document.cookie.split("=");
-                this.$cookies.set(arr[0], arr[1], 60 * 60 * 24 * 7, "/");
-              } else {
-                this.$message.error(response.data.msg);
-              }
-            })
-            .catch(() => {
-              this.loading = false;
-            });
-        } else {
-          console.log("参数不合法！");
-          return false;
-        }
-      });
-    }
   }
 };
 </script>

@@ -6,20 +6,20 @@
 
     <!--主体部分-->
     <div id="body">
-      <el-tabs type="border-card" stretch=true v-model="numberValidateForm.userType" @tab-click="changeUserType">
+      <el-tabs type="border-card" :stretch=true v-model="numberValidateForm.userType" >
         <el-tab-pane label="学生登陆" name="0">
           <el-form :model="numberValidateForm" ref="numberValidateForm" class="demo-ruleForm">
 
             <!--账号输入栏-->
             <el-form-item
               label="账号"
-              prop="username"
+              prop="userId"
               :rules="[
                 { required: true, message: '账号不能为空'},
                 { type: 'number', message: '账号必须为数字值'}
               ]"
             >
-              <el-input type="text" v-model.number="numberValidateForm.username" autocomplete="off" class="input-block" clearable @keyup.enter.native="submitForm('numberValidateForm')"></el-input>
+              <el-input type="text" v-model.number="numberValidateForm.userId" autocomplete="off" class="input-block" clearable @keyup.enter.native="submitForm"></el-input>
             </el-form-item>
 
             <!--密码输入栏-->
@@ -30,7 +30,7 @@
                 { required: true, message: '密码不能为空'},
               ]"
             >
-              <el-input type="password" v-model="numberValidateForm.password" autocomplete="off" class="input-block" clearable @keyup.enter.native="submitForm('numberValidateForm')"></el-input>
+              <el-input type="password" v-model="numberValidateForm.password" autocomplete="off" class="input-block" clearable @keyup.enter.native="submitForm"></el-input>
             </el-form-item>
 
             <!--记住密码-->
@@ -42,7 +42,7 @@
 
             <!--登陆按钮-->
             <el-form-item>
-              <el-button class="login-button" type="primary" @click="submitForm('numberValidateForm')" >登陆</el-button>
+              <el-button class="login-button" type="primary" @click="submitForm" >登录</el-button>
             </el-form-item>              
           </el-form>            
         </el-tab-pane>
@@ -52,13 +52,13 @@
             <!--账号输入栏-->
             <el-form-item
               label="账号"
-              prop="username"
+              prop="userId"
               :rules="[
                 { required: true, message: '账号不能为空'},
                 { type: 'number', message: '账号必须为数字值'}
               ]"
             >
-              <el-input type="text" v-model.number="numberValidateForm.username" autocomplete="off" class="input-block" clearable @keyup.enter.native="submitForm('numberValidateForm')"></el-input>
+              <el-input type="text" v-model.number="numberValidateForm.userId" autocomplete="off" class="input-block" clearable @keyup.enter.native="submitForm"></el-input>
             </el-form-item>
 
             <!--密码输入栏-->
@@ -69,7 +69,7 @@
                 { required: true, message: '密码不能为空'},
               ]"
             >
-              <el-input type="password" v-model="numberValidateForm.password" autocomplete="off" class="input-block" clearable @keyup.enter.native="submitForm('numberValidateForm')"></el-input>
+              <el-input type="password" v-model="numberValidateForm.password" autocomplete="off" class="input-block" clearable @keyup.enter.native="submitForm"></el-input>
             </el-form-item>
 
             <!--记住密码-->
@@ -81,7 +81,7 @@
 
             <!--登陆按钮-->
             <el-form-item>
-              <el-button class="login-button" type="primary" @click="submitForm('numberValidateForm')" >登陆</el-button>
+              <el-button class="login-button" type="primary" @click="submitForm" >登录</el-button>
             </el-form-item>              
           </el-form>            
         </el-tab-pane>
@@ -91,13 +91,13 @@
             <!--账号输入栏-->
             <el-form-item
               label="账号"
-              prop="username"
+              prop="userId"
               :rules="[
                 { required: true, message: '账号不能为空'},
                 { type: 'number', message: '账号必须为数字值'}
               ]"
             >
-              <el-input type="text" v-model.number="numberValidateForm.username" autocomplete="off" class="input-block" clearable @keyup.enter.native="submitForm('numberValidateForm')"></el-input>
+              <el-input type="text" v-model.number="numberValidateForm.userId" autocomplete="off" class="input-block" clearable @keyup.enter.native="submitForm"></el-input>
             </el-form-item>
 
             <!--密码输入栏-->
@@ -108,7 +108,7 @@
                 { required: true, message: '密码不能为空'},
               ]"
             >
-              <el-input type="password" v-model="numberValidateForm.password" autocomplete="off" class="input-block" clearable @keyup.enter.native="submitForm('numberValidateForm')"></el-input>
+              <el-input type="password" v-model="numberValidateForm.password" autocomplete="off" class="input-block" clearable @keyup.enter.native="submitForm"></el-input>
             </el-form-item>
 
             <!--记住密码-->
@@ -120,7 +120,7 @@
 
             <!--登陆按钮-->
             <el-form-item>
-              <el-button class="login-button" type="primary" @click="submitForm('numberValidateForm')" >登陆</el-button>
+              <el-button class="login-button" type="primary" @click="submitForm" >登录</el-button>
             </el-form-item>              
           </el-form>            
         </el-tab-pane>
@@ -141,34 +141,50 @@ export default {
     return {
       numberValidateForm: {
         //表单返回值
-        username: '',
+        userId: null,
         password: null,
-        userType: '0',
+        userType: 0,
         //记住密码返回值
         checked: true,
       },
     };
   },
-
   methods: {
     //提交表单
-    submitForm(formName) {   
+    submitForm() {  
     if (this._data.loading == true) return false; //防止重复点击
-      this.$refs[formName].validate(valid => {
+      this.$refs.numberValidateForm.validate(valid => {
         if (valid) {
           var that = this;
           this.loading = true;
           this.$store
-            .dispatch("Login", formName) //调用Login后返回了一个promise对象，后面的then是promise的方法
+            .dispatch("Login", this.numberValidateForm) //调用Login后返回了一个promise对象，后面的then是promise的方法
             .then(response => {
               that._data.loading = false;
               let state = response.data.success;
               if (state == true) {
                 that._data.loading = false;
-                that.$store.commit("LoginInfoLogin", response.data.info);
+                //console.log(response.data);
+               // that.$store.commit("LoginInfoLogin", this.numberValidateForm);
+
+                if(this.numberValidateForm.userType == 0)
+                  that.$router.push({path: './student'});
+                else if(this.numberValidateForm.userType == 1)
+                  that.$router.push({path: './student'});
+                else
+                  that.$router.push({path: './student'});
+                  
                 var arr = document.cookie.split("=");
-                that.$cookies.set(arr[0], arr[1], 60 * 60 * 24 * 7, "/")
+                that.$cookies.set(arr[0], arr[1], 60 * 60 * 24 * 7, "/");
               } else {
+                if(response.data.msg == '用户不存在')
+                {
+                  this.$message.error("用户不存在");
+                }
+                else
+                {
+                  this.$message.error("用户名或密码错误");
+                }
                 that._data.loading = false;
                 that.errorTip(response.data.msg);
               }

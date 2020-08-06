@@ -7,25 +7,11 @@
 <style type="text/css">
 </style>
 <script>
-import request from "@/utils/request"; //打了大括号后显示找不到request函数
+//import request from "@/utils/request"; //打了大括号后显示找不到request函数
+import Vue from "vue"
+import VueResource from 'vue-resource'
+Vue.use(VueResource);
 export default {
   name: "App",
-  mounted: function() {
-    var that = this;
-    new Promise((resolve, reject) => {
-      request({
-        url: "userInfo/info",
-        method: "get"
-      })
-        .then(response => {
-          let state = response.data.success;
-          if (state == true)
-            that.$store.commit("LoginInfoLogin", response.data.info);
-        })
-        .catch(error => {
-          reject(error);
-        });
-    });
-  }
 };
 </script>

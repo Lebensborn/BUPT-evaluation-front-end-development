@@ -23,9 +23,7 @@ export const constantRouterMap = [
     //配置学生公告申请
     { path: '/studentCement', component: () => import('@/views/studentCement')},
     //配置学生发展评价
-    { path: '/studentDevelopmentEvaluation', component: () => import('@/views/studentDevelopmentEvaluation')},
-    //配置学生基本素质评价
-    { path: '/studentBasicQualityEvaluation', component: () => import('@/views/studentBasicQualityEvaluation')},
+    
 ]
  
 export default new VueRouter({

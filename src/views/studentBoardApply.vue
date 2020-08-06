@@ -26,7 +26,7 @@
 
         <el-form-item label="发布范围">
             <el-select v-model="form.class" placeholder="请选择发布范围">
-            <el-option label="计算机学院" ></el-option>
+            <el-option label="计算机学院19级" ></el-option>
             <el-option label="一大班" ></el-option>
             <el-option label="二大班" ></el-option>
             <el-option label="三大班" ></el-option>
@@ -123,7 +123,7 @@
         <el-form-item label="上传附件">
             <el-upload
                 class="upload-demo"
-                action="https://jsonplaceholder.typicode.com/posts/"
+                action="http://124.70.77.11:8080/notification/file"
                 :on-preview="handlePreview"
                 :on-remove="handleRemove"
                 :before-remove="beforeRemove"
@@ -132,7 +132,7 @@
                 :on-exceed="handleExceed"
                 :file-list="form.fileList">
                 <el-button size="small" type="primary">点击上传</el-button>
-                <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                <div slot="tip" class="el-upload__tip">(上传不超过5个文件，单个文件最多不大于xMB)</div>
             </el-upload>
         </el-form-item>
         
@@ -275,7 +275,6 @@ export default {
         beforeRemove(file) {
             return this.$confirm(`确定移除 ${ file.name }？`);
         },
-
         hrefReturnBackToStudent()
         {
             this.$router.push({path: './student'});

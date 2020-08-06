@@ -26,13 +26,13 @@
               <el-form :model="numberValidateForm" ref="numberValidateForm" label-width="100px" class="demo-ruleForm"  :rules="loginRules">
                 <el-form-item
                   label="账号"
-                  prop="username"
+                  prop="userId"
                   :rules="[
                     { required: true, message: '账号不能为空'},
                     { type: 'number', message: '账号必须为数字值'}
                   ]"
                 >
-                  <el-input type="text" v-model.number="numberValidateForm.username" autocomplete="off"  @keyup.enter.native="submitForm('numberValidateForm')" class="forget-password-input-block-step-one"></el-input>
+                  <el-input type="text" v-model.number="numberValidateForm.userId" autocomplete="off"  @keyup.enter.native="submitForm" class="forget-password-input-block-step-one"></el-input>
                 </el-form-item>
                 
                  <el-radio-group v-model="numberValidateForm.userType">
@@ -42,7 +42,7 @@
 
                 <el-form-item label="验证码" prop="code">
                   <el-col :span="10">
-                    <el-input type="text" auto-complete="off" v-model="numberValidateForm.code" @keyup.enter.native="submitForm('numberValidateForm')">
+                    <el-input type="text" auto-complete="off" v-model="numberValidateForm.code" @keyup.enter.native="submitForm">
                     </el-input>
                   </el-col>
                   <el-col :span="8" style="margin-left: 20px">
@@ -60,7 +60,7 @@
                     { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
                   ]"
                 >
-                  <el-input type="email" v-model="numberValidateForm.email" autocomplete="off"  @keyup.enter.native="submitForm('numberValidateForm')" class="forget-password-input-block-step-one"></el-input>
+                  <el-input type="email" v-model="numberValidateForm.email" autocomplete="off"  @keyup.enter.native="submitForm" class="forget-password-input-block-step-one"></el-input>
                 </el-form-item>
 
                 <el-form-item
@@ -70,12 +70,12 @@
                     { required: true, message: '验证码不能为空'},
                   ]"
                 >
-                  <el-input type="text" v-model="numberValidateForm.validCode" autocomplete="off"  @keyup.enter.native="submitForm('numberValidateForm')" class="forget-password-input-block-step-one"></el-input>
+                  <el-input type="text" v-model="numberValidateForm.validCode" autocomplete="off"  @keyup.enter.native="submitForm" class="forget-password-input-block-step-one"></el-input>
                   <el-button @click.native.prevent="setCheakCode">点击获取验证码</el-button>
                 </el-form-item>
 
                 <el-form-item>
-                  <el-button type="primary" @click="submitForm('numberValidateForm')" id="forget-password-next-step">下一步</el-button>
+                  <el-button type="primary" @click="submitForm" id="forget-password-next-step">下一步</el-button>
                 </el-form-item>
               </el-form>
             </el-card>
@@ -104,11 +104,11 @@ export default {
       }
     return {
       numberValidateForm: {
-        username: '',
-        email: '',
-        code:'',
-        validCode: '',
-        userType: '0',
+        userId: null,
+        email: null,
+        code: null,
+        validCode: null,
+        userType: 0,
       },
       identifyCode: '',
       identifyCodes: '1234567890abcdefghijklmnopqrstuvwxyz',
@@ -134,14 +134,14 @@ export default {
   methods: {
     herfReturn()
     {
-      this.$router.push({path: './login'});
+      this.$router.push({path: './'});
     },
-    submitForm(formName) {
+    submitForm() {
       if (this.loading == true) return false; //防止重复点击
-      this.$refs[formName].validate(valid => {
+      this.$refs.numberValidateForm.validate(valid => {
         if (valid) {
           this.loading = true;
-          this.$store.commit("setUserItemList", formName);
+          this.$store.commit("LoginInfoLogin1", this.numberValidateForm);
           this.$router.push("/forgetPassword-step-two");
         } else {
           console.log("参数不合法！");
@@ -172,7 +172,7 @@ export default {
       }
       this.loading = true;
       this.$store
-        .dispatch("setCheakCode", this.numberValidateForm)
+        .dispatch("setCheakCode2", this.numberValidateForm)
         .then(response => {
           this.loading = false;
           if (response.data) {

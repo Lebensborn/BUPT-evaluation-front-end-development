@@ -2,38 +2,93 @@
   <div>
     <el-container direction="vertical">
       <el-header id="header" height="100px">
-        <div id="information">
-          <span>学生姓名：</span>
-          <span>学号：</span>
-        </div>
         <div id="exit">
           <el-button type="text" @click="herfExit">退出登陆</el-button>
         </div>
       </el-header>
 
       <el-aside id="aside-left" width="150px">
-        <el-menu
-          default-active="2"
-          class="el-menu-vertical-demo"
-          @open="handleOpen"
-          @close="handleClose" router=true>
-          <el-menu-item index="./studentBasicQualityEvaluation" >
-            <!--
-            <i class="el-icon-menu"></i>
-            -->
-            <span slot="title">基本素质评价</span>
-          </el-menu-item>
-          <el-menu-item index="./studentDevelopmentEvaluation">
-            <!--
-            <i class="el-icon-document"></i>
-            -->
-            <span slot="title">发展评价</span>
-          </el-menu-item>
-        </el-menu>
+        <router-link to="./studentPersonalInformation">
+          <div id="information">
+            <span>学生姓名</span>
+            <span>学号</span>
+            <span>邮箱</span>
+          </div>
+        </router-link>
       </el-aside>
 
       <el-main id="body">
+        基本素质评价
+        <el-row>
+          <el-col :span="8" :offset="index > 0 ? 2 : 0">
+            <el-card :body-style="{ padding: '0px' }">
+              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+              <div style="padding: 14px;">
+                <span>自评与互评</span>
+                <div class="bottom clearfix">
+                  <time class="time">{{ currentDate }}</time>
+                  <el-button type="text" class="button" @click="hrefStudentCement">点击跳转</el-button>
+                </div>
+              </div>
+            </el-card>
+          </el-col>
 
+          <el-col :span="8" :offset="index > 0 ? 2 : 0">
+            <el-card :body-style="{ padding: '0px' }">
+              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+              <div style="padding: 14px;">
+                <span>指定给分</span>
+                <div class="bottom clearfix">
+                  <time class="time">{{ currentDate }}</time>
+                  <el-button type="text" class="button">点击跳转</el-button>
+                </div>
+              </div>
+            </el-card>
+          </el-col>
+
+          <el-col :span="8" :offset="index > 0 ? 2 : 0">
+            <el-card :body-style="{ padding: '0px' }">
+              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+              <div style="padding: 14px;">
+                <span>班委给分</span>
+                <div class="bottom clearfix">
+                  <time class="time">{{ currentDate }}</time>
+                  <el-button type="text" class="button">点击跳转</el-button>
+                </div>
+              </div>
+            </el-card>
+          </el-col>
+        </el-row>
+        发展评价
+        <el-row>
+          <el-col :span="8" :key="o" :offset="index > 0 ? 2 : 0">
+            <el-card :body-style="{ padding: '0px' }">
+              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+              <div style="padding: 14px;">
+                <span>好吃的汉堡</span>
+                <div class="bottom clearfix">
+                  <time class="time">{{ currentDate }}</time>
+                  <el-button type="text" class="button">操作按钮</el-button>
+                </div>
+              </div>
+            </el-card>
+          </el-col>
+        </el-row>
+        特殊功能权限
+        <el-row>
+          <el-col :span="8" :key="o" :offset="index > 0 ? 2 : 0">
+            <el-card :body-style="{ padding: '0px' }">
+              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+              <div style="padding: 14px;">
+                <span>测评信息审核</span>
+                <div class="bottom clearfix">
+                  <time class="time">{{ currentDate }}</time>
+                  <el-button type="text" class="button">点击跳转</el-button>
+                </div>
+              </div>
+            </el-card>
+          </el-col>
+        </el-row>
       </el-main>
 
       <el-aside id="aside-right" width="300px">
@@ -41,6 +96,7 @@
           
         </router-link>
         <el-button @click="hrefStudentBoardApply" id="hrefStudentBoardApply">申请公告公示</el-button>
+        <p>举报邮箱：123456789@asd.com</p>
       </el-aside>
 
       <el-footer id="footer" height="150px">
@@ -53,6 +109,7 @@
 export default {
   data() {
     return {
+      currentDate: new Date()
     };
   },
   methods: {
@@ -65,7 +122,7 @@ export default {
 
     herfExit()
     {
-      this.$router.push({path:'./login'});
+      this.$router.push({path:'./'});
     },
 
     hrefStudentBoardApply()
@@ -73,10 +130,10 @@ export default {
       this.$router.push({path:'./studentBoardApply'});
     },
 
-    herfStudentCement()
+    hrefStudentCement()
     {
       this.$router.push({path:'./studentCement'});
-    }
+    },
   }
 };
 </script>
