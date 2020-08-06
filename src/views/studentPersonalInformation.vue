@@ -1,13 +1,17 @@
 <template>
   <div id="studentBoardApply">
     <!--头部logo-->
-    <!--
     <div id="header">
-        <el-button type="text" @click="hrefReturnBackToStudent">返回</el-button>
+       <el-tabs id="return-button" >
+            <el-button type="text" @click="hrefStudentHomePage">首页</el-button>
+            |
+            <el-button type="text" @click="hrefStudentBoard">公告公示</el-button>
+            |
+            <el-button type="text" @click="hrefReturn">退出登录</el-button>
+        </el-tabs>
     </div>
-    -->
     <!--主体部分-->
-    <el-tabs type="border-card">
+    <el-tabs type="border-card" id="main-form">
         <el-tab-pane label="个人资料">
             <p>修改个人资料</p>
             <el-form :model="numberValidateForm" ref="numberValidateForm" label-width="100px" class="demo-ruleForm">
@@ -283,24 +287,34 @@ export default {
 </script>
  
 <style>
-
+#main-form{
+    position: absolute;
+    top:94px;
+    left:0px;
+    right:0px;
+}
+#return-button{
+    position: absolute;
+    right:10px;
+}
 </style>
 
 <style scope>
 #body {
-    position: absolute;
-    top: 94px; 
+  position: absolute;
+  top: 94px;
 }
 
 #header {
   position: absolute;
-  right: 0px;
-  left: 0px;
+  right:0px;
+  left:0px;
   top: 0px;
   height: 94px;
   background: url("../assets/北邮logo.png") no-repeat;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
 }
+
 
 /*#footer {
   

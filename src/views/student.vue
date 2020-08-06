@@ -3,7 +3,7 @@
     <el-container direction="vertical">
       <el-header id="header" height="100px">
         <div id="exit">
-          <el-button type="text" @click="herfExit">退出登陆</el-button>
+          <el-button type="text" @click="hrefExit">退出登录</el-button>
         </div>
       </el-header>
 
@@ -120,7 +120,7 @@ export default {
       console.log(key, keyPath);
     },
 
-    herfExit()
+    hrefExit()
     {
       this.$router.push({path:'./'});
     },

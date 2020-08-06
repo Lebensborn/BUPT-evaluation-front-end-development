@@ -6,8 +6,8 @@
 
     <!--主体部分-->
     <div id="body">
-      <el-tabs type="border-card" :stretch=true v-model="numberValidateForm.userType" >
-        <el-tab-pane label="学生登陆" name="0">
+      <el-tabs type="border-card" stretch=true v-model="numberValidateForm.userType" @tab-click="changeUserType">
+        <el-tab-pane label="学生登录" name="0">
           <el-form :model="numberValidateForm" ref="numberValidateForm" class="demo-ruleForm">
 
             <!--账号输入栏-->
@@ -38,15 +38,15 @@
             <el-checkbox v-model="numberValidateForm.checked" class="remember-password">记住密码</el-checkbox>
             
             <!--忘记密码-->
-            <el-button type="text" @click="herfForgetPassword" class="forget-password">忘记密码</el-button>
+            <el-button type="text" @click="hrefForgetPassword" class="forget-password">忘记密码</el-button>
 
-            <!--登陆按钮-->
+            <!--登录按钮-->
             <el-form-item>
               <el-button class="login-button" type="primary" @click="submitForm" >登录</el-button>
             </el-form-item>              
           </el-form>            
         </el-tab-pane>
-        <el-tab-pane label="辅导员登陆" name="1">
+        <el-tab-pane label="辅导员登录" name="1">
           <el-form :model="numberValidateForm" ref="numberValidateForm" class="demo-ruleForm">
 
             <!--账号输入栏-->
@@ -77,15 +77,15 @@
             <el-checkbox v-model="numberValidateForm.checked" class="remember-password">记住密码</el-checkbox>
             
             <!--忘记密码-->
-            <el-button type="text" @click="herfForgetPassword" class="forget-password">忘记密码</el-button>
+            <el-button type="text" @click="hrefForgetPassword" class="forget-password">忘记密码</el-button>
 
-            <!--登陆按钮-->
+            <!--登录按钮-->
             <el-form-item>
               <el-button class="login-button" type="primary" @click="submitForm" >登录</el-button>
             </el-form-item>              
           </el-form>            
         </el-tab-pane>
-        <el-tab-pane label="管理员登陆" name="2">
+        <el-tab-pane label="管理员登录" name="2">
           <el-form :model="numberValidateForm" ref="numberValidateForm" class="demo-ruleForm">
 
             <!--账号输入栏-->
@@ -116,9 +116,9 @@
             <el-checkbox v-model="numberValidateForm.checked" class="remember-password">记住密码</el-checkbox>
             
             <!--忘记密码-->
-            <el-button type="text" @click="herfForgetPassword" class="forget-password">忘记密码</el-button>
+            <el-button type="text" @click="hrefForgetPassword" class="forget-password">忘记密码</el-button>
 
-            <!--登陆按钮-->
+            <!--登录按钮-->
             <el-form-item>
               <el-button class="login-button" type="primary" @click="submitForm" >登录</el-button>
             </el-form-item>              
@@ -199,9 +199,9 @@ export default {
       });   
     },
     //跳转忘记密码
-    herfForgetPassword()
+    hrefForgetPassword()
     {
-      this.$router.push({path:'./forgetPassword-step-one'});
+      this.$router.push({path:'./forgetPassword-step-1'});
     },
   }
 }
@@ -219,7 +219,7 @@ export default {
   background-color:rgba(255, 255, 255, 0.6);
   
 }
-/*登陆按钮*/
+/*登录按钮*/
 .login-button {
   width: 260px;
 }
@@ -265,7 +265,7 @@ export default {
   right: 0px;
   left: 0px;
   height: 750px;
-  background: url("../assets/登陆界面背景图.jpg") no-repeat;
+  background: url("../assets/登录界面背景图.jpg") no-repeat;
 }
 /*头部*/
 #header {
