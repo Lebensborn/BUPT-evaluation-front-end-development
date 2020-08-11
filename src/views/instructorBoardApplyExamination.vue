@@ -1,137 +1,26 @@
 <template>
-  <div id="studentBoardApply">
+  <div id="instructorBoardApply">
     <!--头部logo-->
     <div id="header">
        <el-tabs id="return-button" >
-            <el-button type="text" @click="hrefStudentHomePage">首页</el-button>
+            <el-button type="text" @click="hrefInstructorHomePage">首页</el-button>
             |
-            <el-button type="text" @click="hrefStudentBoard">公告公示</el-button>
+            <el-button type="text" @click="hrefInstructorBoard">公告公示</el-button>
             |
             <el-button type="text" @click="hrefReturn">退出登录</el-button>
         </el-tabs>
     </div>
     <!--主体部分-->
     <el-tabs type="border-card" id="main-form">
-        <el-tab-pane label="个人资料">
-            <p>修改个人资料</p>
-            <el-form :model="numberValidateForm" ref="numberValidateForm" label-width="100px" class="demo-ruleForm">
-            <el-form-item
-                label="姓名"
-                prop="name"
-                :rules="[
-                { required: true, message: '姓名不能为空'},
-                ]"
-            >
-                <el-input type="name" v-model="numberValidateForm.name" autocomplete="off" disabled= true></el-input>
-            </el-form-item>
-
-            <el-form-item
-                label="学号"
-                prop="userId"
-                :rules="[
-                { required: true, message: '学号不能为空'},
-                ]"
-            >
-                <el-input type="number" v-model="numberValidateForm.userId" autocomplete="off" disabled= true></el-input>
-            </el-form-item>
+        <el-tab-pane label="公告名称1">
             
-            <el-form-item
-                label="专业"
-                prop="userMajor"
-                :rules="[
-                { required: true, message: '专业不能为空'},
-                ]"
-            >
-                <el-input type="major" v-model="numberValidateForm.userMajor" autocomplete="off" disabled= true></el-input>
-            </el-form-item>
-
-            <el-form-item
-                label="班级"
-                prop="studentClass"
-                :rules="[
-                { required: true, message: '班级不能为空'},
-                ]"
-            >
-                <el-input type="class" v-model="numberValidateForm.studentClass" autocomplete="off" disabled= true></el-input>
-            </el-form-item>
-
-            <el-form-item
-                label="职务"
-                prop="studentDuty"
-                :rules="[
-                { required: true, message: '职务不能为空'},
-                ]"
-            >
-                <el-input type="class" v-model="numberValidateForm.studentDuty" autocomplete="off" disabled= true></el-input>
-            </el-form-item>
-
-            <el-form-item
-                label="辅导员"
-                prop="instructor"
-                :rules="[
-                { required: true, message: '姓名不能为空'},
-                ]"
-            >
-                <el-input type="teacher" v-model="numberValidateForm.instructor" autocomplete="off" disabled= true></el-input>
-            </el-form-item>
-
-            <div v-show="doesChange">
-                <el-form-item
-                label="绑定的邮箱"
-                prop="email"
-                :rules="[
-                { required: true, message: '邮箱不能为空'},
-                { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
-                ]"
-                >
-                    <el-input type="email" v-model="numberValidateForm.email" autocomplete="off"  @keyup.enter.native="submitForm1" disabled= true></el-input>
-                    <el-button @click="doesChange = !doesChange">点此修改</el-button>
-                </el-form-item>
-            </div>
-
-            <div v-show="!doesChange">
-                <el-form-item
-                  label="绑定的邮箱"
-                  prop="email"
-                  :rules="[
-                    { required: true, message: '邮箱不能为空'},
-                    { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
-                  ]"
-                >
-                  <el-input type="email" v-model="numberValidateForm.email" autocomplete="off"  @keyup.enter.native="submitForm1" class="forget-password-input-block-step-one"></el-input>
-                </el-form-item>
-
-                <el-form-item
-                  label="收到的验证码"
-                  prop="code"
-                  :rules="[
-                    { required: true, message: '验证码不能为空'},
-                  ]"
-                >
-                  <el-input type="text" v-model="numberValidateForm.code" autocomplete="off"  @keyup.enter.native="submitForm1" class="forget-password-input-block-step-one"></el-input>
-                  <el-button @click.native.prevent="setCheakCode">点击获取验证码</el-button>
-                  <el-button @click.native.prevent="checkCode">确定</el-button>
-                </el-form-item>
-            </div>
-
-            <el-form-item>
-                <el-button type="primary" @click="submitForm1">保存</el-button>
-            </el-form-item>
-            </el-form>
         </el-tab-pane>
-        <el-tab-pane label="修改密码">
-            <el-form :model="resetForm"  :rules="rules" ref="resetForm" label-width="100px" class="demo-ruleForm">
-                <el-form-item label="密码" prop="pass">
-                    <el-input v-model="resetForm.pass" autocomplete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="确认密码" prop="checkPass">
-                    <el-input v-model="resetForm.checkPass" autocomplete="off"></el-input>
-                </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" @click="submitForm2">提交</el-button>
-                </el-form-item>
-            </el-form>
+        <el-tab-pane label="公告名称2">
+            
         </el-tab-pane>
+        <el-tab-pane label="公告名称3">
+            
+        </el-tab-pane>    
     </el-tabs>
     <!--页脚部分留白--> 
     <div id="footer">
@@ -165,7 +54,7 @@ export default {
         return {
             numberValidateForm: {
                 name: null,
-                studentClass: null,
+                instructorMajor: null,
                 instructor: null,
                 userId: null,
                 email: null,
@@ -191,9 +80,9 @@ export default {
         }
     },
     methods: {
-        hrefReturnBackToStudent()
+        hrefReturnBackToInstructor()
         {
-            this.$router.push({path: './student'});
+            this.$router.push({path: './instructor'});
         },
         submitForm1() {
             if (this.loading == true) return false; //防止重复点击
@@ -211,7 +100,7 @@ export default {
                     let state = response.data.success;
                     if (state == true) {
                         //this.$store.commit("LoginInfoLogin", response.data.info);
-                        this.$router.push("/student");
+                        this.$router.push("/instructor");
                         this.$message.success("重置密码成功！");
                         var arr = document.cookie.split("=");
                         this.$cookies.set(arr[0], arr[1], 60 * 60 * 24 * 7, "/");

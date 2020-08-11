@@ -12,6 +12,7 @@
           <div id="information">
             <span>学生姓名</span>
             <span>学号</span>
+            <span>职务</span>            
             <span>邮箱</span>
           </div>
         </router-link>

@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h1>主页</h1>
+      <h1>辅导员公告</h1>
       <p>测试页面！</p>
   </div>
 </template>

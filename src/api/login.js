@@ -1,5 +1,5 @@
 import request from '@/utils/request' //引入封装好的 axios 请求
-//登陆接口
+//登录接口
 export function login(userId, password, userType) { //登录接口
   userId = userId.toString();
   password = password.toString();
