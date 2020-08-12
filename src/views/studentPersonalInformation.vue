@@ -3,11 +3,11 @@
     <!--头部logo-->
     <div id="header">
        <el-tabs id="return-button" >
-            <el-button type="text" @click="hrefStudentHomePage">首页</el-button>
+            <el-button type="text" @click="hrefReturnBackToStudent">首页</el-button>
             |
             <el-button type="text" @click="hrefStudentBoard">公告公示</el-button>
             |
-            <el-button type="text" @click="hrefReturn">退出登录</el-button>
+            <el-button type="text" @click="hrefExit">退出登录</el-button>
         </el-tabs>
     </div>
     <!--主体部分-->
@@ -194,6 +194,14 @@ export default {
         hrefReturnBackToStudent()
         {
             this.$router.push({path: './student'});
+        },
+        hrefStudentBoard()
+        {
+            this.$router.push({path: './studentBoard'});
+        },
+        hrefExit()
+        {
+            this.$router.push({path: './'});
         },
         submitForm1() {
             if (this.loading == true) return false; //防止重复点击

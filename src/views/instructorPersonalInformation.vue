@@ -7,7 +7,7 @@
             |
             <el-button type="text" @click="hrefInstructorBoard">公告公示</el-button>
             |
-            <el-button type="text" @click="hrefReturn">退出登录</el-button>
+            <el-button type="text" @click="hrefExit">退出登录</el-button>
         </el-tabs>
     </div>
     <!--主体部分-->
@@ -174,6 +174,14 @@ export default {
         hrefReturnBackToInstructor()
         {
             this.$router.push({path: './instructor'});
+        },
+        hrefInstructorBoard()
+        {
+            this.$router.push({path: './instructorBoard'});
+        },
+        hrefExit()
+        {
+            this.$router.push({path: './'});
         },
         submitForm1() {
             if (this.loading == true) return false; //防止重复点击

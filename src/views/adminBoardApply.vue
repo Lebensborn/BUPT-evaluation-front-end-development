@@ -7,6 +7,7 @@
 
     <!--主体部分-->
     <div id="body">
+        <div id='Board'>发布公告公示<br/></div>
         <el-form ref="form" :model="form" label-width="80px">
         <el-form-item label="标题">
             <el-input v-model="form.title"></el-input>
@@ -25,6 +26,13 @@
         </el-form-item>
 
         <el-form-item label="发布范围">
+            学生届数：
+            <el-select v-model="form.class" placeholder="请选择发布范围">
+            <el-option label="计算机学院19级" ></el-option>
+            <el-option label="计算机学院18级" ></el-option>
+            <el-option label="计算机学院17级" ></el-option>
+            </el-select>
+            班级范围：
             <el-select v-model="form.class" placeholder="请选择发布范围">
             <el-option label="计算机学院19级" ></el-option>
             <el-option label="一大班" ></el-option>
@@ -280,7 +288,10 @@ export default {
 </script>
  
 <style>
-
+#Board
+{
+    text-align: center;
+};
 </style>
 
 <style scope>

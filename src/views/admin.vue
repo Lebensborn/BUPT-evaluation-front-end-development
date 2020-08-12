@@ -10,9 +10,9 @@
       <el-aside id="aside-left" width="150px">
         <router-link to="./adminPersonalInformation">
           <div id="information">
-            <span>管理员姓名</span>
-            <span>账号</span>
-            <span>邮箱</span>
+          管理员姓名<br/>
+          账号<br/>
+          邮箱<br/>
           </div>
         </router-link>
       </el-aside>
@@ -27,7 +27,7 @@
                 <span>用户账号管理</span>
                 <div class="bottom clearfix">
                   <time class="time">{{ currentDate }}</time>
-                  <el-button type="text" class="button" @click="hrefAdminCement">点击跳转</el-button>
+                  <el-button type="text" class="button" @click="hrefAdminUserAccount">点击跳转</el-button>
                 </div>
               </div>
             </el-card>
@@ -40,7 +40,7 @@
                 <span>发起活动类型</span>
                 <div class="bottom clearfix">
                   <time class="time">{{ currentDate }}</time>
-                  <el-button type="text" class="button">点击跳转</el-button>
+                  <el-button type="text" class="button" @click="hrefAdminActivityType">点击跳转</el-button>
                 </div>
               </div>
             </el-card>
@@ -53,7 +53,7 @@
                 <span>打分情况处理</span>
                 <div class="bottom clearfix">
                   <time class="time">{{ currentDate }}</time>
-                  <el-button type="text" class="button">点击跳转</el-button>
+                  <el-button type="text" class="button" @click="hrefAdminScoring">点击跳转</el-button>
                 </div>
               </div>
             </el-card>
@@ -66,7 +66,7 @@
                 <span>查看系统日志</span>
                 <div class="bottom clearfix">
                   <time class="time">{{ currentDate }}</time>
-                  <el-button type="text" class="button">点击跳转</el-button>
+                  <el-button type="text" class="button" @click="hrefAdminSystemLog">点击跳转</el-button>
                 </div>
               </div>
             </el-card>
@@ -79,7 +79,7 @@
                 <span>发布公告公示</span>
                 <div class="bottom clearfix">
                   <time class="time">{{ currentDate }}</time>
-                  <el-button type="text" class="button">点击跳转</el-button>
+                  <el-button type="text" class="button" @click="hrefAdminBoardApply">点击跳转</el-button>
                 </div>
               </div>
             </el-card>
@@ -118,9 +118,24 @@ export default {
       this.$router.push({path:'./adminBoardApply'});
     },
 
-    hrefAdminCement()
+    hrefAdminUserAccount()
     {
-      this.$router.push({path:'./adminCement'});
+      this.$router.push({path:'./adminUserAccount'});
+    },
+
+    hrefAdminActivityType()
+    {
+      this.$router.push({path:'./adminActivityType'});
+    },
+
+    hrefAdminScoring()
+    {
+      this.$router.push({path:'./adminScoring'});
+    },
+
+    hrefAdminSystemLog()
+    {
+      this.$router.push({path:'./adminSystemLog'});
     },
   }
 };
@@ -158,9 +173,7 @@ export default {
 }
 
 #information {
-  position: absolute;
-  right: 100px;
-  top: 40px;
+    text-align: center;
 }
 
 #exit {
