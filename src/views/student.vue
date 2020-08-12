@@ -10,10 +10,11 @@
       <el-aside id="aside-left" width="150px">
         <router-link to="./studentPersonalInformation">
           <div id="information">
-            <span>学生姓名</span>
-            <span>学号</span>
-            <span>职务</span>            
-            <span>邮箱</span>
+            学生姓名
+            <br />学号
+            <br />职务
+            <br />邮箱
+            <br />
           </div>
         </router-link>
       </el-aside>
@@ -23,7 +24,10 @@
         <el-row>
           <el-col :span="8" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+              <img
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597220172789&di=ee5c40f159b2b81d7c12c0bfc7a64f6d&imgtype=0&src=http%3A%2F%2Fpic.51yuansu.com%2Fpic2%2Fcover%2F00%2F31%2F56%2F5810bd7b71543_610.jpg"
+                class="image"
+              />
               <div style="padding: 14px;">
                 <span>自评与互评</span>
                 <div class="bottom clearfix">
@@ -36,12 +40,15 @@
 
           <el-col :span="8" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+              <img
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597218296219&di=92c6bc78f34da58c18867107e4003c63&imgtype=0&src=http%3A%2F%2Fpic.51yuansu.com%2Fpic2%2Fcover%2F00%2F30%2F78%2F581091538f7a5_610.jpg"
+                class="image"
+              />
               <div style="padding: 14px;">
                 <span>指定给分</span>
                 <div class="bottom clearfix">
                   <time class="time">{{ currentDate }}</time>
-                  <el-button type="text" class="button">点击跳转</el-button>
+                  <el-button type="text" class="button" @click="hrefStudentScoring">点击跳转</el-button>
                 </div>
               </div>
             </el-card>
@@ -49,22 +56,27 @@
 
           <el-col :span="8" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+              <img
+                src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2962166990,353693425&fm=26&gp=0.jpg"
+                class="image"
+              />
               <div style="padding: 14px;">
                 <span>班委给分</span>
                 <div class="bottom clearfix">
                   <time class="time">{{ currentDate }}</time>
-                  <el-button type="text" class="button">点击跳转</el-button>
+                  <el-button type="text" class="button" @click="hrefStudentClassCommitteeScoring">点击跳转</el-button>
                 </div>
               </div>
             </el-card>
           </el-col>
-        </el-row>
-        发展评价
+        </el-row>发展评价
         <el-row>
           <el-col :span="8" :key="o" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+              <img
+                src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                class="image"
+              />
               <div style="padding: 14px;">
                 <span>好吃的汉堡</span>
                 <div class="bottom clearfix">
@@ -74,17 +86,19 @@
               </div>
             </el-card>
           </el-col>
-        </el-row>
-        特殊功能权限
+        </el-row>特殊功能权限
         <el-row>
           <el-col :span="8" :key="o" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+              <img
+                src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3157318169,94160677&fm=26&gp=0.jpg"
+                class="image"
+              />
               <div style="padding: 14px;">
                 <span>测评信息审核</span>
                 <div class="bottom clearfix">
                   <time class="time">{{ currentDate }}</time>
-                  <el-button type="text" class="button">点击跳转</el-button>
+                  <el-button type="text" class="button" @click="hrefStudentCement">点击跳转</el-button>
                 </div>
               </div>
             </el-card>
@@ -93,16 +107,12 @@
       </el-main>
 
       <el-aside id="aside-right" width="300px">
-        <router-link to="./studentBoard" id="board">
-          
-        </router-link>
+        <router-link to="./studentBoard" id="board"></router-link>
         <el-button @click="hrefStudentBoardApply" id="hrefStudentBoardApply">申请公告公示</el-button>
         <p>举报邮箱：123456789@asd.com</p>
       </el-aside>
 
-      <el-footer id="footer" height="150px">
-
-      </el-footer>
+      <el-footer id="footer" height="150px"></el-footer>
     </el-container>
   </div>
 </template>
@@ -110,7 +120,7 @@
 export default {
   data() {
     return {
-      currentDate: new Date()
+      currentDate: new Date(),
     };
   },
   methods: {
@@ -121,21 +131,26 @@ export default {
       console.log(key, keyPath);
     },
 
-    hrefExit()
-    {
-      this.$router.push({path:'./'});
+    hrefExit() {
+      this.$router.push({ path: "./" });
     },
 
-    hrefStudentBoardApply()
-    {
-      this.$router.push({path:'./studentBoardApply'});
+    hrefStudentBoardApply() {
+      this.$router.push({ path: "./studentBoardApply" });
     },
 
-    hrefStudentCement()
-    {
-      this.$router.push({path:'./studentCement'});
+    hrefStudentCement() {
+      this.$router.push({ path: "./studentCement" });
     },
-  }
+
+    hrefStudentScoring() {
+      this.$router.push({ path: "./studentScoring" });
+    },
+
+    hrefStudentClassCommitteeScoring() {
+      this.$router.push({ path: "./studentClassCommitteeScoring" });
+    },
+  },
 };
 </script>
 
@@ -162,18 +177,16 @@ export default {
 
 .clearfix:before,
 .clearfix:after {
-    display: table;
-    content: "";
+  display: table;
+  content: "";
 }
 
 .clearfix:after {
-    clear: both
+  clear: both;
 }
 
 #information {
-  position: absolute;
-  right: 100px;
-  top: 40px;
+  text-align: center;
 }
 
 #exit {
@@ -192,9 +205,7 @@ export default {
 }
 
 #hrefStudentBoardApply {
-  position: absolute;
-  right: 80px;
-  top: 450px;  
+  text-align: center;
 }
 </style>
 
@@ -205,6 +216,7 @@ export default {
   left: 0px;
   right: 0px;
   bottom: 0px;
+  background: url("../assets/北邮logo.png") no-repeat;
 }
 
 #body {
@@ -212,7 +224,7 @@ export default {
   left: 150px;
   right: 300px;
   top: 100px;
-  bottom: 150px; 
+  bottom: 150px;
   background-color: #f2f2f2;
 }
 

@@ -19,9 +19,9 @@ export const constantRouterMap = [
     //配置学生自评与互评
     { path: '/studentCement', component: () => import('@/views/studentCement')},
     //配置学生指定给分
-    { path: '/studentAllocateScores', component: () => import('@/views/studentAllocateScores')},
+    { path: '/studentScoring', component: () => import('@/views/studentScoring')},
     //配置学生班委评分
-    { path: '/studentClassCommitteeAllocateScores', component: () => import('@/views/studentClassCommitteeAllocateScores')},
+    { path: '/studentClassCommitteeScoring', component: () => import('@/views/studentClassCommitteeScoring')},
     //配置学生申请公告公示
     { path: '/studentBoardApply', component: () => import('@/views/studentBoardApply')},
     //配置学生测评信息审核
@@ -38,15 +38,32 @@ export const constantRouterMap = [
     //配置辅导员转移下放权限
     { path: '/instructorTransferDelegateAuthority', component: () => import('@/views/instructorTransferDelegateAuthority')}, 
     //配置辅导员公告申请审核
-    { path: '/instructorBoardApplyExamination', component: () => import('@/views/instructorBoardApplyExamination')}, 
+    { path: '/instructorBoardExamination', component: () => import('@/views/instructorBoardExamination')}, 
     //配置辅导员发布公告公示
     { path: '/instructorBoardApply', component: () => import('@/views/instructorBoardApply')}, 
     //配置辅导员指定给分
-    { path: '/instructorAllocateScores', component: () => import('@/views/instructorAllocateScores')}, 
+    { path: '/instructorScoring', component: () => import('@/views/instructorScoring')}, 
     //配置辅导员班委评分
-    { path: '/instructorClassCommitteeAllocateScores', component: () => import('@/views/instructorClassCommitteeAllocateScores')},    
+    { path: '/instructorClassCommitteeScoring', component: () => import('@/views/instructorClassCommitteeScoring')},    
     //配置辅导员公告公示
     { path: '/instructorBoard', component: () => import('@/views/instructorBoard')},
+
+    //配置管理员主页
+    { path: '/admin', component: () => import('@/views/admin')},
+    //配置管理员个人资料
+    { path: '/adminPersonalInformation', component: () => import('@/views/adminPersonalInformation')},
+    //配置管理员用户账号管理
+    { path: '/adminUserAccount', component: () => import('@/views/adminUserAccount')},
+    //配置管理员发起活动类型
+    { path: '/adminActivityType', component: () => import('@/views/adminActivityType')}, 
+    //配置管理员打分情况处理
+    { path: '/adminScoring', component: () => import('@/views/adminScoring')}, 
+    //配置管理员查看系统日志
+    { path: '/adminSystemLog', component: () => import('@/views/adminSystemLog')}, 
+    //配置管理员发布公告公示
+    { path: '/adminBoardApply', component: () => import('@/views/adminBoardApply')},    
+    //配置管理员公告公示
+    { path: '/adminBoard', component: () => import('@/views/adminBoard')},
 ]
  
 export default new VueRouter({

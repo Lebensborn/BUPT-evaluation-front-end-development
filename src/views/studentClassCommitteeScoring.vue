@@ -1,5 +1,5 @@
 <template>
-    <div id="instructorAllocateScores">
+    <div id="studentClassCommitteeScoring">
         <div id="header">
             <el-button type="text" @click="hrefReturnBackToInstructor">返回</el-button>
             |
@@ -9,7 +9,7 @@
         </div>
         <div id="body">
             
-            <span>自评与互评</span>
+            <span>班委评分</span>
             <el-button plain>保存</el-button>
             <el-button type="primary">提交</el-button>
             

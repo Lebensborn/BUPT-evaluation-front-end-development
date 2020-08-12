@@ -3,7 +3,7 @@
     <!--头部logo-->
     <div id="header">
        <el-tabs id="return-button" >
-            <el-button type="text" @click="hrefInstructorHomePage">首页</el-button>
+            <el-button type="text" @click="hrefReturnBackToInstructor">首页</el-button>
             |
             <el-button type="text" @click="hrefInstructorBoard">公告公示</el-button>
             |

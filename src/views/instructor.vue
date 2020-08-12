@@ -10,10 +10,10 @@
       <el-aside id="aside-left" width="150px">
         <router-link to="./instructorPersonalInformation">
           <div id="information">
-            <span>辅导员姓名</span>
-            <span>账号</span>
-            <span>专业</span>
-            <span>邮箱</span>
+          辅导员姓名<br/>
+          账号<br/>
+          专业<br/>
+          邮箱<br/>
           </div>
         </router-link>
       </el-aside>
@@ -23,12 +23,12 @@
         <el-row>
           <el-col :span="8" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+              <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3157318169,94160677&fm=26&gp=0.jpg" class="image">
               <div style="padding: 14px;">
                 <span>测评信息审核</span>
                 <div class="bottom clearfix">
                   <time class="time">{{ currentDate }}</time>
-                  <el-button type="text" class="button" @click="hrefInstructorCement">点击跳转</el-button>
+                  <el-button type="text" class="button" @click="hrefInstructorEvaluationExamination">点击跳转</el-button>
                 </div>
               </div>
             </el-card>
@@ -36,12 +36,12 @@
 
           <el-col :span="8" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+              <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597218103407&di=3da659362ff0a041f3f8f6dafe11590e&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F01%2F40%2F51%2F03573d02a6116e6.jpg" class="image">
               <div style="padding: 14px;">
                 <span>转移下放权限</span>
                 <div class="bottom clearfix">
                   <time class="time">{{ currentDate }}</time>
-                  <el-button type="text" class="button">点击跳转</el-button>
+                  <el-button type="text" class="button" @click="hrefInstructorTransferDelegateAuthority">点击跳转</el-button>
                 </div>
               </div>
             </el-card>
@@ -49,12 +49,12 @@
 
           <el-col :span="8" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+              <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597218155302&di=98b569f407b98faa949341e0cf3572f6&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F01%2F51%2F69%2F415745c99f14518.jpg" class="image">
               <div style="padding: 14px;">
                 <span>发布公告公示</span>
                 <div class="bottom clearfix">
                   <time class="time">{{ currentDate }}</time>
-                  <el-button type="text" class="button">点击跳转</el-button>
+                  <el-button type="text" class="button" @click="hrefInstructorBoardApply">点击跳转</el-button>
                 </div>
               </div>
             </el-card>
@@ -62,12 +62,12 @@
 
           <el-col :span="8" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+              <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597218252315&di=af7f858f65fdfa3b4e67e37fefcd185d&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F01%2F47%2F47%2F295743ef47b56e7.jpg" class="image">
               <div style="padding: 14px;">
                 <span>公告申请审核</span>
                 <div class="bottom clearfix">
                   <time class="time">{{ currentDate }}</time>
-                  <el-button type="text" class="button">点击跳转</el-button>
+                  <el-button type="text" class="button" @click="hrefInstructorBoardExamination">点击跳转</el-button>
                 </div>
               </div>
             </el-card>
@@ -77,12 +77,12 @@
         <el-row>
           <el-col :span="8" :key="o" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+              <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597218296219&di=92c6bc78f34da58c18867107e4003c63&imgtype=0&src=http%3A%2F%2Fpic.51yuansu.com%2Fpic2%2Fcover%2F00%2F30%2F78%2F581091538f7a5_610.jpg" class="image">
               <div style="padding: 14px;">
                 <span>指定给分</span>
                 <div class="bottom clearfix">
                   <time class="time">{{ currentDate }}</time>
-                  <el-button type="text" class="button">点击跳转</el-button>
+                  <el-button type="text" class="button" @click="hrefInstructorScoring">点击跳转</el-button>
                 </div>
               </div>
             </el-card>
@@ -90,12 +90,12 @@
 
            <el-col :span="8" :key="o" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+              <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2962166990,353693425&fm=26&gp=0.jpg" class="image">
               <div style="padding: 14px;">
                 <span>班委评分</span>
                 <div class="bottom clearfix">
                   <time class="time">{{ currentDate }}</time>
-                  <el-button type="text" class="button">点击跳转</el-button>
+                  <el-button type="text" class="button" @click="hrefInstructorClassCommitteeScoring">点击跳转</el-button>
                 </div>
               </div>
             </el-card>
@@ -129,14 +129,34 @@ export default {
       this.$router.push({path:'./'});
     },
 
+    hrefInstructorEvaluationExamination()
+    {
+      this.$router.push({path:'./instructorEvaluationExamination'});
+    },
+
     hrefInstructorBoardApply()
     {
       this.$router.push({path:'./instructorBoardApply'});
     },
 
-    hrefInstructorCement()
+    hrefInstructorTransferDelegateAuthority()
     {
-      this.$router.push({path:'./instructorCement'});
+      this.$router.push({path:'./instructorTransferDelegateAuthority'});
+    },
+
+    hrefInstructorBoardExamination()
+    {
+      this.$router.push({path:'./instructorBoardExamination'});
+    },
+
+    hrefInstructorScoring()
+    {
+      this.$router.push({path:'./instructorScoring'});
+    },
+
+    hrefInstructorClassCommitteeScoring()
+    {
+      this.$router.push({path:'./instructorClassCommitteeScoring'});
     },
   }
 };
@@ -174,9 +194,7 @@ export default {
 }
 
 #information {
-  position: absolute;
-  right: 100px;
-  top: 40px;
+    text-align: center;
 }
 
 #exit {
@@ -208,6 +226,7 @@ export default {
   left: 0px;
   right: 0px;
   bottom: 0px;
+  background: url("../assets/北邮logo.png") no-repeat;
 }
 
 #body {
