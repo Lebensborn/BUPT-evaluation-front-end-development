@@ -4,9 +4,6 @@ export function login(userId, password, userType) { //登录接口
   userId = userId.toString();
   password = password.toString();
 
-  userId = userId.trim();
-  password = password.trim();
-  userType = userType.trim();
   return request({ //使用封装好的 axios 进行网络请求
     url: '/user/session',
     method: 'post',

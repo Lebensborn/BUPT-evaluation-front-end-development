@@ -110,7 +110,6 @@ const user = {
         checkCode({commit}, form){
             return new Promise((resolve, reject) => {
                 CheckCode(form).then(response => {
-                    console.log("hhh");
                     commit('') //提交一个 mutation，通知状态改变             
                     resolve(response) //将结果封装进 Promise        
                 }).catch(error => {
