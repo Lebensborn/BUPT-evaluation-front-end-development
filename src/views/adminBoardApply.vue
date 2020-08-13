@@ -1,13 +1,13 @@
 <template>
-  <div id="studentBoardApply">
+  <div id="adminBoardApply">
     <!--头部logo-->
     <div id="header">
-        <el-button type="text" @click="hrefReturnBackToStudent">返回</el-button>
+        <el-button type="text" @click="hrefReturnBackToAdmin">返回</el-button>
     </div>
 
     <!--主体部分-->
     <div id="body">
-        <div id='Board'>申请公告公示<br/></div>
+        <div id='Board'>发布公告公示<br/></div>
         <el-form ref="form" :model="form" label-width="80px">
         <el-form-item label="标题">
             <el-input v-model="form.title"></el-input>
@@ -26,6 +26,13 @@
         </el-form-item>
 
         <el-form-item label="发布范围">
+            学生届数：
+            <el-select v-model="form.class" placeholder="请选择发布范围">
+            <el-option label="计算机学院19级" ></el-option>
+            <el-option label="计算机学院18级" ></el-option>
+            <el-option label="计算机学院17级" ></el-option>
+            </el-select>
+            班级范围：
             <el-select v-model="form.class" placeholder="请选择发布范围">
             <el-option label="计算机学院19级" ></el-option>
             <el-option label="一大班" ></el-option>
@@ -135,10 +142,6 @@
                 <el-button size="small" type="primary">点击上传</el-button>
                 <div slot="tip" class="el-upload__tip">(上传不超过5个文件，单个文件最多不大于xMB)</div>
             </el-upload>
-        </el-form-item>
-        
-        <el-form-item label="备注">
-            <el-input v-model="form.remark"></el-input>
         </el-form-item>
 
         <el-form-item>
@@ -250,7 +253,7 @@ export default {
                         content: '',
                         fileList: [],
                         };
-                        if (this.$route.params.type == "change") this.$router.push("/studentBoard");
+                        if (this.$route.params.type == "change") this.$router.push("/adminBoard");
                     } else {
                         this.errorTip(response.data.msg);
                     }
@@ -276,9 +279,9 @@ export default {
         beforeRemove(file) {
             return this.$confirm(`确定移除 ${ file.name }？`);
         },
-        hrefReturnBackToStudent()
+        hrefReturnBackToAdmin()
         {
-            this.$router.push({path: './student'});
+            this.$router.push({path: './admin'});
         }
     }
 }

@@ -1,11 +1,11 @@
 <template>
-  <div id="studentBoardApply">
+  <div id="instructorBoardApply">
     <!--头部logo-->
     <div id="header">
        <el-tabs id="return-button" >
-            <el-button type="text" @click="hrefReturnBackToStudent">首页</el-button>
+            <el-button type="text" @click="hrefReturnBackToInstructor">首页</el-button>
             |
-            <el-button type="text" @click="hrefStudentBoard">公告公示</el-button>
+            <el-button type="text" @click="hrefInstructorBoard">公告公示</el-button>
             |
             <el-button type="text" @click="hrefExit">退出登录</el-button>
         </el-tabs>
@@ -15,6 +15,16 @@
         <el-tab-pane label="个人资料">
             <p>修改个人资料</p>
             <el-form :model="numberValidateForm" ref="numberValidateForm" label-width="100px" class="demo-ruleForm">
+            <el-form-item
+                label="用户名"
+                prop="userId"
+                :rules="[
+                { required: true, message: '用户名不能为空'},
+                ]"
+            >
+                <el-input type="number" v-model="numberValidateForm.userId" autocomplete="off" disabled= true></el-input>
+            </el-form-item>
+
             <el-form-item
                 label="姓名"
                 prop="name"
@@ -26,53 +36,23 @@
             </el-form-item>
 
             <el-form-item
-                label="学号"
-                prop="userId"
-                :rules="[
-                { required: true, message: '学号不能为空'},
-                ]"
-            >
-                <el-input type="number" v-model="numberValidateForm.userId" autocomplete="off" disabled= true></el-input>
-            </el-form-item>
-            
-            <el-form-item
                 label="专业"
-                prop="userMajor"
+                prop="instructorMajor"
                 :rules="[
                 { required: true, message: '专业不能为空'},
                 ]"
             >
-                <el-input type="major" v-model="numberValidateForm.userMajor" autocomplete="off" disabled= true></el-input>
+                <el-input type="major" v-model="numberValidateForm.instructorMajor" autocomplete="off" disabled= true></el-input>
             </el-form-item>
 
             <el-form-item
-                label="班级"
-                prop="studentClass"
+                label="管理班级"
+                prop="instructorClass"
                 :rules="[
-                { required: true, message: '班级不能为空'},
+                { required: true, message: '管理班级不能为空'},
                 ]"
             >
-                <el-input type="class" v-model="numberValidateForm.studentClass" autocomplete="off" disabled= true></el-input>
-            </el-form-item>
-
-            <el-form-item
-                label="职务"
-                prop="studentDuty"
-                :rules="[
-                { required: true, message: '职务不能为空'},
-                ]"
-            >
-                <el-input type="class" v-model="numberValidateForm.studentDuty" autocomplete="off" disabled= true></el-input>
-            </el-form-item>
-
-            <el-form-item
-                label="辅导员"
-                prop="instructor"
-                :rules="[
-                { required: true, message: '姓名不能为空'},
-                ]"
-            >
-                <el-input type="teacher" v-model="numberValidateForm.instructor" autocomplete="off" disabled= true></el-input>
+                <el-input type="class" v-model="numberValidateForm.instructorClass" autocomplete="off" disabled= true></el-input>
             </el-form-item>
 
             <div v-show="doesChange">
@@ -165,7 +145,7 @@ export default {
         return {
             numberValidateForm: {
                 name: null,
-                studentClass: null,
+                instructorMajor: null,
                 instructor: null,
                 userId: null,
                 email: null,
@@ -191,13 +171,13 @@ export default {
         }
     },
     methods: {
-        hrefReturnBackToStudent()
+        hrefReturnBackToInstructor()
         {
-            this.$router.push({path: './student'});
+            this.$router.push({path: './instructor'});
         },
-        hrefStudentBoard()
+        hrefInstructorBoard()
         {
-            this.$router.push({path: './studentBoard'});
+            this.$router.push({path: './instructorBoard'});
         },
         hrefExit()
         {
@@ -219,7 +199,7 @@ export default {
                     let state = response.data.success;
                     if (state == true) {
                         //this.$store.commit("LoginInfoLogin", response.data.info);
-                        this.$router.push("/student");
+                        this.$router.push("/instructor");
                         this.$message.success("重置密码成功！");
                         var arr = document.cookie.split("=");
                         this.$cookies.set(arr[0], arr[1], 60 * 60 * 24 * 7, "/");

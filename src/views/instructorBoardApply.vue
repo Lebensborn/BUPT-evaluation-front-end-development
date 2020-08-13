@@ -1,13 +1,13 @@
 <template>
-  <div id="studentBoardApply">
+  <div id="instructorBoardApply">
     <!--头部logo-->
     <div id="header">
-        <el-button type="text" @click="hrefReturnBackToStudent">返回</el-button>
+        <el-button type="text" @click="hrefReturnBackToInstructor">返回</el-button>
     </div>
 
     <!--主体部分-->
     <div id="body">
-        <div id='Board'>申请公告公示<br/></div>
+        <div id='Board'>发布公告公示<br/></div>
         <el-form ref="form" :model="form" label-width="80px">
         <el-form-item label="标题">
             <el-input v-model="form.title"></el-input>
@@ -136,10 +136,6 @@
                 <div slot="tip" class="el-upload__tip">(上传不超过5个文件，单个文件最多不大于xMB)</div>
             </el-upload>
         </el-form-item>
-        
-        <el-form-item label="备注">
-            <el-input v-model="form.remark"></el-input>
-        </el-form-item>
 
         <el-form-item>
             <el-button>保存</el-button>
@@ -250,7 +246,7 @@ export default {
                         content: '',
                         fileList: [],
                         };
-                        if (this.$route.params.type == "change") this.$router.push("/studentBoard");
+                        if (this.$route.params.type == "change") this.$router.push("/instructorBoard");
                     } else {
                         this.errorTip(response.data.msg);
                     }
@@ -276,9 +272,9 @@ export default {
         beforeRemove(file) {
             return this.$confirm(`确定移除 ${ file.name }？`);
         },
-        hrefReturnBackToStudent()
+        hrefReturnBackToInstructor()
         {
-            this.$router.push({path: './student'});
+            this.$router.push({path: './instructor'});
         }
     }
 }

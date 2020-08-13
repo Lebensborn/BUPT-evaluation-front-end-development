@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h1>主页</h1>
+      <h1>系统日志</h1>
       <p>测试页面！</p>
   </div>
 </template>
