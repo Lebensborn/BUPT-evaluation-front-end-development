@@ -1,7 +1,7 @@
 <template>
    <div>
         <div id="header">
-            <el-button type="text" @click="hrefReturnBackToStudent">返回</el-button> |<el-button type="text" @click="hrefApplyBoard">申请公示公告</el-button> |<el-button type="text" @click="hrefExit">退出登陆</el-button>
+            <el-button type="text" @click="hrefReturnBackToStudent">返回</el-button> |<el-button type="text" @click="hrefApplyBoard">申请公示公告</el-button> |<el-button type="text" @click="hrefExit">退出登录</el-button>
         </div>
         <h2 style="margin-top: 96px;">公示公告</h2>
         <hr>
@@ -68,7 +68,7 @@ export default {
   left: 0px;
   top: 0px;
   height: 94px;
-  background: url("../../assets/北邮logo.png") no-repeat;
+  background: url("../assets/北邮logo.png") no-repeat;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
 }
 </style>
