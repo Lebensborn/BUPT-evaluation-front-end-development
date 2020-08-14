@@ -22,7 +22,7 @@
         <el-row>
           <el-col :span="8" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+              <img src="../assets/用户账号管理.png" class="image">
               <div style="padding: 14px;">
                 <span>用户账号管理</span>
                 <div class="bottom clearfix">
@@ -35,7 +35,7 @@
 
           <el-col :span="8" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+              <img src="../assets/发起活动类型.png" class="image">
               <div style="padding: 14px;">
                 <span>发起活动类型</span>
                 <div class="bottom clearfix">
@@ -48,7 +48,7 @@
 
           <el-col :span="8" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+              <img src="../assets/打分情况处理.png" class="image">
               <div style="padding: 14px;">
                 <span>打分情况处理</span>
                 <div class="bottom clearfix">
@@ -61,7 +61,7 @@
 
           <el-col :span="8" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+              <img src="../assets/查看系统日志.png" class="image">
               <div style="padding: 14px;">
                 <span>查看系统日志</span>
                 <div class="bottom clearfix">
@@ -74,7 +74,7 @@
 
            <el-col :span="8" :key="o" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+              <img src="../assets/发布公告公示.png" class="image">
               <div style="padding: 14px;">
                 <span>发布公告公示</span>
                 <div class="bottom clearfix">

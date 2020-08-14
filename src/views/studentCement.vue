@@ -1,14 +1,21 @@
 <template>
     <div id="studentCement">
         <div id="header">
-            <el-button type="text" @click="hrefReturnBackToStudent">返回</el-button> |<el-button type="text" @click="hrefExit">退出</el-button> |<el-button type="text" @click="hrefBoard">公示公告</el-button>
+          <el-tabs id="return-button" >
+            <el-button type="text" @click="hrefReturnBackToStudent">首页</el-button>
+            |
+            <el-button type="text" @click="hrefStudentBoard">公告公示</el-button>
+            |
+            <el-button type="text" @click="hrefExit">退出登录</el-button>
+        </el-tabs>
         </div>
         <div id="body">
             
             <span>自评与互评</span>
-            <el-button plain @click="saveCement">保存</el-button>
-            <el-button type="primary" @click="submitForm">提交</el-button>
-           
+            <div id="save-button">
+              <el-button plain @click="saveCement">保存</el-button>
+              <el-button type="primary" @click="submitForm">提交</el-button>
+            </div>
           <el-form :model="tableData" ref="tableData" label-width="100px" class="demo-ruleForm">
           <el-table :data="tableData">
             <el-table-column
@@ -254,6 +261,11 @@ export default {
 #body {
     position: absolute;
     top: 94px;
+}
+
+#return-button{
+    position: absolute;
+    right:10px;
 }
 </style>
 

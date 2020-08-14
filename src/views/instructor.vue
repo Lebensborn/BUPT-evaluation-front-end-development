@@ -23,7 +23,7 @@
         <el-row>
           <el-col :span="8" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
-              <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3157318169,94160677&fm=26&gp=0.jpg" class="image">
+              <img src="../assets/测评信息审核.png" class="image">
               <div style="padding: 14px;">
                 <span>测评信息审核</span>
                 <div class="bottom clearfix">
@@ -36,7 +36,7 @@
 
           <el-col :span="8" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
-              <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597218103407&di=3da659362ff0a041f3f8f6dafe11590e&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F01%2F40%2F51%2F03573d02a6116e6.jpg" class="image">
+              <img src="../assets/转移下放权限.png" class="image">
               <div style="padding: 14px;">
                 <span>转移下放权限</span>
                 <div class="bottom clearfix">
@@ -49,7 +49,7 @@
 
           <el-col :span="8" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
-              <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597218155302&di=98b569f407b98faa949341e0cf3572f6&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F01%2F51%2F69%2F415745c99f14518.jpg" class="image">
+              <img src="../assets/发布公告公示.png" class="image">
               <div style="padding: 14px;">
                 <span>发布公告公示</span>
                 <div class="bottom clearfix">
@@ -62,7 +62,7 @@
 
           <el-col :span="8" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
-              <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597218252315&di=af7f858f65fdfa3b4e67e37fefcd185d&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F01%2F47%2F47%2F295743ef47b56e7.jpg" class="image">
+              <img src="../assets/公告公示审核.png" class="image">
               <div style="padding: 14px;">
                 <span>公告申请审核</span>
                 <div class="bottom clearfix">
@@ -77,7 +77,7 @@
         <el-row>
           <el-col :span="8" :key="o" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
-              <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597218296219&di=92c6bc78f34da58c18867107e4003c63&imgtype=0&src=http%3A%2F%2Fpic.51yuansu.com%2Fpic2%2Fcover%2F00%2F30%2F78%2F581091538f7a5_610.jpg" class="image">
+              <img src="../assets/发布公告公示.png" class="image">
               <div style="padding: 14px;">
                 <span>指定给分</span>
                 <div class="bottom clearfix">
@@ -90,7 +90,7 @@
 
            <el-col :span="8" :key="o" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
-              <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2962166990,353693425&fm=26&gp=0.jpg" class="image">
+              <img src="../assets/发布公告公示.png" class="image">
               <div style="padding: 14px;">
                 <span>班委评分</span>
                 <div class="bottom clearfix">
