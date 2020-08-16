@@ -59,10 +59,10 @@ export const constantRouterMap = [
     { path: '/instructorBoardApply', component: () => import('@/views/instructor/instructorBoardApply')},
     //配置公告
     { path: '/instructorBoard', component: () => import('@/views/instructor/instructorBoard')},
-    //配置辅导员评价
-    { path: '/instructorCement', component: () => import('@/views/instructor/instructorCement')},
+
+    // { path: '/instructorCement', component: () => import('@/views/instructor/instructorCement')},
     //配置辅导员得分
-    { path: '/instructorScoring', component: () => import('@/views/instructor/instructorScoring')},
+    { path: '/instructorAssignCement', component: () => import('@/views/instructor/instructorAssignCement')},
     //配置辅导员评价
     { path: '/instructorBoardExamination', component: () => import('@/views/instructor/instructorBoardExamination')},
     //配置辅导员班委打分

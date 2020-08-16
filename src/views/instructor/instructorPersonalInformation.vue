@@ -1,31 +1,27 @@
 <template>
-  <div id="instructorBoardApply">
+  <div id="instructorPersonalInformation">
     <!--头部logo-->
     <div id="header">
-       <el-tabs id="return-button" >
-            <el-button type="text" @click="hrefReturnBackToInstructor">首页</el-button>
-            |
-            <el-button type="text" @click="hrefInstructorBoard">公告公示</el-button>
-            |
-            <el-button type="text" @click="hrefExit">退出登录</el-button>
-        </el-tabs>
+        <div class="hrefButton">
+            <el-button type="text" @click="hrefReturnBackToStudent">返回</el-button> |<el-button type="text" @click="hrefBoard">公示公告</el-button> |<el-button type="text" @click="hrefExit">退出登陆</el-button>
+        </div>
     </div>
     <!--主体部分-->
-    <el-tabs type="border-card" id="main-form">
+    <el-tabs type="border-card" id="tabs">
         <el-tab-pane label="个人资料">
-            <p>修改个人资料</p>
             <el-form :model="numberValidateForm" ref="numberValidateForm" label-width="100px" class="demo-ruleForm">
             <el-form-item
-                label="用户名"
+                label="账号"
                 prop="userId"
                 :rules="[
-                { required: true, message: '用户名不能为空'},
+                { required: true, message: '账号不能为空'},
                 ]"
             >
-                <el-input type="number" v-model="numberValidateForm.userId" autocomplete="off" disabled= true></el-input>
+                <el-input type="string" v-model="numberValidateForm.userId" autocomplete="off" disabled= true></el-input>
             </el-form-item>
 
             <el-form-item
+                class="header-input"
                 label="姓名"
                 prop="name"
                 :rules="[
@@ -36,23 +32,13 @@
             </el-form-item>
 
             <el-form-item
-                label="专业"
-                prop="instructorMajor"
-                :rules="[
-                { required: true, message: '专业不能为空'},
-                ]"
-            >
-                <el-input type="major" v-model="numberValidateForm.instructorMajor" autocomplete="off" disabled= true></el-input>
-            </el-form-item>
-
-            <el-form-item
                 label="管理班级"
-                prop="instructorClass"
+                prop="classCharge"
                 :rules="[
-                { required: true, message: '管理班级不能为空'},
+                { required: true, message: '班级不能为空'},
                 ]"
             >
-                <el-input type="class" v-model="numberValidateForm.instructorClass" autocomplete="off" disabled= true></el-input>
+                <el-input type="class" v-model="numberValidateForm.classCharge" autocomplete="off" disabled= true></el-input>
             </el-form-item>
 
             <div v-show="doesChange">
@@ -65,6 +51,8 @@
                 ]"
                 >
                     <el-input type="email" v-model="numberValidateForm.email" autocomplete="off"  @keyup.enter.native="submitForm1" disabled= true></el-input>
+                </el-form-item>
+                <el-form-item>
                     <el-button @click="doesChange = !doesChange">点此修改</el-button>
                 </el-form-item>
             </div>
@@ -82,13 +70,16 @@
                 </el-form-item>
 
                 <el-form-item
-                  label="收到的验证码"
+                  label="邮箱验证码"
                   prop="code"
                   :rules="[
                     { required: true, message: '验证码不能为空'},
                   ]"
                 >
                   <el-input type="text" v-model="numberValidateForm.code" autocomplete="off"  @keyup.enter.native="submitForm1" class="forget-password-input-block-step-one"></el-input>
+                </el-form-item>
+
+                <el-form-item>
                   <el-button @click.native.prevent="setCheakCode">点击获取验证码</el-button>
                   <el-button @click.native.prevent="checkCode">确定</el-button>
                 </el-form-item>
@@ -100,7 +91,7 @@
             </el-form>
         </el-tab-pane>
         <el-tab-pane label="修改密码">
-            <el-form :model="resetForm"  :rules="rules" ref="resetForm" label-width="100px" class="demo-ruleForm">
+            <el-form :model="resetForm"  :rules="rules" ref="resetForm" label-width="100px" class="demo-ruleForm header-input">
                 <el-form-item label="密码" prop="pass">
                     <el-input v-model="resetForm.pass" autocomplete="off"></el-input>
                 </el-form-item>
@@ -145,11 +136,10 @@ export default {
         return {
             numberValidateForm: {
                 name: null,
-                instructorMajor: null,
-                instructor: null,
+                classCharge: null,
                 userId: null,
                 email: null,
-                code: null
+                code: null,
             },
             resetForm: {
                 pass: null,
@@ -171,18 +161,6 @@ export default {
         }
     },
     methods: {
-        hrefReturnBackToInstructor()
-        {
-            this.$router.push({path: './instructor'});
-        },
-        hrefInstructorBoard()
-        {
-            this.$router.push({path: './instructorBoard'});
-        },
-        hrefExit()
-        {
-            this.$router.push({path: './'});
-        },
         submitForm1() {
             if (this.loading == true) return false; //防止重复点击
             this.$message.success("保存成功！");
@@ -196,15 +174,16 @@ export default {
                     .dispatch("resetPassword", this.resetForm) //调用reset后返回了一个promise对象，后面的then是promise的方法
                     .then(response => {
                     this.loading = false;
-                    let state = response.data.success;
+                    let data = JSON.parse(response.data);
+                    let state = data.success;
                     if (state == true) {
                         //this.$store.commit("LoginInfoLogin", response.data.info);
-                        this.$router.push("/instructor");
+                        this.$router.push("./instructor");
                         this.$message.success("重置密码成功！");
                         var arr = document.cookie.split("=");
                         this.$cookies.set(arr[0], arr[1], 60 * 60 * 24 * 7, "/");
                     } else {
-                        this.$message.error(response.data.msg);
+                        this.$message.error(data.msg);
                     }
                     })
                     .catch(() => {
@@ -226,14 +205,15 @@ export default {
                     .dispatch("checkCode", this.numberValidateForm) //调用reset后返回了一个promise对象，后面的then是promise的方法
                     .then(response => {
                     this.loading = false;
-                    let state = response.data.success;
+                    let data = JSON.parse(response.data);
+                    let state = data.success;
                     if (state == true) {
                         //this.$store.commit("LoginInfoLogin", response.data.info);
                         //this.$router.push("/login");
                         this.$message.success("验证成功");
                         this.doesChange = !this.doesChange;
                     } else {
-                        this.$message.error(response.data.msg);
+                        this.$message.error(data.msg);
                     }
                     })
                     .catch(() => {
@@ -257,13 +237,14 @@ export default {
         this.$store
             .dispatch("setCheakCode1", this.numberValidateForm)
             .then(response => {
+            let data = JSON.parse(response.data);
             this.loading = false;
-            if (response.data) {
+            if (data) {
                 this.is_send = true;
                 this.$message.success(
                 "我们已向这个邮箱发送了一封验证邮件，请输入邮件中的验证码并重设您的密码"
                 );
-                console.log(response.data)
+                //console.log(data)
             } else {
                 this.$message.error("您还没有注册哦！");
             }
@@ -272,19 +253,33 @@ export default {
             this.loading = false;
             });
         },
+        hrefReturnBackToStudent()
+        {
+            this.$router.push({path: './instructor'});
+        },
+
+        hrefExit()
+        {
+            this.$router.push({path: './'});
+        },
+        hrefBoard()
+        {
+            this.$router.push({path: './instructorBoard'});
+        },
     },
     mounted: function() {
       var that = this;
       new Promise((resolve, reject) => {
         request({
-          url: "user/info",
+          url: "/user/info/instructor",
           method: "get"
         })
           .then(response => {
-            let state = response.data.success;
+            let data = JSON.parse(response.data);
+            let state = data.success;
             if (state == true)
-              console.log(response.data);
-              that.numberValidateForm = response.data.personInfo;
+              console.log(data);
+              that.numberValidateForm = data.personInfo;
           })
           .catch(error => {
             reject(error);
@@ -295,29 +290,38 @@ export default {
 </script>
  
 <style scoped>
-#main-form{
-    position: absolute;
-    top:94px;
-    left:0px;
-    right:0px;
+.header-input {
+    margin-top: 30px;
 }
-#return-button{
+
+.hrefButton {
     position: absolute;
-    right:10px;
+    right: 10px;
+    bottom: 0px;
+}
+#tabs {
+    position: absolute;
+    top: 130px;
+    left: 30%;
+    right: 30%;
 }
 
 #body {
-  position: absolute;
-  top: 94px;
+    position: absolute;
+    top: 94px; 
 }
 
 #header {
   position: absolute;
-  right:0px;
-  left:0px;
+  right: 0px;
+  left: 0px;
   top: 0px;
   height: 94px;
   background: url("../../assets/北邮logo.png") no-repeat;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
 }
+
+/*#footer {
+  
+}*/
 </style>
