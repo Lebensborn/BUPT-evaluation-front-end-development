@@ -38,9 +38,7 @@ const release = {
             })
         },
         saveCement({commit}, data){
-            console.log("hh")
             return new Promise((resolve, reject) => { //封装一个 Promise      
-                console.log("123")  
                 SaveCement(data).then(response => { //使用 login 接口进行网络请求          
                     commit('') //提交一个 mutation，通知状态改变          
                     resolve(response) //将结果封装进 Promise        
@@ -50,9 +48,7 @@ const release = {
             })
         },
         Submit({commit}, data){
-            console.log("hh")
             return new Promise((resolve, reject) => { //封装一个 Promise      
-                console.log("123")  
                 SubMit(data).then(response => { //使用 login 接口进行网络请求          
                     commit('') //提交一个 mutation，通知状态改变          
                     resolve(response) //将结果封装进 Promise        

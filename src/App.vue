@@ -8,9 +8,6 @@
 </style>
 <script>
 //import request from "@/utils/request"; //打了大括号后显示找不到request函数
-import Vue from "vue"
-import VueResource from 'vue-resource'
-Vue.use(VueResource);
 export default {
   name: "App",
 };
