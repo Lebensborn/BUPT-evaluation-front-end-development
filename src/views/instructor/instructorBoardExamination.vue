@@ -1,191 +1,119 @@
 <template>
-  <div id="instructorBoardApply">
-    <!--头部logo-->
-    <div id="header">
-       <el-tabs id="return-button" >
-            <el-button type="text" @click="hrefInstructorHomePage">首页</el-button>
-            |
-            <el-button type="text" @click="hrefInstructorBoard">公告公示</el-button>
-            |
-            <el-button type="text" @click="hrefReturn">退出登录</el-button>
-        </el-tabs>
+    <div id="instructorClassCommitteeScoring">
+        <div id="header">
+            <div class="hrefButton">
+              <el-button type="text" @click="instructorBoardExamination">返回</el-button> |<el-button type="text" @click="hrefExit">退出</el-button> |<el-button type="text" @click="hrefBoard">公示公告</el-button>
+            </div>
+        </div>
+
+        <el-card id="body">
+              
+        </el-card>
     </div>
-    <!--主体部分-->
-    <el-tabs type="border-card" id="main-form">
-        <el-tab-pane label="公告名称1">
-            
-        </el-tab-pane>
-        <el-tab-pane label="公告名称2">
-            
-        </el-tab-pane>
-        <el-tab-pane label="公告名称3">
-            
-        </el-tab-pane>    
-    </el-tabs>
-    <!--页脚部分留白--> 
-    <div id="footer">
-    </div>
-  </div>
 </template>
- 
+
 <script>
 import request from "@/utils/request"; //打了大括号后显示找不到request函数
 export default {
     data() {
-      var validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入密码'));
-        } else {
-          if (this.resetForm.checkPass !== '') {
-            this.$refs.resetForm.validateField('checkPass');
-          }
-          callback();
-        }
-      };
-      var validatePass2 = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请再次输入密码'));
-        } else if (value !== this.resetForm.pass) {
-          callback(new Error('两次输入密码不一致!'));
-        } else {
-          callback();
-        }
-      };
-        return {
-            numberValidateForm: {
-                name: null,
-                instructorMajor: null,
-                instructor: null,
-                userId: null,
-                email: null,
-                code: null
-            },
-            resetForm: {
-                pass: null,
-                checkPass: null,
-                //prePass: null
-            },
-            rules: {
-                pass: [
-                    { validator: validatePass, trigger: 'blur' }
-                ],
-                checkPass: [
-                    { validator: validatePass2, trigger: 'blur' }
-                ],
-                /*prePass: [
-                    { validator: validatePass3, trigger: 'blur' }
-                ]*/
-            },
-            doesChange: true
-        }
+      return {
+        tableData: [],
+        submit: [],
+        id: null
+      }
     },
     methods: {
-        hrefReturnBackToInstructor()
+        hrefReturnBackToStudent()
         {
             this.$router.push({path: './instructor'});
         },
-        submitForm1() {
-            if (this.loading == true) return false; //防止重复点击
-            this.$message.success("保存成功！");
-        },
-        submitForm2() {
-            if (this.loading == true) return false; //防止重复点击
-            this.$refs.resetForm.validate(valid => {
-                if (valid) {
-                this.loading = true;
-                this.$store
-                    .dispatch("resetPassword", this.resetForm) //调用reset后返回了一个promise对象，后面的then是promise的方法
-                    .then(response => {
-                    this.loading = false;
-                    let state = response.data.success;
-                    if (state == true) {
-                        //this.$store.commit("LoginInfoLogin", response.data.info);
-                        this.$router.push("/instructor");
-                        this.$message.success("重置密码成功！");
-                        var arr = document.cookie.split("=");
-                        this.$cookies.set(arr[0], arr[1], 60 * 60 * 24 * 7, "/");
-                    } else {
-                        this.$message.error(response.data.msg);
-                    }
-                    })
-                    .catch(() => {
-                    this.loading = false;
-                    });
-                } else {
-                console.log("参数不合法！");
-                return false;
-                }
-            });
-        },
 
-        checkCode(){
-            if (this.loading == true) return false; //防止重复点击
-            this.$refs.numberValidateForm.validate(valid => {
-                if (valid) {
-                this.loading = true;
-                this.$store
-                    .dispatch("checkCode", this.numberValidateForm) //调用reset后返回了一个promise对象，后面的then是promise的方法
-                    .then(response => {
-                    this.loading = false;
-                    let state = response.data.success;
-                    if (state == true) {
-                        //this.$store.commit("LoginInfoLogin", response.data.info);
-                        //this.$router.push("/login");
-                        this.$message.success("验证成功");
-                        this.doesChange = !this.doesChange;
-                    } else {
-                        this.$message.error(response.data.msg);
-                    }
-                    })
-                    .catch(() => {
-                    this.loading = false;
-                    });
-                } else {
-                console.log("参数不合法！");
-                return false;
+        hrefExit()
+        {
+            this.$router.push({path: './'});
+        },
+        hrefBoard()
+        {
+            this.$router.push({path: './instructorBoard'});
+        },
+        submitForm()
+        {
+          if (this.loading == true) return false; //防止重复点击
+          this.$refs.tableData.validate(valid => {
+              if (valid) {
+              this.tableData.map(((item)=> {
+                if(item.politicBelief + item.moralQuality + item.studyAttitude + item.cultureQuality + item.collectiveConception >= 55 && item.politicBelief <= 20 && item.moralQuality <= 15 && item.studyAttitude <= 10 && item.cultureQuality <= 10 && item.collectiveConception <= 10 && item.politicBelief >= 0 && item.moralQuality >= 0 && item.studyAttitude >= 0 && item.cultureQuality >= 0 && item.collectiveConception >= 0){
+                    this.submit.push(Object.assign({},{judgeStudentId: this.id, 
+                                                      beJudgeStudentId: item.beJudgeStudentId, 
+                                                      belongClass: item.belongClass, 
+                                                      politicBelief: item.politicBelief, 
+                                                      moralQuality: item.moralQuality, 
+                                                      studyAttitude: item.studyAttitude, 
+                                                      cultureQuality: item.cultureQuality,
+                                                      collectiveConception: item.collectiveConception
+                                                      }))                                     
                 }
-            });
-        },
-        //发送邮箱验证码
-        setCheakCode() {
-        if (this.loading) return false;//防止重复点击
-        const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
-        if (!mailReg.test(this.numberValidateForm.email)) {
-            this.$message.error("请输入正确的邮箱！");
-            return false;
+                else{
+                  this.$message.error("打分不合理，请检查" + item.name + "的打分情况");
+                  return false;
+                }
+              }))
+              this.loading = true;
+              this.$store
+                  .dispatch("Submit", this.submit) //调用reset后返回了一个promise对象，后面的then是promise的方法
+                  .then(response => {
+                  this.loading = false;
+                  let data = JSON.parse(response.data);
+                  let state = data.success;
+                  if (state == true) {
+                      //this.$store.commit("LoginInfoLogin", response.data.info);
+                      //this.$router.push("/instructor");
+                      this.$message.success("提交成功！");
+                      var arr = document.cookie.split("=");
+                      this.$cookies.set(arr[0], arr[1], 60 * 60 * 24 * 7, "/");
+                  } else {
+                      this.$message.error(data.msg);
+                  }
+                  })
+                  .catch(() => {
+                  this.loading = false;
+                  });
+              } else {
+              console.log("参数不合法！");
+              return false;
+              }
+          });
         }
-        this.loading = true;
-        this.$store
-            .dispatch("setCheakCode1", this.numberValidateForm)
-            .then(response => {
-            this.loading = false;
-            if (response.data) {
-                this.is_send = true;
-                this.$message.success(
-                "我们已向这个邮箱发送了一封验证邮件，请输入邮件中的验证码并重设您的密码"
-                );
-                console.log(response.data)
-            } else {
-                this.$message.error("您还没有注册哦！");
-            }
-            })
-            .catch(() => {
-            this.loading = false;
-            });
-        },
     },
     mounted: function() {
       var that = this;
       new Promise((resolve, reject) => {
         request({
-          url: "user/info",
+          url: "/basicQuality/selfJudgment",
           method: "get"
         })
           .then(response => {
-            let state = response.data.success;
+            let data = JSON.parse(response.data);
+            let state = data.success;
             if (state == true)
-              console.log(response.data);
-              that.numberValidateForm = response.data.personInfo;
+            console.log(data);
+            that.tableData = data.selfJudgment.table;
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
+
+      new Promise((resolve, reject) => {
+        request({
+          url: "/user/info/instructor",
+          method: "get"
+        })
+          .then(response => {
+            let data = JSON.parse(response.data);
+            let state = data.success;
+            if (state == true)
+            that.id = data.personInfo.userId;
           })
           .catch(error => {
             reject(error);
@@ -193,32 +121,46 @@ export default {
       });
     }
 }
+
 </script>
- 
+
 <style scoped>
-#main-form{
-    position: absolute;
-    top:94px;
-    left:0px;
-    right:0px;
-}
-#return-button{
-    position: absolute;
-    right:10px;
+.demo-ruleForm {
+  margin-top: 30px;
 }
 
-#body {
+#button-group {
   position: absolute;
-  top: 94px;
+  right: 30px;
+  top: 20px;
+}
+
+#title {
+  color: gray;
+  font-size: 20px;
+}
+
+.hrefButton {
+    position: absolute;
+    right: 10px;
+    bottom: 0px;
 }
 
 #header {
   position: absolute;
-  right:0px;
-  left:0px;
+  right: 0px;
+  left: 0px;
   top: 0px;
   height: 94px;
   background: url("../../assets/北邮logo.png") no-repeat;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
 }
+
+#body {
+    position: absolute;
+    top: 130px;
+    left: 15%;
+    right: 15%;
+}
 </style>
+
