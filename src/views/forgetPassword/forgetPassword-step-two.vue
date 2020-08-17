@@ -99,7 +99,7 @@ export default {
       //回到主页
       herfReturn()
       {
-        this.$router.push({path: './login'})
+        this.$router.push({path: './'})
       }
     }
   }
@@ -125,6 +125,8 @@ export default {
 /*下一步按钮*/
 #forget-password-next-step {
   width: 360px;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 /*输入框*/
 .forget-password-input-block-step-two {

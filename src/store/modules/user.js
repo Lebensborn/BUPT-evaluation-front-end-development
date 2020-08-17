@@ -31,6 +31,7 @@ const user = {
             "pass": null,
             "checkPass": null,
         },
+        is_login: false,
     },
     mutations: {
         signOut(state) {
@@ -52,6 +53,9 @@ const user = {
             state.userInfo.pass = info.pass;
             console.log(state.userInfo);
         },
+        checkLogin(state){
+            state.is_login = true;
+        }
     },
     actions: {
         // 登录    
