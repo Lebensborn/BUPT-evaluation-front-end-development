@@ -1,24 +1,93 @@
 <template>
-  <el-container>
-    <el-header>
-      <div id="header">
-        <div class="hrefButton">
-          <el-button type="text" @click="hrefReturnBackToInstructor">返回</el-button> |<el-button type="text" @click="hrefExit">退出</el-button> |<el-button type="text" @click="hrefBoard">公示公告</el-button>
+    <div id="instructorCement">
+        <div id="header">
+            <div class="hrefButton">
+              <el-button type="text" @click="hrefReturnBackToInstructor">返回</el-button> |<el-button type="text" @click="hrefExit">退出</el-button> |<el-button type="text" @click="hrefBoard">公示公告</el-button>
+            </div>
         </div>
-      </div>
-    </el-header>
-
-    <el-main>
-      <el-tabs v-model="activeName" @tab-click="handleClick" id="body">
-        <el-tab-pane label="转移审核测评权限" name="first">转移审核测评权限</el-tab-pane>
-        <el-tab-pane label="审核状态" name="second">审核状态</el-tab-pane>
-        <el-tab-pane label="转移打分权限" name="third">转移打分权限</el-tab-pane>
-        <el-tab-pane label="打分状态" name="fourth">打分状态</el-tab-pane>
-      </el-tabs>
-    </el-main>
-
-    <!-- <el-footer>Footer</el-footer> -->
-  </el-container>
+        <el-card id="body">
+              <span id="title"><strong>指定打分</strong></span>
+              <div id="button-group">
+                <el-popconfirm
+                  confirmButtonText='我确认无误'
+                  cancelButtonText='我再确认一下'
+                  icon="el-icon-info"
+                  iconColor="red"
+                  title="评分提交即无法更改，请确认无误后再提交"
+                  @onConfirm = "submitForm"
+                >
+                  <el-button type="primary" slot="reference" disabled='is_able'>提交</el-button>
+                </el-popconfirm>
+              </div>
+          <el-form :model="tableData" ref="tableData" label-width="100px" class="demo-ruleForm">
+          <el-table :data="tableData">
+            <el-table-column
+              prop="name"
+              label="姓名"
+              width="120px">
+            </el-table-column>
+            <el-table-column
+              prop="belongClass"
+              label="班级"
+              width="120px">
+            </el-table-column>
+            <el-table-column
+              prop="beJudgeInstructorId"
+              label="学号"
+              width="120px">
+            </el-table-column>
+            <el-table-column
+              prop="politicBelief"
+              label="政治信念(20)"
+              width="120px">
+                <template scope="scope">
+                  <el-input size="small" v-model.number="scope.row.politicBelief" placeholder="请打分"></el-input>
+                </template>
+            </el-table-column>
+            <el-table-column
+              prop="moralQuality"
+              label="道德品质(15)"
+              width="120px">
+                <template scope="scope">
+                  <el-input size="small" v-model.number="scope.row.moralQuality" placeholder="请打分"></el-input>
+                </template>
+            </el-table-column>
+            <el-table-column
+              prop="studyAttitude"
+              label="学习态度(10)"
+              width="120px">
+                <template scope="scope">
+                  <el-input size="small" v-model.number="scope.row.studyAttitude" placeholder="请打分"></el-input>
+                </template>
+            </el-table-column>
+            <el-table-column
+              prop="cultureQuality"
+              label="文化素养(10)"
+              width="120px">
+                <template scope="scope">
+                  <el-input size="small" v-model.number="scope.row.cultureQuality" placeholder="请打分"></el-input>
+                </template>
+            </el-table-column>
+            <el-table-column
+              prop="collectiveConception"
+              label="集体观念(10)"
+              width="120px">
+                <template scope="scope">
+                  <el-input size="small" v-model.number="scope.row.collectiveConception" placeholder="请打分"></el-input>
+                </template>
+            </el-table-column>
+            <el-table-column
+              prop="remarks"
+              label="备注"
+              width="200px">
+               <template scope="scope">
+                  <el-input size="small" v-model="scope.row.remarks" placeholder="请输入内容"></el-input>
+               </template>
+            </el-table-column>
+          </el-table>
+          </el-form>
+        </el-card>
+    </div>
 </template>
 
 <script>
@@ -28,7 +97,8 @@ export default {
       return {
         tableData: [],
         submit: [],
-        id: null
+        id: null,
+        is_able: false
       }
     },
     methods: {
@@ -36,6 +106,7 @@ export default {
         {
             this.$router.push({path: './instructor'});
         },
+
         hrefExit()
         {
             this.$router.push({path: './'});
@@ -51,8 +122,8 @@ export default {
               if (valid) {
               this.tableData.map(((item)=> {
                 if(item.politicBelief + item.moralQuality + item.studyAttitude + item.cultureQuality + item.collectiveConception >= 55 && item.politicBelief <= 20 && item.moralQuality <= 15 && item.studyAttitude <= 10 && item.cultureQuality <= 10 && item.collectiveConception <= 10 && item.politicBelief >= 0 && item.moralQuality >= 0 && item.studyAttitude >= 0 && item.cultureQuality >= 0 && item.collectiveConception >= 0){
-                    this.submit.push(Object.assign({},{judgeStudentId: this.id, 
-                                                      beJudgeStudentId: item.beJudgeStudentId, 
+                    this.submit.push(Object.assign({},{judgeInstructorId: this.id, 
+                                                      beJudgeInstructorId: item.beJudgeInstructorId, 
                                                       belongClass: item.belongClass, 
                                                       politicBelief: item.politicBelief, 
                                                       moralQuality: item.moralQuality, 
@@ -93,21 +164,11 @@ export default {
           });
         }
     },
-    created: function() {
-      if (this.$store.state.user.is_login == false)
-        setTimeout(() => {
-          //未登陆的的原因可能是用户一开始就访问了需要登录的网址，还没来得及加载状态，所以一旦检测到没登陆，延时等待看是不是状态还没返回，延时后还未登录就说明真没登陆了
-          if (this.$store.state.user.is_login == false) {
-            this.$message.error("您还未登录呢，快去登陆吧");
-            this.$router.push("/");
-          }
-        }, 1500);
-    },
     mounted: function() {
       var that = this;
       new Promise((resolve, reject) => {
         request({
-          url: "/basicQuality/selfJudgment",
+          url: "/basicQuality/assignJudgment",
           method: "get"
         })
           .then(response => {
@@ -115,7 +176,11 @@ export default {
             let state = data.success;
             if (state == true)
             console.log(data);
-            that.tableData = data.selfJudgment.table;
+            that.tableData = data.assignJudgment;
+            if(that.tableData == null){
+              console.log("hhh")
+              this.is_able = true;
+            }
           })
           .catch(error => {
             reject(error);
