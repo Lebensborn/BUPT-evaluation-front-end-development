@@ -1,12 +1,12 @@
 <template>
-    <div id="studentCement">
+    <div id="instructorCement">
         <div id="header">
             <div class="hrefButton">
-              <el-button type="text" @click="hrefReturnBackToStudent">返回</el-button> |<el-button type="text" @click="hrefExit">退出</el-button> |<el-button type="text" @click="hrefBoard">公示公告</el-button>
+              <el-button type="text" @click="hrefReturn">返回</el-button> |<el-button type="text" @click="hrefExit">退出</el-button> |<el-button type="text" @click="hrefBoard">公示公告</el-button>
             </div>
         </div>
         <el-card id="body">
-              <span id="title"><strong>班委给分</strong></span>
+              <span id="title"><strong>指定打分</strong></span>
               <div id="button-group">
                 <el-popconfirm
                   confirmButtonText='我确认无误'
@@ -16,7 +16,7 @@
                   title="评分提交即无法更改，请确认无误后再提交"
                   @onConfirm = "submitForm"
                 >
-                  <el-button type="primary" slot="reference">提交</el-button>
+                  <el-button type="primary" slot="reference" disabled='is_able'>提交</el-button>
                 </el-popconfirm>
               </div>
           <el-form :model="tableData" ref="tableData" label-width="100px" class="demo-ruleForm">
@@ -32,7 +32,7 @@
               width="120px">
             </el-table-column>
             <el-table-column
-              prop="beJudgeStudentId"
+              prop="beJudgeInstructorId"
               label="学号"
               width="120px">
             </el-table-column>
@@ -97,13 +97,14 @@ export default {
       return {
         tableData: [],
         submit: [],
-        id: null
+        id: null,
+        is_able: false
       }
     },
     methods: {
-        hrefReturnBackToStudent()
+        hrefReturn()
         {
-            this.$router.push({path: './student'});
+            this.$router.push({path: './instructor'});
         },
 
         hrefExit()
@@ -112,7 +113,7 @@ export default {
         },
         hrefBoard()
         {
-            this.$router.push({path: './studentBoard'});
+            this.$router.push({path: './instructorBoard'});
         },
         submitForm()
         {
@@ -121,8 +122,8 @@ export default {
               if (valid) {
               this.tableData.map(((item)=> {
                 if(item.politicBelief + item.moralQuality + item.studyAttitude + item.cultureQuality + item.collectiveConception >= 55 && item.politicBelief <= 20 && item.moralQuality <= 15 && item.studyAttitude <= 10 && item.cultureQuality <= 10 && item.collectiveConception <= 10 && item.politicBelief >= 0 && item.moralQuality >= 0 && item.studyAttitude >= 0 && item.cultureQuality >= 0 && item.collectiveConception >= 0){
-                    this.submit.push(Object.assign({},{judgeStudentId: this.id, 
-                                                      beJudgeStudentId: item.beJudgeStudentId, 
+                    this.submit.push(Object.assign({},{judgeInstructorId: this.id, 
+                                                      beJudgeInstructorId: item.beJudgeInstructorId, 
                                                       belongClass: item.belongClass, 
                                                       politicBelief: item.politicBelief, 
                                                       moralQuality: item.moralQuality, 
@@ -145,7 +146,7 @@ export default {
                   let state = data.success;
                   if (state == true) {
                       //this.$store.commit("LoginInfoLogin", response.data.info);
-                      //this.$router.push("/student");
+                      //this.$router.push("/instructor");
                       this.$message.success("提交成功！");
                       var arr = document.cookie.split("=");
                       this.$cookies.set(arr[0], arr[1], 60 * 60 * 24 * 7, "/");
@@ -164,16 +165,16 @@ export default {
         }
     },
     created: function() {
-      if(this.$cookies.get("uuid") == null){
+        if(this.$cookies.get("uuid") == null){
         this.$message.error("您还未登陆呢，快去登陆吧");
         this.$router.push("/");
-      }
+        }
     },
     mounted: function() {
       var that = this;
       new Promise((resolve, reject) => {
         request({
-          url: "/basicQuality/selfJudgment",
+          url: "/basicQuality/assignJudgment",
           method: "get"
         })
           .then(response => {
@@ -181,7 +182,11 @@ export default {
             let state = data.success;
             if (state == true)
             console.log(data);
-            that.tableData = data.selfJudgment.table;
+            that.tableData = data.assignJudgment;
+            if(that.tableData == null){
+              console.log("hhh")
+              this.is_able = true;
+            }
           })
           .catch(error => {
             reject(error);
@@ -190,7 +195,7 @@ export default {
 
       new Promise((resolve, reject) => {
         request({
-          url: "/user/info/student",
+          url: "/user/info/instructor",
           method: "get"
         })
           .then(response => {

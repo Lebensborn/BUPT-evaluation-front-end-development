@@ -3,7 +3,7 @@
     <!--头部logo-->
     <div id="header">
         <div class="hrefButton">
-            <el-button type="text" @click="hrefReturnBackToStudent">返回</el-button> |<el-button type="text" @click="hrefBoard">公示公告</el-button> |<el-button type="text" @click="hrefExit">退出登录</el-button>
+            <el-button type="text" @click="hrefReturnBackToStudent">返回</el-button> |<el-button type="text" @click="hrefBoard">公示公告</el-button> |<el-button type="text" @click="hrefExit">退出登陆</el-button>
         </div>
     </div>
 
@@ -61,10 +61,6 @@
                     start-placeholder="开始日期"
                     end-placeholder="结束日期">
                     </el-date-picker>
-                </el-form-item>
-
-                <el-form-item label="摘要">
-                    <el-input type="textarea" v-model="form.abstract"></el-input>
                 </el-form-item>
 
                 <el-form-item label="正文">
@@ -128,10 +124,11 @@
                         :before-remove="beforeRemove"
                         multiple
                         :limit="5"
+                        :beforeUpload="beforeFileUpload"
                         :on-exceed="handleExceed"
                         :file-list="form.fileList">
                         <el-button size="small" type="primary">点击上传</el-button>
-                        <div slot="tip" class="el-upload__tip">(上传不超过5个文件，单个文件最多不大于xMB)</div>
+                        <div slot="tip" class="el-upload__tip">(上传不超过5个文件，单个文件最多不大于2MB)</div>
                     </el-upload>
                 </el-form-item>
 
@@ -184,7 +181,6 @@ export default {
                 type: '',
                 resource: '',
                 date: '',
-                abstract: '',
                 content: '',
                 fileList: [],
                 value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
@@ -282,7 +278,6 @@ export default {
         {
             this.$router.push({path: './student'});
         },
-
         hrefExit()
         {
             this.$router.push({path: './'});
@@ -291,16 +286,24 @@ export default {
         {
             this.$router.push({path: './studentBoard'});
         },
+        beforeFileUpload(file) {
+            const isLt2M = file.size / 1024 / 1024 < 2;
+            console.log("upload file size=" + file.size / 1024 / 1024);
+            if (!isLt2M) {
+                this.upload_warning = true;
+                this.$message({
+                message: "上传文件大小不能超过 2 MB!",
+                type: "error"
+                });
+            }
+            return isLt2M;
+        },
     },
     created: function() {
-        if (this.$store.state.user.is_login == false)
-        setTimeout(() => {
-            //未登录的的原因可能是用户一开始就访问了需要登录的网址，还没来得及加载状态，所以一旦检测到没登录，延时等待看是不是状态还没返回，延时后还未登录就说明真没登录了
-            if (this.$store.state.user.is_login == false) {
-            this.$message.error("您还未登录呢，快去登录吧");
-            this.$router.push("/");
-            }
-        }, 1500);
+        if(this.$cookies.get("uuid") == null){
+        this.$message.error("您还未登陆呢，快去登陆吧");
+        this.$router.push("/");
+        }
     },
 }
 </script>
