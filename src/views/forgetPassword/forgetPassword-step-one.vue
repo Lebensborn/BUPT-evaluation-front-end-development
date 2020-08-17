@@ -42,21 +42,16 @@
 
                 <el-row>
                   <el-col :span="10">
-                  <el-form-item label="验证码" prop="code">
-                    
-                      <el-input type="text" auto-complete="off" v-model="numberValidateForm.code" @keyup.enter.native="submitForm">
-                      </el-input>
-                    
-                  </el-form-item>
+                    <el-form-item label="验证码" prop="code">
+                        <el-input type="text" auto-complete="off" v-model="numberValidateForm.code" @keyup.enter.native="submitForm">
+                        </el-input>
+                    </el-form-item>
                   </el-col>
-                  <el-col :span="8" style="">
-                  <el-form-item>
-                    
-                      <div class="login-code" @click="refreshCode">
-                        <v-sidentify :identifyCode="identifyCode"></v-sidentify>
-                      </div>
-                    
-                  </el-form-item>
+
+                  <el-col :span="8" style="margin-left: 20px">
+                    <div class="login-code" @click="refreshCode">
+                      <v-sidentify :identifyCode="identifyCode"></v-sidentify>
+                    </div>
                   </el-col>
                 </el-row>
 
@@ -204,11 +199,9 @@ export default {
 </script>
 
 <style scoped>
-
-
 #email-valid-code-input {
   margin-top: 10px;
-  margin-left: 260px;
+  margin-left: 0px;
 }
 
 #selection-group {

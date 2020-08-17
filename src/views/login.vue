@@ -153,7 +153,7 @@ export default {
               if (state == true) {
                 that._data.loading = false;
                 //console.log(response.data);
-               // that.$store.commit("LoginInfoLogin", this.numberValidateForm);
+                that.$store.commit("checkLogin", this.numberValidateForm);
 
                 if(this.numberValidateForm.userType == 0)
                   that.$router.push({path: './student'});
@@ -232,7 +232,7 @@ export default {
 }
 /*账号密码输入框*/
 .input-block {
-  left: 0px;
+  
   width: 225px;
 }
 /*套在card内层的div*/ 
@@ -240,10 +240,7 @@ export default {
   margin-top: 30px;
   margin-left: 10px;
 }
-/*错误提示*/
-.el-form-item__error {
-  left: 50px;
-} 
+
 
 /*主体*/
 #body {
@@ -263,5 +260,9 @@ export default {
   height: 94px;
   background: url("../assets/北邮logo.png") no-repeat;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+}
+/*错误提示*/
+.el-form-item__error/deep/ {
+  left: 50px;
 }
 </style>
