@@ -3,7 +3,7 @@
     <el-container direction="vertical">
       <el-header id="header" height="100px">
         <div id="exit">
-          <el-button type="text" @click="herfExit">退出登陆</el-button>
+          <el-button type="text" @click="herfExit">退出登录</el-button>
         </div>
       </el-header>
 
@@ -27,7 +27,7 @@
         <el-row :gutter="20">
           <el-col :span="6">
             <div @click="hrefAdminUserAccount">
-              <el-card :body-style="{ padding: '0px' }" class="option-card">
+              <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
                 <img src="../../assets/用户账号管理.png" class="image">
                 <div>
                     <center>用户账号管理</center>
@@ -38,7 +38,7 @@
 
           <el-col :span="6">
             <div @click="hrefAdminActivityType">
-              <el-card :body-style="{ padding: '0px' }" class="option-card">
+              <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
                 <img src="../../assets/发起活动类型.png" class="image">
                 <div>
                     <center>发起活动类型</center>
@@ -49,7 +49,7 @@
 
           <el-col :span="6">
             <div @click="hrefAdminScoring">
-              <el-card :body-style="{ padding: '0px' }" class="option-card">
+              <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
                 <img src="../../assets/打分情况处理.png" class="image">
                 <div>
                     <center>打分情况处理</center>
@@ -60,7 +60,7 @@
 
           <el-col :span="6">
             <div @click="hrefAdminSystemLog">
-              <el-card :body-style="{ padding: '0px' }" class="option-card">
+              <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
                 <img src="../../assets/查看系统日志.png" class="image">
                 <div>
                     <center>查看系统日志</center>
@@ -73,7 +73,7 @@
         <el-row :gutter="20">
           <el-col :span="6">
             <div @click="hrefAdminBoardApply">
-              <el-card :body-style="{ padding: '0px' }" class="option-card">
+              <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
                 <img src="../../assets/发布公告公示.png" class="image">
                 <div>
                     <center>发布公告公示</center>
@@ -118,9 +118,9 @@ export default {
   created: function() {
     if (this.$store.state.user.is_login == false)
       setTimeout(() => {
-        //未登陆的的原因可能是用户一开始就访问了需要登录的网址，还没来得及加载状态，所以一旦检测到没登陆，延时等待看是不是状态还没返回，延时后还未登录就说明真没登陆了
+        //未登录的的原因可能是用户一开始就访问了需要登录的网址，还没来得及加载状态，所以一旦检测到没登录，延时等待看是不是状态还没返回，延时后还未登录就说明真没登录了
         if (this.$store.state.user.is_login == false) {
-          this.$message.error("您还未登录呢，快去登陆吧");
+          this.$message.error("您还未登录呢，快去登录吧");
           this.$router.push("/");
         }
       }, 1500);
