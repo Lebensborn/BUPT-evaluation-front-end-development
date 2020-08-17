@@ -3,25 +3,17 @@
     <el-header>
       <div id="header">
         <div class="hrefButton">
-          <el-button type="text" @click="instructorBoardExamination">返回</el-button> |<el-button type="text" @click="hrefExit">退出</el-button> |<el-button type="text" @click="hrefBoard">公示公告</el-button>
+          <el-button type="text" @click="hrefReturnBackToInstructor">返回</el-button> |<el-button type="text" @click="hrefExit">退出</el-button> |<el-button type="text" @click="hrefBoard">公示公告</el-button>
         </div>
       </div>
     </el-header>
 
     <el-main>
-      <el-tabs type="border-card" id="body">
-        <el-tab-pane label="转移审核测评权限">
-            
-        </el-tab-pane>
-        <el-tab-pane label="审核状态">
-            
-        </el-tab-pane>
-        <el-tab-pane label="转移打分权限">
-            
-        </el-tab-pane>        
-        <el-tab-pane label="打分状态">
-            
-        </el-tab-pane>    
+      <el-tabs v-model="activeName" @tab-click="handleClick" id="body">
+        <el-tab-pane label="转移审核测评权限" name="first">转移审核测评权限</el-tab-pane>
+        <el-tab-pane label="审核状态" name="second">审核状态</el-tab-pane>
+        <el-tab-pane label="转移打分权限" name="third">转移打分权限</el-tab-pane>
+        <el-tab-pane label="打分状态" name="fourth">打分状态</el-tab-pane>
       </el-tabs>
     </el-main>
 
@@ -40,11 +32,10 @@ export default {
       }
     },
     methods: {
-        hrefReturnBackToStudent()
+        hrefReturnBackToInstructor()
         {
             this.$router.push({path: './instructor'});
         },
-
         hrefExit()
         {
             this.$router.push({path: './'});

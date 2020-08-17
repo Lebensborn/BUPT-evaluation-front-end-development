@@ -3,7 +3,7 @@
     <!--头部logo-->
     <div id="header">
         <div class="hrefButton">
-            <el-button type="text" @click="hrefReturnBackToStudent">返回</el-button> |<el-button type="text" @click="hrefBoard">公示公告</el-button> |<el-button type="text" @click="hrefExit">退出登陆</el-button>
+            <el-button type="text" @click="hrefReturnBackToInstructor">返回</el-button> |<el-button type="text" @click="hrefBoard">公示公告</el-button> |<el-button type="text" @click="hrefExit">退出登陆</el-button>
         </div>
     </div>
     <!--主体部分-->
@@ -43,7 +43,7 @@
 
             <div v-show="doesChange">
                 <el-form-item
-                label="绑定的邮箱"
+                label="邮箱"
                 prop="email"
                 :rules="[
                 { required: true, message: '邮箱不能为空'},
@@ -53,7 +53,7 @@
                     <el-input type="email" v-model="numberValidateForm.email" autocomplete="off"  @keyup.enter.native="submitForm1" disabled= true></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button @click="doesChange = !doesChange">点此修改</el-button>
+                    <el-button @click="doesChange = !doesChange">修改邮箱</el-button>
                 </el-form-item>
             </div>
 
@@ -253,11 +253,10 @@ export default {
             this.loading = false;
             });
         },
-        hrefReturnBackToStudent()
+        hrefReturnBackToInstructor()
         {
             this.$router.push({path: './instructor'});
         },
-
         hrefExit()
         {
             this.$router.push({path: './'});

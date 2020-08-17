@@ -2,7 +2,7 @@
     <div id="instructorClassCommitteeScoring">
         <div id="header">
             <div class="hrefButton">
-              <el-button type="text" @click="instructorBoardExamination">返回</el-button> |<el-button type="text" @click="hrefExit">退出</el-button> |<el-button type="text" @click="hrefBoard">公示公告</el-button>
+              <el-button type="text" @click="hrefReturnBackToInstructor">返回</el-button> |<el-button type="text" @click="hrefExit">退出</el-button> |<el-button type="text" @click="hrefBoard">公示公告</el-button>
             </div>
         </div>
 
@@ -23,11 +23,10 @@ export default {
       }
     },
     methods: {
-        hrefReturnBackToStudent()
+        hrefReturnBackToInstructor()
         {
             this.$router.push({path: './instructor'});
         },
-
         hrefExit()
         {
             this.$router.push({path: './'});
