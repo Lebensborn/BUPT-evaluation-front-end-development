@@ -9,14 +9,73 @@
     </el-header>
 
     <el-main>
-      <el-tabs v-model="activeName" @tab-click="handleClick" id="body">
-        <el-tab-pane label="转移审核测评权限" name="first">转移审核测评权限</el-tab-pane>
-        <el-tab-pane label="审核状态" name="second">审核状态</el-tab-pane>
-        <el-tab-pane label="转移打分权限" name="third">转移打分权限</el-tab-pane>
-        <el-tab-pane label="打分状态" name="fourth">打分状态</el-tab-pane>
-      </el-tabs>
+      <el-card id="body">
+        <el-backtop></el-backtop>
+        <el-tabs v-model="activeName" @tab-click="handleClick">
+          <el-tab-pane label="转移审核测评权限" name="first">转移审核测评权限</el-tab-pane>
+          <el-tab-pane label="审核状态" name="second">审核状态</el-tab-pane>
+          <el-tab-pane label="转移打分权限" name="third">转移打分权限</el-tab-pane>
+          <el-tab-pane label="打分状态" name="fourth">
+            <div style="margin:0 auto; text-align:center">
+              <el-table
+                id="stateTable"
+                :data="tableData"
+                style="width: 100% margin: auto"
+                :default-sort = "{prop: 'userId', order: 'ascending'}"
+                stripe
+                >
+                <el-table-column
+                  type="index"
+                  width="50">
+                </el-table-column>
+                <el-table-column
+                  prop="classId"
+                  label="班级"
+                  sortable
+                  width="100">
+                </el-table-column>
+                <el-table-column
+                  prop="userId"
+                  label="学号"
+                  sortable
+                  width="100">
+                </el-table-column>
+                <el-table-column
+                  prop="name"
+                  label="姓名"
+                  sortable
+                  width="100">
+                </el-table-column>
+                <el-table-column
+                  prop="duty"
+                  label="职务"
+                  sortable
+                  width="100">
+                </el-table-column>
+                <el-table-column
+                  prop="activity"
+                  label="打分项"
+                  sortable
+                  width="120"
+                  :formatter="formatterActivity"
+                  :filters="[{ text: '指定给分', value: '指定给分' }, { text: '班委评分', value: '班委评分' }, { text: '自评互评', value: '自评互评' }]"
+                  :filter-method="filterActivity">
+                </el-table-column>
+                <el-table-column
+                  prop="state"
+                  label="打分状态"
+                  sortable
+                  width="120"
+                  :formatter="formatterState"
+                  :filters="[{ text: '完成', value: true }, { text: '尚未完成', value: false }]"
+                  :filter-method="filterState">
+                </el-table-column>
+              </el-table>
+            </div>
+          </el-tab-pane>
+        </el-tabs>
+      </el-card>
     </el-main>
-
     <!-- <el-footer>Footer</el-footer> -->
   </el-container>
 </template>
@@ -32,6 +91,22 @@ export default {
       }
     },
     methods: {
+        filterState(value, row) {
+          return row.state == value;
+        },
+
+        filterActivity(value, row) {
+          return row.activity == value;
+        },
+
+        formatterState(row) {
+          return (row.state ? "完成" : "尚未完成");
+        },
+
+        formatterActivity(row) {
+          return row.activity;
+        },
+
         hrefReturn()
         {
             this.$router.push({path: './instructor'});
@@ -44,54 +119,6 @@ export default {
         {
             this.$router.push({path: './instructorBoard'});
         },
-        submitForm()
-        {
-          if (this.loading == true) return false; //防止重复点击
-          this.$refs.tableData.validate(valid => {
-              if (valid) {
-              this.tableData.map(((item)=> {
-                if(item.politicBelief + item.moralQuality + item.studyAttitude + item.cultureQuality + item.collectiveConception >= 55 && item.politicBelief <= 20 && item.moralQuality <= 15 && item.studyAttitude <= 10 && item.cultureQuality <= 10 && item.collectiveConception <= 10 && item.politicBelief >= 0 && item.moralQuality >= 0 && item.studyAttitude >= 0 && item.cultureQuality >= 0 && item.collectiveConception >= 0){
-                    this.submit.push(Object.assign({},{judgeStudentId: this.id, 
-                                                      beJudgeStudentId: item.beJudgeStudentId, 
-                                                      belongClass: item.belongClass, 
-                                                      politicBelief: item.politicBelief, 
-                                                      moralQuality: item.moralQuality, 
-                                                      studyAttitude: item.studyAttitude, 
-                                                      cultureQuality: item.cultureQuality,
-                                                      collectiveConception: item.collectiveConception
-                                                      }))                                     
-                }
-                else{
-                  this.$message.error("打分不合理，请检查" + item.name + "的打分情况");
-                  return false;
-                }
-              }))
-              this.loading = true;
-              this.$store
-                  .dispatch("Submit", this.submit) //调用reset后返回了一个promise对象，后面的then是promise的方法
-                  .then(response => {
-                  this.loading = false;
-                  let data = JSON.parse(response.data);
-                  let state = data.success;
-                  if (state == true) {
-                      //this.$store.commit("LoginInfoLogin", response.data.info);
-                      //this.$router.push("/instructor");
-                      this.$message.success("提交成功！");
-                      var arr = document.cookie.split("=");
-                      this.$cookies.set(arr[0], arr[1], 60 * 60 * 24 * 7, "/");
-                  } else {
-                      this.$message.error(data.msg);
-                  }
-                  })
-                  .catch(() => {
-                  this.loading = false;
-                  });
-              } else {
-              console.log("参数不合法！");
-              return false;
-              }
-          });
-        }
     },
     created: function() {
       if (this.$store.state.user.is_login == false)
@@ -107,36 +134,37 @@ export default {
       var that = this;
       new Promise((resolve, reject) => {
         request({
-          url: "/basicQuality/selfJudgment",
+          url: "/instructor/markState?type=selfJudgment",
           method: "get"
         })
           .then(response => {
             let data = JSON.parse(response.data);
             let state = data.success;
-            if (state == true)
-            console.log(data);
-            that.tableData = data.selfJudgment.table;
+            if (state == true) {
+              console.log(data);
+              that.tableData = data.state;
+            }
           })
           .catch(error => {
             reject(error);
           });
       });
 
-      new Promise((resolve, reject) => {
-        request({
-          url: "/user/info/instructor",
-          method: "get"
-        })
-          .then(response => {
-            let data = JSON.parse(response.data);
-            let state = data.success;
-            if (state == true)
-            that.id = data.personInfo.userId;
-          })
-          .catch(error => {
-            reject(error);
-          });
-      });
+      // new Promise((resolve, reject) => {
+      //   request({
+      //     url: "/user/info/instructor",
+      //     method: "get"
+      //   })
+      //     .then(response => {
+      //       let data = JSON.parse(response.data);
+      //       let state = data.success;
+      //       if (state == true)
+      //       that.id = data.personInfo.userId;
+      //     })
+      //     .catch(error => {
+      //       reject(error);
+      //     });
+      // });
     }
 }
 
