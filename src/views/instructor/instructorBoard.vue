@@ -2,7 +2,7 @@
    <div>
     <div id="header">
         <div id="button-group">
-          <el-button type="text" @click="hrefReturnBackToInstructor">返回</el-button> |<el-button type="text" @click="hrefApplyBoard">发布公示公告</el-button> |<el-button type="text" @click="hrefExit">退出登陆</el-button>
+          <el-button type="text" @click="hrefReturn">返回</el-button> |<el-button type="text" @click="hrefApplyBoard">发布公示公告</el-button> |<el-button type="text" @click="hrefExit">退出登陆</el-button>
         </div>
     </div>
     <el-card id="main-only" shadow="always">
@@ -55,7 +55,7 @@ export default {
       changeBoard(i){
         this.index = i;
       },
-      hrefReturnBackToInstructor()
+      hrefReturn()
       {
           this.$router.push({path: './instructor'});
       },

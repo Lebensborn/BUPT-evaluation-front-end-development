@@ -3,7 +3,7 @@
     <el-header>
       <div id="header">
         <div class="hrefButton">
-          <el-button type="text" @click="hrefReturnBackToInstructor">返回</el-button> |<el-button type="text" @click="hrefExit">退出</el-button> |<el-button type="text" @click="hrefBoard">公示公告</el-button>
+          <el-button type="text" @click="hrefReturn">返回</el-button> |<el-button type="text" @click="hrefExit">退出</el-button> |<el-button type="text" @click="hrefBoard">公示公告</el-button>
         </div>
       </div>
     </el-header>
@@ -32,7 +32,7 @@ export default {
       }
     },
     methods: {
-        hrefReturnBackToInstructor()
+        hrefReturn()
         {
             this.$router.push({path: './instructor'});
         },

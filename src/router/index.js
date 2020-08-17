@@ -40,7 +40,7 @@ export const constantRouterMap = [
     //配置公告
     { path: '/adminBoard', component: () => import('@/views/admin/adminBoard')},
     //配置管理员评价
-    { path: '/adminCement', component: () => import('@/views/admin/adminCement')},
+    // { path: '/adminCement', component: () => import('@/views/admin/adminCement')},
     //配置管理员得分
     { path: '/adminScoring', component: () => import('@/views/admin/adminScoring')},
     //配置管理员系统日志

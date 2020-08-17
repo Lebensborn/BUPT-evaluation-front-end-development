@@ -1,14 +1,16 @@
 <template>
-  <div>
-    <el-container direction="vertical">
-      <el-header id="header" height="100px">
-        <div id="exit">
-          <el-button type="text" @click="hrefExit">退出登录</el-button>
+  <div id="adminBoardApply">
+    <!--头部logo-->
+    <div id="header">
+        <div class="hrefButton">
+            <el-button type="text" @click="hrefReturn">返回</el-button> |<el-button type="text" @click="hrefBoard">公示公告</el-button> |<el-button type="text" @click="hrefExit">退出登陆</el-button>
         </div>
-      </el-header>
+    </div>
 
-      <el-main id="body">
-        发起活动类型
+    <!--主体部分-->
+    <div id="body">
+        <el-card id="main">
+        <h3>发起活动类型</h3>
         <el-row>
           <el-col :span="8" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
@@ -48,15 +50,15 @@
               </div>
             </el-card>
           </el-col>
-        </el-row>
-      </el-main>
-
-      <el-footer id="footer" height="150px">
-
-      </el-footer>
-    </el-container>
+        </el-row> 
+      </el-card>
+    </div>
+    <!--页脚部分留白--> 
+    <div id="footer">
+    </div>
   </div>
 </template>
+
 <script>
 export default {
   data() {
@@ -77,6 +79,11 @@ export default {
       this.$router.push({path:'./'});
     },
 
+    hrefReturn()
+    {
+        this.$router.push({path: './admin'});
+    },
+
     hrefAdminBoardApply()
     {
       this.$router.push({path:'./adminBoardApply'});
@@ -89,102 +96,40 @@ export default {
   }
 };
 </script>
-
+ 
 <style scoped>
-.time {
-  font-size: 13px;
-  color: #999;
+#title {
+    margin-top: 30px;
 }
 
-.bottom {
-  margin-top: 13px;
-  line-height: 12px;
+#upload {
+    margin-top: 100px;
 }
 
-.button {
-  padding: 0;
-  float: right;
+#main, #body {
+    position: absolute;
+    top: 50px;
+    left: 5%;
+    right: 5%;
+}
+.hrefButton {
+    position: absolute;
+    right: 10px;
+    bottom: 0px;
 }
 
-.image {
-  width: 100%;
-  display: block;
-}
-
-.clearfix:before,
-.clearfix:after {
-    display: table;
-    content: "";
-}
-
-.clearfix:after {
-    clear: both
-}
-
-#information {
-  position: absolute;
-  right: 100px;
-  top: 40px;
-}
-
-#exit {
-  position: absolute;
-  right: 5px;
-  bottom: 0px;
-}
-
-#board {
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  left: 0px;
-  height: 400px;
-  border: 1px solid #000000;
-}
-
-#hrefAdminBoardApply {
-  position: absolute;
-  right: 80px;
-  top: 450px;  
+#body {
+    position: absolute;
+    top: 94px; 
 }
 
 #header {
   position: absolute;
+  right: 0px;
+  left: 0px;
   top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-}
-
-#body {
-  position: absolute;
-  left: 150px;
-  right: 300px;
-  top: 100px;
-  bottom: 150px; 
-  background-color: #f2f2f2;
-}
-
-#aside-left {
-  position: absolute;
-  left: 0px;
-  top: 100px;
-  bottom: 150px;
-  border: 1px solid;
-  /*box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);*/
-}
-
-#aside-right {
-  position: absolute;
-  right: 0px;
-  top: 100px;
-  bottom: 150px;
-}
-
-#footer {
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
+  height: 94px;
+  background: url("../../assets/北邮logo.png") no-repeat;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
 }
 </style>

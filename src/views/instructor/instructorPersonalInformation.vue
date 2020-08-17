@@ -3,7 +3,7 @@
     <!--头部logo-->
     <div id="header">
         <div class="hrefButton">
-            <el-button type="text" @click="hrefReturnBackToInstructor">返回</el-button> |<el-button type="text" @click="hrefBoard">公示公告</el-button> |<el-button type="text" @click="hrefExit">退出登陆</el-button>
+            <el-button type="text" @click="hrefReturn">返回</el-button> |<el-button type="text" @click="hrefBoard">公示公告</el-button> |<el-button type="text" @click="hrefExit">退出登陆</el-button>
         </div>
     </div>
     <!--主体部分-->
@@ -253,7 +253,7 @@ export default {
             this.loading = false;
             });
         },
-        hrefReturnBackToInstructor()
+        hrefReturn()
         {
             this.$router.push({path: './instructor'});
         },

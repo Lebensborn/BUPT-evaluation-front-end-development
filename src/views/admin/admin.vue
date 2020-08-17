@@ -3,90 +3,96 @@
     <el-container direction="vertical">
       <el-header id="header" height="100px">
         <div id="exit">
-          <el-button type="text" @click="hrefExit">退出登录</el-button>
+          <el-button type="text" @click="herfExit">退出登陆</el-button>
         </div>
       </el-header>
 
-      <el-aside id="aside-left" width="150px">
+      <el-aside id="aside-left" width="170px">
         <router-link to="./adminPersonalInformation">
           <div id="information">
-          管理员姓名<br/>
-          账号<br/>
-          邮箱<br/>
+            <center>
+            <h1>管理员姓名</h1>
+            <span v-show="is_get">{{ numberValidateForm.name }}</span><br>
+            <h3>账号</h3>
+            <span v-show="is_get">{{ numberValidateForm.userId }}</span><br>
+            <h3>邮箱</h3>
+            <span v-show="is_get">{{ numberValidateForm.email }}</span><br>
+            </center>
           </div>
         </router-link>
       </el-aside>
 
       <el-main id="body">
-        功能权限
-        <el-row>
-          <el-col :span="8" :offset="index > 0 ? 2 : 0">
-            <el-card :body-style="{ padding: '0px' }">
-              <img src="../../assets/用户账号管理.png" class="image">
-              <div style="padding: 14px;">
-                <span>用户账号管理</span>
-                <div class="bottom clearfix">
-                  <time class="time">{{ currentDate }}</time>
-                  <el-button type="text" class="button" @click="hrefAdminUserAccount">点击跳转</el-button>
+        <h3 class="title-board">功能权限</h3>
+        <el-row :gutter="20">
+          <el-col :span="6">
+            <div @click="hrefAdminUserAccount">
+              <el-card :body-style="{ padding: '0px' }" class="option-card">
+                <img src="../../assets/用户账号管理.png" class="image">
+                <div>
+                    <center>用户账号管理</center>
                 </div>
-              </div>
-            </el-card>
+              </el-card>
+            </div>
           </el-col>
 
-          <el-col :span="8" :offset="index > 0 ? 2 : 0">
-            <el-card :body-style="{ padding: '0px' }">
-              <img src="../../assets/发起活动类型.png" class="image">
-              <div style="padding: 14px;">
-                <span>发起活动类型</span>
-                <div class="bottom clearfix">
-                  <time class="time">{{ currentDate }}</time>
-                  <el-button type="text" class="button" @click="hrefAdminActivityType">点击跳转</el-button>
+          <el-col :span="6">
+            <div @click="hrefAdminActivityType">
+              <el-card :body-style="{ padding: '0px' }" class="option-card">
+                <img src="../../assets/发起活动类型.png" class="image">
+                <div>
+                    <center>发起活动类型</center>
                 </div>
-              </div>
-            </el-card>
+              </el-card>
+            </div>
           </el-col>
 
-          <el-col :span="8" :offset="index > 0 ? 2 : 0">
-            <el-card :body-style="{ padding: '0px' }">
-              <img src="../../assets/打分情况处理.png" class="image">
-              <div style="padding: 14px;">
-                <span>打分情况处理</span>
-                <div class="bottom clearfix">
-                  <time class="time">{{ currentDate }}</time>
-                  <el-button type="text" class="button" @click="hrefAdminScoring">点击跳转</el-button>
+          <el-col :span="6">
+            <div @click="hrefAdminScoring">
+              <el-card :body-style="{ padding: '0px' }" class="option-card">
+                <img src="../../assets/打分情况处理.png" class="image">
+                <div>
+                    <center>打分情况处理</center>
                 </div>
-              </div>
-            </el-card>
+              </el-card>
+            </div>
           </el-col>
 
-          <el-col :span="8" :offset="index > 0 ? 2 : 0">
-            <el-card :body-style="{ padding: '0px' }">
-              <img src="../../assets/查看系统日志.png" class="image">
-              <div style="padding: 14px;">
-                <span>查看系统日志</span>
-                <div class="bottom clearfix">
-                  <time class="time">{{ currentDate }}</time>
-                  <el-button type="text" class="button" @click="hrefAdminSystemLog">点击跳转</el-button>
+          <el-col :span="6">
+            <div @click="hrefAdminSystemLog">
+              <el-card :body-style="{ padding: '0px' }" class="option-card">
+                <img src="../../assets/查看系统日志.png" class="image">
+                <div>
+                    <center>查看系统日志</center>
                 </div>
-              </div>
-            </el-card>
+              </el-card>
+            </div>
           </el-col>
-
-           <el-col :span="8" :key="o" :offset="index > 0 ? 2 : 0">
-            <el-card :body-style="{ padding: '0px' }">
-              <img src="../../assets/发布公告公示.png" class="image">
-              <div style="padding: 14px;">
-                <span>发布公告公示</span>
-                <div class="bottom clearfix">
-                  <time class="time">{{ currentDate }}</time>
-                  <el-button type="text" class="button" @click="hrefAdminBoardApply">点击跳转</el-button>
+        </el-row>
+      
+        <el-row :gutter="20">
+          <el-col :span="6">
+            <div @click="hrefAdminBoardApply">
+              <el-card :body-style="{ padding: '0px' }" class="option-card">
+                <img src="../../assets/发布公告公示.png" class="image">
+                <div>
+                    <center>发布公告公示</center>
                 </div>
-              </div>
-            </el-card>
+              </el-card>
+            </div>
           </el-col>
         </el-row>
       </el-main>
 
+      <el-aside id="aside-right" width="300px">
+        <router-link to="./adminBoard" id="board-router">
+          <el-card id="board" shadow="never">
+            <div v-html="item.title" v-for="item in board" :key=item id="board-title"></div>
+          </el-card>
+        </router-link>
+        <!-- <el-button @click="hrefStudentBoardApply" id="hrefStudentBoardApply">申请公告公示</el-button> -->
+        <p id="email">举报邮箱：123456789@asd.com</p>
+      </el-aside>
       <el-footer id="footer" height="150px">
 
       </el-footer>
@@ -94,10 +100,19 @@
   </div>
 </template>
 <script>
+import request from "@/utils/request"; //打了大括号后显示找不到request函数
 export default {
   data() {
     return {
-      currentDate: new Date()
+      currentDate: new Date(),
+      is_get: false,
+      numberValidateForm: {
+        name: null,
+        classCharge: null,
+        userId: null,
+        email: null
+      },
+      board: []
     };
   },
   methods: {
@@ -108,7 +123,7 @@ export default {
       console.log(key, keyPath);
     },
 
-    hrefExit()
+    herfExit()
     {
       this.$router.push({path:'./'});
     },
@@ -137,11 +152,89 @@ export default {
     {
       this.$router.push({path:'./adminSystemLog'});
     },
+  },
+  mounted: function() {
+    var that = this;
+    new Promise((resolve, reject) => {
+      request({
+        url: "/user/info/admin",
+        method: "get"
+      })
+        .then(response => {
+          let data = JSON.parse(response.data);
+          let state = data.success;
+          if (state == true)
+            console.log(data);
+            that.numberValidateForm = data.personInfo;
+            this.is_get = true;
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+
+    //var that = this;
+    new Promise((resolve, reject) => {
+      request({
+        url: "/notification?disqualify=false",
+        method: "get"
+      })
+        .then(response => {
+          let data = JSON.parse(response.data);
+          let state = data.success;
+          if (state == true)
+            console.log(data);
+            that.board = data.notification;
+            this.is_get = true;
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });  
   }
 };
 </script>
 
 <style scoped>
+#board-title {
+  color: gray;
+}
+
+.option-card {
+  height: 300px;
+  width: 230px;
+}
+
+.el-row {
+  margin-bottom: 20px;
+  /* &:last-child {
+    margin-bottom: 0;
+  } */
+}
+.el-col {
+  border-radius: 4px;
+}
+
+.el-card:hover{
+  margin-top: -1px;
+  /* margin-left: -1px; */
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, .2);
+  border-color: #eee;
+  transition: all .2s ease-in-out;
+  cursor: pointer;
+}
+
+.title-board {
+  color: gray;
+}
+
+#email {
+  position: absolute;
+  right: 25px;
+  top: 500px;
+  color: gray;
+}
+
 .time {
   font-size: 13px;
   color: #999;
@@ -173,7 +266,11 @@ export default {
 }
 
 #information {
-    text-align: center;
+  position: absolute;
+  top: 40px;
+  color: gray;
+  left: 10%;
+  right: 10%;
 }
 
 #exit {
@@ -189,9 +286,21 @@ export default {
   left: 0px;
   height: 400px;
   border: 1px solid #000000;
+  text-decoration:none;
+  border-radius: 0px;
+  font-size: 18px;
 }
 
-#hrefAdminBoardApply {
+#board-router {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  left: 0px;
+  height: 400px;
+  text-decoration:none;
+}
+
+#hrefStudentBoardApply {
   position: absolute;
   right: 80px;
   top: 450px;  
@@ -203,11 +312,14 @@ export default {
   left: 0px;
   right: 0px;
   bottom: 0px;
+  height: 94px;
+  background: url("../../assets/北邮logo.png") no-repeat;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
 }
 
 #body {
   position: absolute;
-  left: 150px;
+  left: 170px;
   right: 300px;
   top: 100px;
   bottom: 150px; 
