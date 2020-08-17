@@ -48,7 +48,7 @@
           </el-col>
 
           <el-col :span="6">
-            <div @click="hrefAdminScoring">
+            <div @click="hrefAdminScoringStatus">
               <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
                 <img src="../../assets/打分情况处理.png" class="image">
                 <div>
@@ -153,9 +153,9 @@ export default {
       this.$router.push({path:'./adminActivityType'});
     },
 
-    hrefAdminScoring()
+    hrefAdminScoringStatus()
     {
-      this.$router.push({path:'./adminScoring'});
+      this.$router.push({path:'./adminScoringStatus'});
     },
 
     hrefAdminSystemLog()
