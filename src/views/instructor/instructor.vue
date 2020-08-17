@@ -25,7 +25,7 @@
       <el-main id="body">
         <h3 class="title-board">功能权限</h3>
         <el-row :gutter="20">
-          <el-col :span="6">
+          <!-- <el-col :span="6">
             <div @click="hrefInstructorEvaluationExamination">
               <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
                 <img src="../../assets/测评信息审核.png" class="image">
@@ -34,7 +34,7 @@
                 </div>
               </el-card>
             </div>
-          </el-col>
+          </el-col> -->
 
           <el-col :span="6">
             <div @click="hrefInstructorTransferDelegateAuthority">
@@ -58,7 +58,7 @@
             </div>
           </el-col>
 
-          <el-col :span="6">
+          <!-- <el-col :span="6">
             <div @click="hrefInstructorBoardExamination">
               <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
                 <img src="../../assets/公告公示审核.png" class="image">
@@ -67,10 +67,10 @@
                 </div>
               </el-card>
             </div>
-          </el-col>
+          </el-col> -->
         </el-row>
 
-        <h3 class="title-board">基本素质评价</h3>
+        <!-- <h3 class="title-board">基本素质评价</h3>
 
         <el-row>
           <el-col :span="6">
@@ -94,7 +94,7 @@
               </el-card>
             </div>
           </el-col>
-        </el-row>
+        </el-row> -->
       </el-main>
 
       <el-aside id="aside-right" width="300px">

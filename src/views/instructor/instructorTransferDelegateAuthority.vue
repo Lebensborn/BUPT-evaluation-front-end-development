@@ -11,11 +11,11 @@
     <el-main>
       <el-card id="body">
         <el-backtop></el-backtop>
-        <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="转移审核测评权限" name="first">转移审核测评权限</el-tab-pane>
+        <el-tabs v-model="activeTab" @tab-click="handleClick">
+          <!-- <el-tab-pane label="转移审核测评权限" name="first">转移审核测评权限</el-tab-pane>
           <el-tab-pane label="审核状态" name="second">审核状态</el-tab-pane>
-          <el-tab-pane label="转移打分权限" name="third">转移打分权限</el-tab-pane>
-          <el-tab-pane label="打分状态" name="fourth">
+          <el-tab-pane label="转移打分权限" name="third">转移打分权限</el-tab-pane> -->
+          <el-tab-pane label="打分状态" name="scoringStatus">
             <el-button @click="output" type="primary">导出</el-button>
             <div style="margin:0 auto; text-align:center">
               <el-table
@@ -113,7 +113,8 @@ export default {
       return {
         tableData: [],
         submit: [],
-        id: null
+        id: null,
+        activeTab: 'scoringStatus'
       }
     },
     methods: {
