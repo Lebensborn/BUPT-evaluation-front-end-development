@@ -2,7 +2,7 @@
    <div>
     <div id="header">
         <div id="button-group">
-          <el-button type="text" @click="hrefReturnBackToStudent">返回</el-button> |<el-button type="text" @click="hrefApplyBoard">申请公示公告</el-button> |<el-button type="text" @click="hrefExit">退出登陆</el-button>
+          <el-button type="text" @click="hrefReturn">返回</el-button> |<el-button type="text" @click="hrefApplyBoard">申请公示公告</el-button> |<el-button type="text" @click="hrefExit">退出登录</el-button>
         </div>
     </div>
     <el-card id="main-only" shadow="always">
@@ -31,11 +31,16 @@
             </center>
           </div>
           <div id="title-content">
-          
           </div>
-          <el-link v-for="item in numberValidateForm[index].file" :key="item" :href="item.fileUrl">
-            {{ item.fileUrl }}
-          </el-link>
+          
+          <ul>
+              <li v-for="item in numberValidateForm[index].file" :key="item">
+                <a target="_blank" :href="item.fileUrl" :download="item.fileName">
+                  <span>{{item.fileName}}</span>
+                </a>
+              </li>
+            </ul>
+
         </el-main>
     </el-card>
    </div>
@@ -55,7 +60,7 @@ export default {
       changeBoard(i){
         this.index = i;
       },
-      hrefReturnBackToStudent()
+      hrefReturn()
       {
           this.$router.push({path: './student'});
       },

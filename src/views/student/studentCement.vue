@@ -2,7 +2,7 @@
   <div id="studentCement">
     <div id="header">
       <div class="hrefButton">
-        <el-button type="text" @click="hrefReturnBackToStudent">返回</el-button>
+        <el-button type="text" @click="hrefReturn">返回</el-button>
         |<el-button type="text" @click="hrefExit">退出</el-button> |<el-button
           type="text"
           @click="hrefBoard"
@@ -122,7 +122,7 @@ export default {
     };
   },
   methods: {
-    hrefReturnBackToStudent() {
+    hrefReturn() {
       this.$router.push({ path: "./student" });
     },
 

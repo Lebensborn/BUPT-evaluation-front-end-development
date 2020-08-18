@@ -3,7 +3,7 @@
     <!--头部logo-->
     <div id="header">
         <div class="hrefButton">
-            <el-button type="text" @click="hrefReturnBackToStudent">返回</el-button> |<el-button type="text" @click="hrefBoard">公示公告</el-button> |<el-button type="text" @click="hrefExit">退出登陆</el-button>
+            <el-button type="text" @click="hrefReturn">返回</el-button> |<el-button type="text" @click="hrefBoard">公示公告</el-button> |<el-button type="text" @click="hrefExit">退出登录</el-button>
         </div>
     </div>
 
@@ -63,6 +63,8 @@
                     </el-date-picker>
                 </el-form-item>
 
+
+
                 <el-form-item label="正文">
                     <quill-editor v-model="form.content" ref="myQuillEditor" style="height: 500px;" :options="editorOption">
                     <!-- 自定义toolar -->
@@ -118,22 +120,26 @@
                 <el-form-item label="上传附件" id="upload">
                     <el-upload
                         class="upload-demo"
-                        action="/api/notification/file"
+                        ref="upload"
+                        drag
+                        action="api/notification/file"
                         :on-preview="handlePreview"
                         :on-remove="handleRemove"
+                        :on-error="handleError"
+                        :on-success="handleSuccess"
                         :before-remove="beforeRemove"
                         multiple
+                        with-credentials
                         :limit="5"
-                        :beforeUpload="beforeFileUpload"
-                        :on-exceed="handleExceed"
-                        :file-list="form.fileList">
-                        <el-button size="small" type="primary">点击上传</el-button>
-                        <div slot="tip" class="el-upload__tip">(上传不超过5个文件，单个文件最多不大于2MB)</div>
+                        :on-exceed="handleExceed">
+                        <i class="el-icon-upload"></i>
+                        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                        <div class="el-upload__tip" slot="tip">最多上传5个文件</div>
                     </el-upload>
                 </el-form-item>
 
                 <el-form-item>
-                    <el-button type="primary" @click="handlereset">申请发布</el-button>
+                    <el-button type="primary" @click="handleRelease">申请发布</el-button>
                 </el-form-item>
 
                 </el-form>
@@ -183,7 +189,7 @@ export default {
                 date: '',
                 content: '',
                 fileList: [],
-                value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
+                value1: [new Date(), new Date()],
             },
             //日期
             pickerOptions: {
@@ -219,8 +225,32 @@ export default {
     components: {
     quillEditor
     },
+    created: function() {
+        if (this.$store.state.user.is_login == false)
+        setTimeout(() => {
+            //未登录的的原因可能是用户一开始就访问了需要登录的网址，还没来得及加载状态，所以一旦检测到没登录，延时等待看是不是状态还没返回，延时后还未登录就说明真没登录了
+            if (this.$store.state.user.is_login == false) {
+            this.$message.error("您还未登录呢，快去登录吧");
+            this.$router.push("/");
+            }
+        }, 1500);
+    },
     methods: {
-        handlereset() {
+        handleSuccess(response, file) {
+            console.log(response);
+            console.log(file);
+            let data = JSON.parse(response);
+            this.$message.success(file.name + " " + data.msg);
+            this.form.fileList.push({
+                "fileName": file.name,
+                "fileUrl": data.file
+            });
+        },
+        handleError() {
+            this.$message.error("附件上传失败");
+        },
+
+        handleRelease() {
             if (this._data.loading == true) return false; //防止重复点击
             this.$refs.form.validate(valid => {
                 if (valid) {
@@ -246,7 +276,7 @@ export default {
                             remark: '',
                             content: '',
                             fileList: [],
-                            value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
+                            value1: [new Date(), new Date()],
                         };
                         this.$router.push("/studentBoard");
                     } else {
@@ -263,18 +293,24 @@ export default {
             });
         },
         handleRemove(file, fileList) {
+            // TODO 后端图片删除接口
             console.log(file, fileList);
+            var that = this;
+            for (var i in that.form.fileList)
+                if (that.form.fileList[i].name == file.name)
+                    that.form.fileList.splice(i, 1);
+            this.$message.success("成功删除文件" + file.name);
         },
         handlePreview(file) {
             console.log(file);
         },
         handleExceed(files, fileList) {
-            this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+            this.$message.warning(`当前限制选择 5 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
         },
         beforeRemove(file) {
             return this.$confirm(`确定移除 ${ file.name }？`);
         },
-        hrefReturnBackToStudent()
+        hrefReturn()
         {
             this.$router.push({path: './student'});
         },
@@ -286,25 +322,7 @@ export default {
         {
             this.$router.push({path: './studentBoard'});
         },
-        beforeFileUpload(file) {
-            const isLt2M = file.size / 1024 / 1024 < 2;
-            console.log("upload file size=" + file.size / 1024 / 1024);
-            if (!isLt2M) {
-                this.upload_warning = true;
-                this.$message({
-                message: "上传文件大小不能超过 2 MB!",
-                type: "error"
-                });
-            }
-            return isLt2M;
-        },
-    },
-    created: function() {
-        if(this.$cookies.get("uuid") == null){
-        this.$message.error("您还未登陆呢，快去登陆吧");
-        this.$router.push("/");
-        }
-    },
+    }
 }
 </script>
  

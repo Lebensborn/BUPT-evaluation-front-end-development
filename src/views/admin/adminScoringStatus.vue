@@ -20,7 +20,7 @@
             id="stateTable"
             :data="tableData"
             style="width: 100% margin: auto"
-            :default-sort = "{prop: 'userId', order: 'ascending'}"
+            :default-sort = "{prop: 'studentId', order: 'ascending'}"
             stripe
             >
             <el-table-column
@@ -54,7 +54,7 @@
               :filter-method="filterClassId">
             </el-table-column>
             <el-table-column
-              prop="userId"
+              prop="studentId"
               label="学号"
               sortable
               width="100">
@@ -63,13 +63,14 @@
               prop="name"
               label="姓名"
               sortable
-              width="100">
+              width="80">
             </el-table-column>
             <el-table-column
               prop="politicBelief"
               label="政治信念"
               sortable
-              width="110">
+              width="110"
+              :formatter="formatterPoliticBelief">
             </el-table-column>
             <el-table-column
               prop="moralQuality"
@@ -126,6 +127,9 @@ export default {
       filterClassId(value, row) {
         return row.classId == value;
       },
+      formatterPoliticBelief(row) {
+        return row.politicBelief;
+      },
       formatterState(row) {
         return (row.state ? "完成" : "尚未完成");
       },
@@ -172,18 +176,13 @@ export default {
         request({
           url: "/admin/selfJudgment",
           method: "get",
-          data: [
-            "2019211301",
-            "2019211302",
-            "2019211303"
-          ]
         })
           .then(response => {
             let data = JSON.parse(response.data);
             let state = data.success;
             if (state == true) {
               console.log(data);
-              that.tableData = data.selfJudgment[0].table;
+              that.tableData = data.selfJudgment;
             }
           })
           .catch(error => {

@@ -5,7 +5,7 @@ axios.defaults.withCredentials=true;
 // 创建 axios 实例
 const service = axios.create({
   baseURL: "/api", // api 的 base_url
-  timeout: 15000, // 请求超时时间
+  timeout: 200000, // 请求超时时间
 })
 
 export default service
