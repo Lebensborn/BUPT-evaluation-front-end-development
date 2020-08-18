@@ -3,7 +3,7 @@
     <el-container direction="vertical">
       <el-header id="header" height="100px">
         <div id="exit">
-          <el-button type="text" @click="herfExit">退出登录</el-button>
+          <el-button type="text" @click="herfExit">退出登陆</el-button>
         </div>
       </el-header>
 
@@ -28,7 +28,7 @@
         <h3 class="title-board">基本素质评价</h3>
         <el-row>
           <el-col :span="8" :offset="index > 0 ? 2 : 0">
-            <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+            <el-card :body-style="{ padding: '0px' }" class="option-card">
               <img src="../../assets/自评与互评.png" class="image">
               <div style="padding: 14px;">
                 <span>自评与互评</span>
@@ -40,7 +40,7 @@
           </el-col>
           
           <el-col :span="8" :offset="index > 0 ? 2 : 0">
-            <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+            <el-card :body-style="{ padding: '0px' }" class="option-card">
               <img src="../../assets/指定打分.png" class="image">
               <div style="padding: 14px;">
                 <span>指定给分</span>
@@ -52,7 +52,7 @@
           </el-col>
 
           <el-col :span="8" :offset="index > 0 ? 2 : 0">
-            <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+            <el-card :body-style="{ padding: '0px' }" class="option-card">
               <img src="../../assets/班委评分.png" class="image">
               <div style="padding: 14px;">
                 <span>班委给分</span>
@@ -67,7 +67,7 @@
         <h3 class="title-board">发展评价</h3>
         <el-row>
           <el-col :span="8" :key="o" :offset="index > 0 ? 2 : 0">
-            <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+            <el-card :body-style="{ padding: '0px' }" class="option-card">
               <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
               <div style="padding: 14px;">
                 <span>好吃的汉堡</span>
@@ -82,7 +82,7 @@
         <h3 class="title-board">特殊功能权限</h3>
         <el-row>
           <el-col :span="8" :key="o" :offset="index > 0 ? 2 : 0">
-            <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+            <el-card :body-style="{ padding: '0px' }" class="option-card">
               <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
               <div style="padding: 14px;">
                 <span>测评信息审核</span>
@@ -97,13 +97,16 @@
       </el-main>
 
       <el-aside id="aside-right" width="300px">
+        
         <router-link to="./studentBoard" id="board-router">
           <el-card id="board" shadow="never">
             <div v-html="item.title" v-for="item in board" :key=item id="board-title"></div>
           </el-card>
         </router-link>
+        <!--
         <el-button @click="hrefStudentBoardApply" id="hrefStudentBoardApply">申请公告公示</el-button>
-        <p id="email">举报邮箱：123456789@asd.com</p>
+        -->
+        <p id="email">举报邮箱：xs_kevin@bupt.edu.cn</p>
       </el-aside>
 
       <el-footer id="footer" height="150px">
@@ -138,6 +141,7 @@ export default {
     herfExit()
     {
       this.$router.push({path:'./'});
+      this.$store.commit("signOut");
     },
 
     hrefStudentBoardApply()
@@ -157,14 +161,10 @@ export default {
     }
   },
   created: function() {
-    if (this.$store.state.user.is_login == false)
-      setTimeout(() => {
-        //未登录的的原因可能是用户一开始就访问了需要登录的网址，还没来得及加载状态，所以一旦检测到没登录，延时等待看是不是状态还没返回，延时后还未登录就说明真没登录了
-        if (this.$store.state.user.is_login == false) {
-          this.$message.error("您还未登录呢，快去登录吧");
-          this.$router.push("/");
-        }
-      }, 1500);
+    if(this.$cookies.get("uuid") == null){
+      this.$message.error("您还未登陆呢，快去登陆吧");
+      this.$router.push("/");
+    }
   },
   mounted: function() {
     var that = this;
@@ -301,6 +301,7 @@ export default {
 }
 
 #header {
+  background: url("../../assets/北邮logo.png") no-repeat;
   position: absolute;
   top: 0px;
   left: 0px;

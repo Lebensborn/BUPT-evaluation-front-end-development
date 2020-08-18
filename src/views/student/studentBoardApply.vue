@@ -187,7 +187,6 @@ export default {
                 type: '',
                 resource: '',
                 date: '',
-                abstract: '',
                 content: '',
                 fileList: [],
                 value1: [new Date(), new Date()],
@@ -315,7 +314,6 @@ export default {
         {
             this.$router.push({path: './student'});
         },
-
         hrefExit()
         {
             this.$router.push({path: './'});

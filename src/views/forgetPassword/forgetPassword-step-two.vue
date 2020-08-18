@@ -2,7 +2,7 @@
   <div id="forget-password">
       <!--头部-->
       <div id="header">
-        <el-button type="text" @click="herfReturn" id="return-button">返回登录界面</el-button>
+        <el-button type="text" @click="herfReturn" id="return-button">返回登陆界面</el-button>
       </div>
 
       <!--主体部分-->
@@ -39,10 +39,7 @@
         </el-row>
       </div>
 
-      <!--尾部-->
-      <div id="footer">
-
-      </div>
+      
   </div>
 </template>
 <script>
@@ -139,7 +136,7 @@ export default {
   right: 0px;
   left: 0px;
   height: 750px;
-  background: url("../../assets/登录界面背景图.jpg") no-repeat;
+  background: url("../../assets/登陆界面背景图.jpg") no-repeat;
 }
 
 #header {

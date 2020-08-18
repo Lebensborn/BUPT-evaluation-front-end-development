@@ -1,5 +1,5 @@
 <template>
-    <div id="studentCement">
+    <div id="instructorCement">
         <div id="header">
             <div class="hrefButton">
               <el-button type="text" @click="hrefReturn">返回</el-button> |<el-button type="text" @click="hrefExit">退出</el-button> |<el-button type="text" @click="hrefBoard">公示公告</el-button>
@@ -32,7 +32,7 @@
               width="120px">
             </el-table-column>
             <el-table-column
-              prop="beJudgeStudentId"
+              prop="beJudgeInstructorId"
               label="学号"
               width="120px">
             </el-table-column>
@@ -41,7 +41,7 @@
               label="政治信念(20)"
               width="120px">
                 <template scope="scope">
-                  <el-input size="small" v-model.number="scope.row.politicBelief" placeholder="请打分" v-show="is_politicBelief"></el-input>
+                  <el-input size="small" v-model.number="scope.row.politicBelief" placeholder="请打分"></el-input>
                 </template>
             </el-table-column>
             <el-table-column
@@ -49,7 +49,7 @@
               label="道德品质(15)"
               width="120px">
                 <template scope="scope">
-                  <el-input size="small" v-model.number="scope.row.moralQuality" placeholder="请打分" v-show="is_moralQuality"></el-input>
+                  <el-input size="small" v-model.number="scope.row.moralQuality" placeholder="请打分"></el-input>
                 </template>
             </el-table-column>
             <el-table-column
@@ -57,7 +57,7 @@
               label="学习态度(10)"
               width="120px">
                 <template scope="scope">
-                  <el-input size="small" v-model.number="scope.row.studyAttitude" placeholder="请打分" v-show="is_studyAttitude"></el-input>
+                  <el-input size="small" v-model.number="scope.row.studyAttitude" placeholder="请打分"></el-input>
                 </template>
             </el-table-column>
             <el-table-column
@@ -65,7 +65,7 @@
               label="文化素养(10)"
               width="120px">
                 <template scope="scope">
-                  <el-input size="small" v-model.number="scope.row.cultureQuality" placeholder="请打分" v-show="is_cultureQuality"></el-input>
+                  <el-input size="small" v-model.number="scope.row.cultureQuality" placeholder="请打分"></el-input>
                 </template>
             </el-table-column>
             <el-table-column
@@ -73,7 +73,7 @@
               label="集体观念(10)"
               width="120px">
                 <template scope="scope">
-                  <el-input size="small" v-model.number="scope.row.collectiveConception" placeholder="请打分" v-show="is_collectiveConception"></el-input>
+                  <el-input size="small" v-model.number="scope.row.collectiveConception" placeholder="请打分"></el-input>
                 </template>
             </el-table-column>
             <el-table-column
@@ -98,18 +98,13 @@ export default {
         tableData: [],
         submit: [],
         id: null,
-        is_able: false,
-        is_politicBelief: false,
-        is_moralQuality: false,
-        is_studyAttitude: false,
-        is_cultureQuality: false,
-        is_collectiveConception: false,
+        is_able: false
       }
     },
     methods: {
         hrefReturn()
         {
-            this.$router.push({path: './student'});
+            this.$router.push({path: './instructor'});
         },
 
         hrefExit()
@@ -118,7 +113,7 @@ export default {
         },
         hrefBoard()
         {
-            this.$router.push({path: './studentBoard'});
+            this.$router.push({path: './instructorBoard'});
         },
         submitForm()
         {
@@ -127,8 +122,8 @@ export default {
               if (valid) {
               this.tableData.map(((item)=> {
                 if(item.politicBelief + item.moralQuality + item.studyAttitude + item.cultureQuality + item.collectiveConception >= 55 && item.politicBelief <= 20 && item.moralQuality <= 15 && item.studyAttitude <= 10 && item.cultureQuality <= 10 && item.collectiveConception <= 10 && item.politicBelief >= 0 && item.moralQuality >= 0 && item.studyAttitude >= 0 && item.cultureQuality >= 0 && item.collectiveConception >= 0){
-                    this.submit.push(Object.assign({},{judgeStudentId: this.id, 
-                                                      beJudgeStudentId: item.beJudgeStudentId, 
+                    this.submit.push(Object.assign({},{judgeInstructorId: this.id, 
+                                                      beJudgeInstructorId: item.beJudgeInstructorId, 
                                                       belongClass: item.belongClass, 
                                                       politicBelief: item.politicBelief, 
                                                       moralQuality: item.moralQuality, 
@@ -151,7 +146,7 @@ export default {
                   let state = data.success;
                   if (state == true) {
                       //this.$store.commit("LoginInfoLogin", response.data.info);
-                      //this.$router.push("/student");
+                      //this.$router.push("/instructor");
                       this.$message.success("提交成功！");
                       var arr = document.cookie.split("=");
                       this.$cookies.set(arr[0], arr[1], 60 * 60 * 24 * 7, "/");
@@ -170,10 +165,10 @@ export default {
         }
     },
     created: function() {
-      if(this.$cookies.get("uuid") == null){
+        if(this.$cookies.get("uuid") == null){
         this.$message.error("您还未登陆呢，快去登陆吧");
         this.$router.push("/");
-      }
+        }
     },
     mounted: function() {
       var that = this;
@@ -187,27 +182,9 @@ export default {
             let state = data.success;
             if (state == true)
             console.log(data);
-            var authority = data.assignJudgment[0].authority;
-
-            if(authority == 'PoliticBelief'){
-              this.is_politicBelief = !this.is_politicBelief;
-            }else if(authority == 'MoralQuality'){
-              this.is_moralQuality = !this.is_moralQuality;
-            }else if(authority == 'StudyAttitude'){
-              this.is_studyAttitude = !this.is_studyAttitude;
-            }else if(authority == 'CultureQuality'){
-              this.is_cultureQuality = !this.is_cultureQuality;
-            }else if(authority == 'CollectiveConception'){
-              this.is_collectiveConception = !this.is_collectiveConception;
-            }
-      
-            data.assignJudgment[0].map(((item)=> {
-            this.tableData.push(Object.assign({},{name: item.table[0].name, 
-                                              belongClass: item.classId, 
-                                              beJudgeStudentId: item.table[0].studentId
-                                              })) 
-            }))                                 
+            that.tableData = data.assignJudgment;
             if(that.tableData == null){
+              console.log("hhh")
               this.is_able = true;
             }
           })
@@ -218,7 +195,7 @@ export default {
 
       new Promise((resolve, reject) => {
         request({
-          url: "/user/info/student",
+          url: "/user/info/instructor",
           method: "get"
         })
           .then(response => {
@@ -275,3 +252,4 @@ export default {
     right: 15%;
 }
 </style>
+
