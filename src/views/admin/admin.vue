@@ -90,7 +90,6 @@
             <div v-html="item.title" v-for="item in board" :key=item id="board-title"></div>
           </el-card>
         </router-link>
-        <!-- <el-button @click="hrefStudentBoardApply" id="hrefStudentBoardApply">申请公告公示</el-button> -->
         <p id="email">举报邮箱：xs_kevin@bupt.edu.cn</p>
       </el-aside>
       <el-footer id="footer" height="150px">
@@ -236,8 +235,8 @@ export default {
 
 #email {
   position: absolute;
-  right: 25px;
-  top: 500px;
+  right: 30px;
+  top: 450px;
   color: gray;
 }
 
@@ -291,7 +290,7 @@ export default {
   top: 0px;
   left: 0px;
   height: 400px;
-  border: 1px solid #000000;
+  /* border: 1px solid #000000; */
   text-decoration:none;
   border-radius: 0px;
   font-size: 18px;
@@ -337,7 +336,7 @@ export default {
   left: 0px;
   top: 100px;
   bottom: 150px;
-  border: 1px solid;
+  /* border: 1px solid; */
   /*box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);*/
 }
 

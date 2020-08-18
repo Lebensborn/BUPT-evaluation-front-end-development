@@ -1,17 +1,17 @@
 <template>
   <div>
-    <el-container direction="vertical">
-      <el-header id="header" height="100px">
-        <div id="exit">
-          <el-button type="text" @click="herfExit">退出登录</el-button>
-        </div>
-      </el-header>
+    <el-header id="header" height="100px">
+      <div id="exit">
+        <el-button type="text" @click="herfExit">退出登录</el-button>
+      </div>
+    </el-header>
 
-      <el-aside id="aside-left" width="170px">
+    <div class="wbox">
+      <div id="aside-left">
         <router-link to="./instructorPersonalInformation">
           <div id="information">
             <center>
-            <h1>辅导员姓名</h1>
+            <h3>辅导员姓名</h3>
             <span v-show="is_get">{{ numberValidateForm.name }}</span><br>
             <h3>账号</h3>
             <span v-show="is_get">{{ numberValidateForm.userId }}</span><br>
@@ -20,8 +20,19 @@
             </center>
           </div>
         </router-link>
-      </el-aside>
-
+      </div>
+      <div id="aside-right">
+        <router-link to="./instructorBoard" id="board-router">
+          <div id="board">
+            <h3>
+              公告公示
+            </h3>
+            <div>
+              <div v-html="item.title" v-for="item in board" :key=item id="board-title"></div>
+            </div>
+          </div>
+        </router-link>
+      </div>
       <el-main id="body">
         <h3 class="title-board">功能权限</h3>
         <el-row :gutter="20">
@@ -96,22 +107,11 @@
           </el-col>
         </el-row> -->
       </el-main>
-
-      <el-aside id="aside-right" width="300px">
-        <router-link to="./instructorBoard" id="board-router">
-          <el-card id="board" shadow="never">
-            <div v-html="item.title" v-for="item in board" :key=item id="board-title"></div>
-          </el-card>
-        </router-link>
-        <!-- <el-button @click="hrefStudentBoardApply" id="hrefStudentBoardApply">申请公告公示</el-button> -->
-        <p id="email">举报邮箱：xs_kevin@bupt.edu.cn</p>
-      </el-aside>
-      <el-footer id="footer" height="150px">
-
-      </el-footer>
-    </el-container>
+      <el-footer  class="copyright">举报邮箱：xs_kevin@bupt.edu.cn</el-footer>
+    </div>
   </div>
 </template>
+
 <script>
 import request from "@/utils/request"; //打了大括号后显示找不到request函数
 export default {
@@ -252,12 +252,11 @@ export default {
   color: gray;
 }
 
-#email {
+/* #email {
   position: absolute;
   right: 25px;
-  top: 500px;
   color: gray;
-}
+} */
 
 .time {
   font-size: 13px;
@@ -303,27 +302,6 @@ export default {
   bottom: 0px;
 }
 
-#board {
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  left: 0px;
-  height: 400px;
-  border: 1px solid #000000;
-  text-decoration:none;
-  border-radius: 0px;
-  font-size: 18px;
-}
-
-#board-router {
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  left: 0px;
-  height: 400px;
-  text-decoration:none;
-}
-
 #hrefStudentBoardApply {
   position: absolute;
   right: 80px;
@@ -341,35 +319,78 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
 }
 
+.wbox {
+    width: 1500px;
+    margin: 0 auto;
+}
+
 #body {
   position: absolute;
   left: 170px;
   right: 300px;
   top: 100px;
-  bottom: 150px; 
+  height: 80%;
+  width: 1030px;
   background-color: #f2f2f2;
 }
 
 #aside-left {
   position: absolute;
+  /* float: left!important; */
   left: 0px;
   top: 100px;
-  bottom: 150px;
-  border: 1px solid;
+  height: 80%;
+  width: 170px;
+  /* border: 1px solid; */
   /*box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);*/
 }
 
 #aside-right {
   position: absolute;
-  right: 0px;
+  left: 1200px;
   top: 100px;
-  bottom: 150px;
+  height: 80%;
+  width: 300px;
+  overflow: auto;
 }
 
 #footer {
   position: absolute;
   bottom: 0px;
+}
+
+#board {
+  position: absolute;
+  right: 0px;
+  top: 20px;
+  left: 10%;
+  /* height: 400px; */
+  /* border: 1px solid #00000f; */
+  /* text-decoration:none; */
+  font-size: 18px;
+}
+
+.copyright {
+  position: absolute;
+  text-align: center;
+  float: right;
+  margin: 0 auto;
+  top: 95%;
+}
+
+/* #board-router {
+  position: absolute;
+  right: 0px;
+  top: 100px;
+  left: 0px;
+  
+  text-decoration:none;
+} */
+
+/* #footer {
+  position: absolute;
+  bottom: 0px;
   left: 0px;
   right: 0px;
-}
+} */
 </style>

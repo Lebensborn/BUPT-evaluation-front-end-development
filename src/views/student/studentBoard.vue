@@ -2,46 +2,49 @@
    <div>
     <div id="header">
         <div id="button-group">
-          <el-button type="text" @click="hrefReturn">返回</el-button> |<el-button type="text" @click="hrefApplyBoard">申请公示公告</el-button> |<el-button type="text" @click="hrefExit">退出登录</el-button>
+          <!-- <el-button type="text" @click="hrefReturn">返回</el-button> |<el-button type="text" @click="hrefApplyBoard">申请公示公告</el-button> |<el-button type="text" @click="hrefExit">退出登录</el-button> -->
+          <el-button type="text" @click="hrefReturn">返回</el-button> | <el-button type="text" @click="hrefExit">退出登录</el-button>
         </div>
     </div>
     <el-card id="main-only" shadow="always">
-        <h2>公示公告</h2>
-        <hr>
-        <el-main id="Content-only" shadow="never">
-          <div v-html="numberValidateForm[index].content"></div> 
-        </el-main>
-        <el-main id="title-only" shadow="never">
-          <div id="title-title">
-            <center>
-            <span id="board-last">最近公告</span>
-            </center>
-          </div>
-          <div id="title-content">
+        <el-page-header @back="hrefReturn" content="公告公示">
+        </el-page-header>
 
+        <el-container>
+          <div class="mainbox pull-left">
+            <h1 class="text-center">
+              {{ numberValidateForm[index].title}}
+            </h1>
+            <div v-html="numberValidateForm[index].content"></div>
+
+            <div class="accessory">
+              <b>附件:</b>
+              <ul>
+                <li v-for="item in numberValidateForm[index].file" :key="item">
+                  <i class="el-icon-download"></i>
+                  <a target="_blank" :href="item.fileUrl" :download="item.fileName">
+                    <span>{{item.fileName}}</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
-          <el-button v-for="(item, i) in numberValidateForm" :key="item" @click="changeBoard(i)" type="text">
-            {{ item.title }}
-          </el-button>
-        </el-main>
-        <el-main id="bottom-only" shadow="never">
-          <div id="title-file">
-            <center>
-            <span id="board-last-fujian">附件</span>
-            </center>
-          </div>
-          <div id="title-content">
-          </div>
-          
-          <ul>
-              <li v-for="item in numberValidateForm[index].file" :key="item">
-                <a target="_blank" :href="item.fileUrl" :download="item.fileName">
-                  <span>{{item.fileName}}</span>
-                </a>
+
+          <div class="sidebox">
+            <h3>最近公告</h3>
+            <hr>
+            <ul id="list-recent">
+              <li v-for="(item, i) in numberValidateForm" :key="item">
+                <div>
+                  <el-link @click="changeBoard(i)">
+                    <i class="el-icon-news"></i>
+                    {{ item.title }}
+                  </el-link>
+                </div>
               </li>
             </ul>
-
-        </el-main>
+          </div>
+        </el-container>
     </el-card>
    </div>
 </template>
@@ -74,10 +77,10 @@ export default {
       },
     },
     created: function() {
-      if(this.$cookies.get("uuid") == null){
+        if(this.$cookies.get("uuid") == null){
         this.$message.error("您还未登陆呢，快去登陆吧");
         this.$router.push("/");
-      }
+        }
     },
     mounted: function() {
       var that = this;
@@ -103,6 +106,53 @@ export default {
 </script>
 
 <style scoped>
+.mainbox {
+  width: 60%;
+  margin: 30px;
+  margin-right: 80px;
+}
+
+.sidebox {
+  width: 30%;
+  overFlow-x: hidden;
+  word-break: break-all;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.accessory {
+    margin: 10px auto;
+    margin-top: 30px;
+}
+
+.accessory ul {
+    padding: 10px;
+    border: 1px solid #ccc;
+    background: #fcfcfc;
+    list-style: none;
+}
+
+.accessory ul li a {
+    color: #00f;
+    padding: 10px 10px;
+    font-size: 15pt;
+    margin-bottom: 10px;
+}
+
+#list-recent {
+  padding-left: 0;
+  list-style: none;
+  font-size: 15pt;
+}
+
+#list-recent li {
+  border-bottom: 1px dashed #e9eaeb;
+  padding: 10px;
+}
+
+
 #board-last-fujian {
   position: absolute;
   top: 10px;
@@ -121,7 +171,6 @@ export default {
 
 #title-title {
   position: absolute;
-  border-radius: 0px;
   border: 1px rgb(202, 202, 202) solid;
   width: 130px;
   height: 40px;
@@ -131,7 +180,6 @@ export default {
 
 #title-file {
   position: absolute;
-  border-radius: 0px;
   border: 1px rgb(202, 202, 202) solid;
   width: 130px;
   height: 40px;
@@ -141,12 +189,10 @@ export default {
 
 #bottom-only {
   position: absolute;
-  top: 610px;
+  /* top: 610px; */
   left: 2.5%;
   right: 2.5%;
   bottom: 2.5%;
-  border-radius: 0px;
-  
 }
 
 #main-only {
@@ -154,28 +200,19 @@ export default {
   top: 130px;
   left:5%;
   right: 5%;
-  height: 820px;
-  border-radius: 0px;
-  
+  /* height: ; */
 }
 
-#Content-only {
+/* #content {
   position: absolute;
   left: 2.5%;
   right: 36%;
   height: 500px;
   border-radius: 0px;
   
-}
+} */
 
-#title-only {
-  position: absolute;
-  left: 65%;
-  right: 2.5%;
-  height: 500px;
-  border-radius: 0px;
-  
-}
+
 
 #header {
   position: absolute;

@@ -237,8 +237,8 @@ export default {
 
 #email {
   position: absolute;
-  right: 25px;
-  top: 500px;
+  right: 30px;
+  top: 450px;
   color: gray;
 }
 
@@ -292,10 +292,11 @@ export default {
   top: 0px;
   left: 0px;
   height: 400px;
-  border: 1px solid #000000;
+  /* border: 1px solid #000000; */
   text-decoration:none;
   border-radius: 0px;
   font-size: 18px;
+  overflow: auto;
 }
 
 #board-router {
@@ -338,7 +339,7 @@ export default {
   left: 0px;
   top: 100px;
   bottom: 150px;
-  border: 1px solid;
+  /* border: 1px solid; */
   /*box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);*/
 }
 
