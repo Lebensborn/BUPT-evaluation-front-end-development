@@ -27,37 +27,34 @@
       <el-main id="body">
         <h3 class="title-board">基本素质评价</h3>
         <el-row>
-          <el-col :span="8" :offset="index > 0 ? 2 : 0">
-            <el-card :body-style="{ padding: '0px' }" class="option-card">
-              <img src="../../assets/自评与互评.png" class="image">
-              <div style="padding: 14px;">
-                <span>自评与互评</span>
-                <div class="bottom clearfix">
-                  <el-button type="text" class="button" @click="hrefStudentCement">点击跳转</el-button>
+          <el-col :span="8">
+            <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+              <div @click="hrefStudentCement">
+                <img src="../../assets/自评与互评.png" class="image">
+                <div>
+                    <center>自评与互评</center>
                 </div>
               </div>
             </el-card>
           </el-col>
           
-          <el-col :span="8" :offset="index > 0 ? 2 : 0">
-            <el-card :body-style="{ padding: '0px' }" class="option-card">
-              <img src="../../assets/指定打分.png" class="image">
-              <div style="padding: 14px;">
-                <span>指定给分</span>
-                <div class="bottom clearfix">
-                  <el-button type="text" class="button" @click="hrefAssignCement">点击跳转</el-button>
+          <el-col :span="8">
+            <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+              <div @click="hrefAssignCement">
+                <img src="../../assets/指定打分.png" class="image">
+                <div>
+                    <center>指定打分</center>
                 </div>
               </div>
             </el-card>
           </el-col>
 
-          <el-col :span="8" :offset="index > 0 ? 2 : 0">
-            <el-card :body-style="{ padding: '0px' }" class="option-card">
-              <img src="../../assets/班委评分.png" class="image">
-              <div style="padding: 14px;">
-                <span>班委给分</span>
-                <div class="bottom clearfix">
-                  <el-button type="text" class="button" @click="hrefClassCommitteeCement">点击跳转</el-button>
+          <el-col :span="8">
+            <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+              <div @click="hrefClassCommitteeCement">
+                <img src="../../assets/班委评分.png" class="image">
+                <div>
+                    <center>班委评分</center>
                 </div>
               </div>
             </el-card>
@@ -66,13 +63,12 @@
 
         <h3 class="title-board">发展评价</h3>
         <el-row>
-          <el-col :span="8" :key="o" :offset="index > 0 ? 2 : 0">
-            <el-card :body-style="{ padding: '0px' }" class="option-card">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
-              <div style="padding: 14px;">
-                <span>好吃的汉堡</span>
-                <div class="bottom clearfix">
-                  <el-button type="text" class="button">操作按钮</el-button>
+          <el-col :span="8">
+            <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+              <div>
+                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+                <div>
+                    <center>好吃的汉堡</center>
                 </div>
               </div>
             </el-card>
@@ -81,23 +77,20 @@
         
         <h3 class="title-board">特殊功能权限</h3>
         <el-row>
-          <el-col :span="8" :key="o" :offset="index > 0 ? 2 : 0">
-            <el-card :body-style="{ padding: '0px' }" class="option-card">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
-              <div style="padding: 14px;">
-                <span>测评信息审核</span>
-                <div class="bottom clearfix">
-                  <el-button type="text" class="button">点击跳转</el-button>
+          <el-col :span="8">
+            <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+              <div>
+                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+                <div>
+                    <center>测评信息审核</center>
                 </div>
               </div>
             </el-card>
           </el-col>
-         
         </el-row>
       </el-main>
 
       <el-aside id="aside-right" width="300px">
-        
         <router-link to="./studentBoard" id="board-router">
           <el-card id="board" shadow="never">
             <div v-html="item.title" v-for="item in board" :key=item id="board-title"></div>
@@ -208,6 +201,7 @@ export default {
 };
 </script>
 
+
 <style scoped>
 #board-title {
   color: gray;
@@ -216,6 +210,25 @@ export default {
 .option-card {
   height: 300px;
   width: 230px;
+}
+
+.el-row {
+  margin-bottom: 20px;
+  /* &:last-child {
+    margin-bottom: 0;
+  } */
+}
+.el-col {
+  border-radius: 4px;
+}
+
+.el-card:hover{
+  margin-top: -1px;
+  /* margin-left: -1px; */
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, .2);
+  border-color: #eee;
+  transition: all .2s ease-in-out;
+  cursor: pointer;
 }
 
 .title-board {
@@ -301,12 +314,14 @@ export default {
 }
 
 #header {
-  background: url("../../assets/北邮logo.png") no-repeat;
   position: absolute;
   top: 0px;
   left: 0px;
   right: 0px;
   bottom: 0px;
+  height: 94px;
+  background: url("../../assets/北邮logo.png") no-repeat;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
 }
 
 #body {
