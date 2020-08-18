@@ -63,10 +63,6 @@
                     </el-date-picker>
                 </el-form-item>
 
-                <el-form-item label="摘要">
-                    <el-input type="textarea" v-model="form.abstract"></el-input>
-                </el-form-item>
-
                 <el-form-item label="正文">
                     <quill-editor v-model="form.content" ref="myQuillEditor" style="height: 500px;" :options="editorOption">
                     <!-- 自定义toolar -->
@@ -122,22 +118,26 @@
                 <el-form-item label="上传附件" id="upload">
                     <el-upload
                         class="upload-demo"
-                        action="/api/notification/file"
+                        ref="upload"
+                        drag
+                        action="api/notification/file"
                         :on-preview="handlePreview"
                         :on-remove="handleRemove"
+                        :on-error="handleError"
+                        :on-success="handleSuccess"
                         :before-remove="beforeRemove"
                         multiple
+                        with-credentials
                         :limit="5"
-                        :on-exceed="handleExceed"
-                        :file-list="form.fileList">
-                        <el-button size="small" type="primary">点击上传</el-button>
-                        <div slot="tip" class="el-upload__tip">(上传不超过5个文件，单个文件最多不大于xMB)</div>
+                        :on-exceed="handleExceed">
+                        <i class="el-icon-upload"></i>
+                        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                        <div class="el-upload__tip" slot="tip">最多上传5个文件</div>
                     </el-upload>
                 </el-form-item>
 
                 <el-form-item>
-                    <!-- <el-button>保存</el-button> -->
-                    <el-button type="primary" @click="handlereset">发布</el-button>
+                    <el-button type="primary" @click="handleRelease">发布</el-button>
                 </el-form-item>
 
                 </el-form>
@@ -188,7 +188,7 @@ export default {
                 abstract: '',
                 content: '',
                 fileList: [],
-                value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
+                value1: [new Date(), new Date()],
             },
             //日期
             pickerOptions: {
@@ -235,7 +235,21 @@ export default {
         }, 1500);
     },
     methods: {
-        handlereset() {
+        handleSuccess(response, file) {
+            console.log(response);
+            console.log(file);
+            let data = JSON.parse(response);
+            this.$message.success(file.name + " " + data.msg);
+            this.form.fileList.push({
+                "fileName": file.name,
+                "fileUrl": data.file
+            });
+        },
+        handleError() {
+            this.$message.error("附件上传失败");
+        },
+
+        handleRelease() {
             if (this._data.loading == true) return false; //防止重复点击
             this.$refs.form.validate(valid => {
                 if (valid) {
@@ -261,7 +275,7 @@ export default {
                             remark: '',
                             content: '',
                             fileList: [],
-                            value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
+                            value1: [new Date(), new Date()],
                         };
                         this.$router.push("/instructorBoard");
                     } else {
@@ -278,7 +292,13 @@ export default {
             });
         },
         handleRemove(file, fileList) {
+            // TODO 后端图片删除接口
             console.log(file, fileList);
+            var that = this;
+            for (var i in that.form.fileList)
+                if (that.form.fileList[i].name == file.name)
+                    that.form.fileList.splice(i, 1);
+            this.$message.success("成功删除文件" + file.name);
         },
         handlePreview(file) {
             console.log(file);

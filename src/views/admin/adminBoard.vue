@@ -33,13 +33,9 @@
           <div id="title-content">
           </div>
 
-          <!-- <el-link v-for="item in numberValidateForm[index].file" :key="item" type="url">
-            {{ item.fileUrl }}
-          </el-link> -->
-
           <ul>
             <li v-for="item in numberValidateForm[index].file" :key="item">
-              <a target="_blank" :href="item.fileUrl" download="item.fileName">
+              <a target="_blank" :href="item.fileUrl" :download="item.fileName">
                 <span>{{item.fileName}}</span>
               </a>
             </li>
