@@ -81,6 +81,17 @@
               </div>
             </el-card>
           </el-col>
+
+          <el-col :span="6">
+            <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+              <div @click="hrefAdminTransferDelegateAuthority">
+                <img src="../../assets/转移下放权限.png" class="image">
+                <div>
+                    <center>转移下放权限</center>
+                </div>
+              </div>
+            </el-card>
+          </el-col>
         </el-row>
       </el-main>
 
@@ -156,6 +167,11 @@ export default {
     hrefAdminSystemLog()
     {
       this.$router.push({path:'./adminSystemLog'});
+    },
+
+    hrefAdminTransferDelegateAuthority()
+    {
+      this.$router.push({path:'./adminTransferDelegateAuthority'});
     },
   },
   mounted: function() {

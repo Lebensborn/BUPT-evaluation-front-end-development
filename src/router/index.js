@@ -49,6 +49,8 @@ export const constantRouterMap = [
     { path: '/adminUserAccount', component: () => import('@/views/admin/adminUserAccount')},
     //配置活动类型
     { path: '/adminActivityType', component: () => import('@/views/admin/adminActivityType')},
+    //配置辅导员转换
+    { path: '/adminTransferDelegateAuthority', component: () => import('@/views/admin/adminTransferDelegateAuthority')},
 
     //-------------------------------------辅导员界面-----------------------------------------------//
     //配置主页
