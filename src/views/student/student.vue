@@ -38,7 +38,7 @@
               </div>
             </el-card>
           </el-col>
-          <!--
+          
           <el-col :span="8" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
               <img src="../../assets/指定打分.png" class="image">
@@ -63,6 +63,7 @@
             </el-card>
           </el-col>
         </el-row>
+
         <h3 class="title-board">发展评价</h3>
         <el-row>
           <el-col :span="8" :key="o" :offset="index > 0 ? 2 : 0">
@@ -77,6 +78,7 @@
             </el-card>
           </el-col>
         </el-row>
+        
         <h3 class="title-board">特殊功能权限</h3>
         <el-row>
           <el-col :span="8" :key="o" :offset="index > 0 ? 2 : 0">
@@ -90,7 +92,7 @@
               </div>
             </el-card>
           </el-col>
-          -->
+         
         </el-row>
       </el-main>
 

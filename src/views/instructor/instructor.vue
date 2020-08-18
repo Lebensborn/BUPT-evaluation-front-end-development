@@ -26,47 +26,47 @@
         <h3 class="title-board">功能权限</h3>
         <el-row :gutter="20">
           <!-- <el-col :span="6">
-            <div @click="hrefInstructorEvaluationExamination">
-              <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+            <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+              <div @click="hrefInstructorEvaluationExamination">
                 <img src="../../assets/测评信息审核.png" class="image">
                 <div>
                     <center>测评信息审核</center>
                 </div>
-              </el-card>
-            </div>
+              </div>
+            </el-card>
           </el-col> -->
 
           <el-col :span="6">
-            <div @click="hrefInstructorTransferDelegateAuthority">
-              <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+            <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+              <div @click="hrefInstructorTransferDelegateAuthority">
                 <img src="../../assets/转移下放权限.png" class="image">
                 <div>
                     <center>转移下放权限</center>
                 </div>
-              </el-card>
-            </div>
+              </div>
+            </el-card>
           </el-col>
 
           <el-col :span="6">
-            <div @click="hrefInstructorBoardApply">
-              <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+            <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+              <div @click="hrefInstructorBoardApply">
                 <img src="../../assets/发布公告公示.png" class="image">
                 <div>
                     <center>发布公告公示</center>
                 </div>
-              </el-card>
-            </div>
+              </div>
+            </el-card>
           </el-col>
 
           <!-- <el-col :span="6">
-            <div @click="hrefInstructorBoardExamination">
-              <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+            <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+              <div @click="hrefInstructorBoardExamination">
                 <img src="../../assets/公告公示审核.png" class="image">
                 <div>
                     <center>公告申请审核</center>
                 </div>
-              </el-card>
-            </div>
+              </div>
+            </el-card>
           </el-col> -->
         </el-row>
 
@@ -74,25 +74,25 @@
 
         <el-row>
           <el-col :span="6">
-            <div @click="hrefinstructorAssignCement">
-              <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+            <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+              <div @click="hrefinstructorAssignCement">
                 <img src="../../assets/指定打分.png" class="image">
                 <div>
                     <center>指定给分</center>
                 </div>
-              </el-card>
-            </div>
+              </div>
+            </el-card>
           </el-col>
 
           <el-col :span="6">
-            <div @click="hrefInstructorClassCommitteeScoring">
-              <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+            <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+              <div @click="hrefInstructorClassCommitteeScoring">
                 <img src="../../assets/班委评分.png" class="image">
                 <div>
                     <center>班委评分</center>
                 </div>
-              </el-card>
-            </div>
+              </div>
+            </el-card>
           </el-col>
         </el-row> -->
       </el-main>

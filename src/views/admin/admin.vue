@@ -26,60 +26,60 @@
         <h3 class="title-board">功能权限</h3>
         <el-row :gutter="20">
           <el-col :span="6">
-            <div @click="hrefAdminUserAccount">
-              <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+            <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+              <div @click="hrefAdminUserAccount">
                 <img src="../../assets/用户账号管理.png" class="image">
                 <div>
                     <center>用户账号管理</center>
                 </div>
-              </el-card>
-            </div>
+              </div>
+            </el-card>
           </el-col>
 
           <el-col :span="6">
-            <div @click="hrefAdminActivityType">
-              <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+            <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+              <div @click="hrefAdminActivityType">
                 <img src="../../assets/发起活动类型.png" class="image">
                 <div>
                     <center>发起活动类型</center>
                 </div>
-              </el-card>
-            </div>
+              </div>
+            </el-card>
           </el-col>
 
           <el-col :span="6">
-            <div @click="hrefAdminScoringStatus">
-              <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+            <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+              <div @click="hrefAdminScoringStatus">
                 <img src="../../assets/打分情况处理.png" class="image">
                 <div>
                     <center>打分情况处理</center>
                 </div>
-              </el-card>
-            </div>
+              </div>
+            </el-card>
           </el-col>
 
           <el-col :span="6">
-            <div @click="hrefAdminSystemLog">
-              <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+            <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+              <div @click="hrefAdminSystemLog">
                 <img src="../../assets/查看系统日志.png" class="image">
                 <div>
                     <center>查看系统日志</center>
                 </div>
-              </el-card>
-            </div>
+             </div>
+            </el-card>
           </el-col>
         </el-row>
       
         <el-row :gutter="20">
           <el-col :span="6">
-            <div @click="hrefAdminBoardApply">
-              <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+            <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
+              <div @click="hrefAdminBoardApply">
                 <img src="../../assets/发布公告公示.png" class="image">
                 <div>
                     <center>发布公告公示</center>
                 </div>
-              </el-card>
-            </div>
+              </div>
+            </el-card>
           </el-col>
         </el-row>
       </el-main>
