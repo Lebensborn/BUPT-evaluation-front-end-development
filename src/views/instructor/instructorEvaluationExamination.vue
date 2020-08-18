@@ -35,6 +35,7 @@ export default {
         },
         hrefExit()
         {
+          this.$cookies.remove('uuid');
             this.$router.push({path: './'});
         },
         hrefBoard()
