@@ -38,7 +38,7 @@
             </el-card>
           </el-col>
           
-          <el-col :span="8">
+          <!-- <el-col :span="8">
             <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
               <div @click="hrefAssignCement">
                 <img src="../../assets/指定打分.png" class="image">
@@ -58,10 +58,10 @@
                 </div>
               </div>
             </el-card>
-          </el-col>
+          </el-col> -->
         </el-row>
 
-        <h3 class="title-board">发展评价</h3>
+        <!-- <h3 class="title-board">发展评价</h3>
         <el-row>
           <el-col :span="8">
             <el-card :body-style="{ padding: '0px' }" shadow="hover" class="option-card">
@@ -87,7 +87,7 @@
               </div>
             </el-card>
           </el-col>
-        </el-row>
+        </el-row> -->
       </el-main>
 
       <el-aside id="aside-right" width="300px">
