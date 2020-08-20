@@ -77,7 +77,10 @@
                 </el-form-item>
 
                 <el-form-item>
-                  <el-button @click.native.prevent="setCheakCode" id="email-valid-code-input">点击获取验证码</el-button>
+                  <el-button @click.native.prevent="setCheakCode" id="email-valid-code-input" :disabled=is_timeUp>
+                    <span v-show=!is_send>点击获取验证码</span>
+                    <span v-show=is_send>{{ countNum }}秒后再次发送</span>
+                  </el-button>
                 </el-form-item>
 
                 <el-form-item>
@@ -115,6 +118,11 @@ export default {
       },
       identifyCode: '',
       identifyCodes: '1234567890abcdefghijklmnopqrstuvwxyz',
+
+      is_send: false,
+      is_timeUp: false,
+      countNum: 90,
+      intervalBtn:{},
 
       loginRules: {
           code: [
@@ -183,6 +191,9 @@ export default {
             this.$message.success(
               "我们已向这个邮箱发送了一封验证邮件，请输入邮件中的验证码并重设您的密码"
             );
+
+            this.is_send = true;
+            this.countDown();
           } else {
             this.$message.error("您还没有注册哦！");
           }
@@ -190,6 +201,23 @@ export default {
         .catch(() => {
           this.loading = false;
         });
+    },
+    countDown(){
+        // 更改btn状态
+        
+        this.is_timeUp = !this.is_timeUp;
+        // 设置倒计时
+        this.intervalBtn = setInterval(() => {
+        if(this.countNum <= 0) {
+            this.is_send = !this.is_send;
+            this.is_timeUp = !this.is_timeUp;
+            clearInterval(this.intervalBtn)
+            // 重置倒计时状态
+            this.countNum = 90;
+        }
+        // 倒计时
+        this.countNum -- ;
+        }, 1000);
     },
   }
 };

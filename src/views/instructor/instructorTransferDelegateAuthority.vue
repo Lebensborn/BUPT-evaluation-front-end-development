@@ -137,6 +137,7 @@ export default {
           this.$router.push({path: './instructor'});
       },
       hrefExit() {
+        this.$cookies.remove('uuid');
           this.$router.push({path: './'});
       },
       hrefBoard() {

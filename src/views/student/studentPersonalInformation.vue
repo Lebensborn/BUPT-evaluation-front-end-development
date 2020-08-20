@@ -100,7 +100,10 @@
                 </el-form-item>
 
                 <el-form-item>
-                  <el-button @click.native.prevent="setCheakCode">点击获取验证码</el-button>
+                  <el-button @click.native.prevent="setCheakCode" :disabled=is_timeUp>
+                      <span v-show=!is_send>点击获取验证码</span>
+                      <span v-show=is_send>{{ countNum }}秒后再次发送</span>
+                  </el-button>
                   <el-button @click.native.prevent="checkCode">确定</el-button>
                 </el-form-item>
             </div>
@@ -179,7 +182,11 @@ export default {
                     { validator: validatePass3, trigger: 'blur' }
                 ]*/
             },
-            doesChange: true
+            doesChange: true,
+            is_send: false,
+            is_timeUp: false,
+            countNum: 90,
+            intervalBtn:{},
         }
     },
     methods: {
@@ -259,14 +266,16 @@ export default {
         this.$store
             .dispatch("setCheakCode1", this.numberValidateForm)
             .then(response => {
+            this.is_send = true;
             let data = JSON.parse(response.data);
             this.loading = false;
             if (data) {
-                this.is_send = true;
                 this.$message.success(
                 "我们已向这个邮箱发送了一封验证邮件，请输入邮件中的验证码并重设您的密码"
                 );
                 //console.log(data)
+                this.is_send = true;
+                this.countDown();
             } else {
                 this.$message.error("您还没有注册哦！");
             }
@@ -282,11 +291,29 @@ export default {
 
         hrefExit()
         {
+            this.$cookies.remove('uuid');
             this.$router.push({path: './'});
         },
         hrefBoard()
         {
             this.$router.push({path: './studentBoard'});
+        },
+        countDown(){
+            // 更改btn状态
+            
+            this.is_timeUp = !this.is_timeUp;
+            // 设置倒计时
+            this.intervalBtn = setInterval(() => {
+            if(this.countNum <= 0) {
+                this.is_send = !this.is_send;
+                this.is_timeUp = !this.is_timeUp;
+                clearInterval(this.intervalBtn)
+                // 重置倒计时状态
+                this.countNum = 90;
+            }
+            // 倒计时
+            this.countNum -- ;
+            }, 1000);
         },
     },
     created: function() {

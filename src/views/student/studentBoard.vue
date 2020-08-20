@@ -65,15 +65,16 @@ export default {
       },
       hrefReturn()
       {
-          this.$router.push({path: './student'});
+        this.$router.push({path: './student'});
       },
       hrefExit()
       {
-          this.$router.push({path: './'});
+        this.$cookies.remove('uuid');
+        this.$router.push({path: './'});
       },
       hrefApplyBoard()
       {
-          this.$router.push({path: './studentBoardApply'});
+        this.$router.push({path: './studentBoardApply'});
       },
     },
     created: function() {

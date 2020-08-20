@@ -2,7 +2,7 @@
   <div id="studentCement">
     <div id="header">
       <div class="hrefButton">
-        <el-button type="text" @click="hrefReturn">返回</el-button>
+        <el-button type="text" @click="hrefReturnBackToStudent">返回</el-button>
         |<el-button type="text" @click="hrefExit">退出</el-button> |<el-button
           type="text"
           @click="hrefBoard"
@@ -11,20 +11,23 @@
       </div>
     </div>
     <el-card id="body">
-      <span id="title"><strong>自评与互评</strong></span>
-      <div id="button-group">
-        <el-button plain @click="saveCement" id="save">保存</el-button>
 
-        <el-popconfirm
-          confirmButtonText="我确认无误"
-          cancelButtonText="我再确认一下"
-          icon="el-icon-info"
-          iconColor="red"
-          title="评分提交即无法更改，请确认无误后再提交"
-          @onConfirm="submitForm"
-        >
-          <el-button type="primary" slot="reference">提交</el-button>
-        </el-popconfirm>
+      <div id="card-head">
+        <span id="title"><strong>自评与互评</strong></span>
+        <div id="button-group">
+          <el-button plain @click="saveCement" id="save">保存</el-button>
+
+          <el-popconfirm
+            confirmButtonText="我确认无误"
+            cancelButtonText="我再确认一下"
+            icon="el-icon-info"
+            iconColor="red"
+            title="评分提交即无法更改，请确认无误后再提交"
+            @onConfirm="submitForm"
+          >
+            <el-button type="primary" slot="reference">提交</el-button>
+          </el-popconfirm>
+        </div>
       </div>
       <el-form
         :model="tableData"
@@ -122,11 +125,12 @@ export default {
     };
   },
   methods: {
-    hrefReturn() {
+    hrefReturnBackToStudent() {
       this.$router.push({ path: "./student" });
     },
 
     hrefExit() {
+      this.$cookies.remove('uuid');
       this.$router.push({ path: "./" });
     },
     hrefBoard() {
@@ -336,14 +340,14 @@ export default {
 }
 
 #button-group {
-  position: absolute;
-  right: 30px;
-  top: 20px;
+  margin-left: 770px;
+  display: inline-block;
 }
 
 #title {
   color: gray;
   font-size: 20px;
+  display: inline-block;
 }
 
 .hrefButton {
@@ -363,9 +367,9 @@ export default {
 }
 
 #body {
-  position: absolute;
-  top: 130px;
-  left: 22%;
-  right: 22%;
+  margin-top: 130px;
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

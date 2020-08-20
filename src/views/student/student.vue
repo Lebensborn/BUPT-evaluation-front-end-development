@@ -133,8 +133,8 @@ export default {
 
     herfExit()
     {
+      this.$cookies.remove('uuid');
       this.$router.push({path:'./'});
-      this.$store.commit("signOut");
     },
 
     hrefStudentBoardApply()
