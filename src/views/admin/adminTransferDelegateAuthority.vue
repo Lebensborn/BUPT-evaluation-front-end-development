@@ -171,7 +171,7 @@ export default {
       var that = this;
       new Promise((resolve, reject) => {
         request({
-          url: "/instructor/markState?type=selfJudgment",
+          url: "/admin/markState?type=selfJudgment",
           method: "get"
         })
           .then(response => {
