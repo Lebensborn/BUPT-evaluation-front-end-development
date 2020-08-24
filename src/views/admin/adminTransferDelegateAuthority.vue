@@ -52,7 +52,8 @@
                              { text: '2019211316', value: '2019211316' },
                              { text: '2019211317', value: '2019211317' },
                              { text: '2019211318', value: '2019211318' },
-                             { text: '2019211319', value: '2019211319' }]"
+                             { text: '2019211319', value: '2019211319' },
+                             { text: '2019661301', value: '2019661301' }]"
                   :filter-method="filterClassId">
                 </el-table-column>
                 <el-table-column

@@ -7,19 +7,51 @@
         </div>
 
         <el-card id="body">
-              
+          <el-button @click="output" type="primary">下载日志</el-button>
+          <el-input v-model="userId" placeholder="请输入要查找用户的用户名"></el-input>
+          <el-button @click="checkInfo">查询</el-button>
+            <el-table :data="tableData" id="stateTable">
+            <el-table-column prop="id" label="数据库里记录的id（可忽略）" width="120px">
+            </el-table-column>
+            <el-table-column prop="userId" label="操作发起者的用户名" width="120px">
+            </el-table-column>
+            <el-table-column prop="ipAddress" label="操作发起者的ip地址" width="120px">
+            </el-table-column>
+            <el-table-column
+              prop="method"
+              label="用户发起该操作使用的http方法"
+              width="120px"
+            >
+            </el-table-column>
+            <el-table-column
+              prop="url"
+              label="用户发起该操作请求的url"
+              width="120px"
+            >
+            </el-table-column>
+            <el-table-column
+              prop="time"
+              label="用户进行该操作的时间"
+              width="120px"
+            >
+            </el-table-column>         
+          </el-table>
         </el-card>
     </div>
 </template>
 
 <script>
+
 import request from "@/utils/request"; //打了大括号后显示找不到request函数
+import FileSaver from "file-saver";
+import XLSX from "xlsx";
+
 export default {
     data() {
       return {
         tableData: [],
         submit: [],
-        id: null
+        userId: null,
       }
     },
     created: function() {
@@ -29,6 +61,44 @@ export default {
         }
     },
     methods: {
+        checkInfo(){
+          var that = this;
+          console.log("/log?user="+this.userId)
+          new Promise((resolve, reject) => {
+            request({
+              url: "/log?user="+this.userId,
+              method: "get"
+            })
+              .then(response => {
+                let data = JSON.parse(response.data);
+                let state = data.success;
+                if (state == true)
+                console.log(data);
+                that.tableData = data.record;
+              })
+              .catch(error => {
+                reject(error);
+              });
+          });
+        },
+        output() {
+          var wb = XLSX.utils.table_to_book(document.querySelector("#stateTable"));//mytable为表格的id名
+          /* get binary string as output */
+          var wbout = XLSX.write(wb, {
+            bookType: "xlsx",
+            bookSST: true,
+            type: "array"
+          });
+          try {
+            FileSaver.saveAs(
+              new Blob([wbout], { type: "application/octet-stream" }),
+              "systemLog.xlsx"
+            );
+          } catch (e) {
+            if (typeof console !== "undefined") console.log(e, wbout);
+          }
+          return wbout;
+        },
         hrefReturn()
         {
             this.$router.push({path: './admin'});
@@ -91,41 +161,7 @@ export default {
           });
         }
     },
-    mounted: function() {
-      var that = this;
-      new Promise((resolve, reject) => {
-        request({
-          url: "/basicQuality/selfJudgment",
-          method: "get"
-        })
-          .then(response => {
-            let data = JSON.parse(response.data);
-            let state = data.success;
-            if (state == true)
-            console.log(data);
-            that.tableData = data.selfJudgment.table;
-          })
-          .catch(error => {
-            reject(error);
-          });
-      });
-
-      new Promise((resolve, reject) => {
-        request({
-          url: "/user/info/admin",
-          method: "get"
-        })
-          .then(response => {
-            let data = JSON.parse(response.data);
-            let state = data.success;
-            if (state == true)
-            that.id = data.personInfo.userId;
-          })
-          .catch(error => {
-            reject(error);
-          });
-      });
-    }
+    
 }
 </script>
 
